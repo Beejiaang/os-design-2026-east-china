@@ -1,0 +1,30 @@
+# Local credentials and private material
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*
+private/
+
+# Local caches and environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+node_modules/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+tmp/
+
+# VM images and large generated outputs
+*.iso
+*.vmdk
+*.vdi
+*.qcow2
+*.ova
+*.vhdx
+results/raw/
