@@ -34,7 +34,7 @@
 
 ## 证据
 
-仓库内归档：[`evidence/member-a/openeuler-20261116.tar.gz`](../evidence/member-a/openeuler-20261116.tar.gz)，校验值见同目录 `SHA256SUMS`。包含完整实验目录（配置、环境、JSONL、CSV、每次测量、stdout/stderr、清理结果）及 `member-a-tests.log`。可解压至独立目录后按 run_id 追溯：
+仓库内归档：[`evidence/member-a/openeuler-20261116.tar.gz`](../../evidence/member-a/openeuler-20261116.tar.gz)，校验值见同目录 `SHA256SUMS`。包含完整实验目录（配置、环境、JSONL、CSV、每次测量、stdout/stderr、清理结果）及 `member-a-tests.log`。可解压至独立目录后按 run_id 追溯：
 
 ```bash
 mkdir -p work/member-a-evidence
@@ -61,7 +61,7 @@ PYTHON=~/projects/osdesign-venv/bin/python bash scripts/reproduce-member-a.sh wo
 
 兼容 CLI 另做 7 类检查：同条件真实样本退出 0；不同配额、环境为 null、层级为 null、timeout 状态、非对象记录退出 1；损坏 JSON 退出 2。全部符合预期，无 traceback。故障输入是注入的测试夹具，不作为真实性能样本。
 
-新增证据：[stage2-openeuler-20261116.tar.gz](../evidence/member-a/stage2-openeuler-20261116.tar.gz)，同目录 SHA256SUMS 覆盖两份归档。包含提交号、预检、测试日志、完整新实验及兼容命令检查报告；不包含检出的 `.git` 或故障夹具原文件。
+新增证据：[stage2-openeuler-20261116.tar.gz](../../evidence/member-a/stage2-openeuler-20261116.tar.gz)，同目录 SHA256SUMS 覆盖两份归档。包含提交号、预检、测试日志、完整新实验及兼容命令检查报告；不包含检出的 `.git` 或故障夹具原文件。
 
 此轮推进了 A 的基线前提接口和复验能力。B/C 联调、队友独立复现及统计回归判定仍保持待验收。
 
@@ -77,6 +77,6 @@ PYTHON=~/projects/osdesign-venv/bin/python bash scripts/reproduce-member-a.sh wo
 - 使用可选 jsonschema 开发工具验证 12 份正常记录和 5 份异常最终记录均符合 run-1.1；配置示例符合 config-1.0。恢复 CLI 对已恢复目录再次执行返回 complete=true、checks=[]，未重复改写记录。
 - 最终检查无残留 `osdesign-*.service`，主工作目录和干净检出均无源码改动。
 
-证据：[stage3-openeuler-20261116.tar.gz](../evidence/member-a/stage3-openeuler-20261116.tar.gz)，包含提交号、预检、测试日志、12 次完整实验及单独标注的故障注入目录；校验值在 SHA256SUMS。[measured-run-1.1.json](../examples/measured-run-1.1.json) 是其中一个未经改写的正式样本快照，artifacts 的相对路径指向归档中原实验目录，并非 examples 目录。
+证据：[stage3-openeuler-20261116.tar.gz](../../evidence/member-a/stage3-openeuler-20261116.tar.gz)，包含提交号、预检、测试日志、12 次完整实验及单独标注的故障注入目录；校验值在 SHA256SUMS。[measured-run-1.1.json](../../examples/measured-run-1.1.json) 是其中一个未经改写的正式样本快照，artifacts 的相对路径指向归档中原实验目录，并非 examples 目录。
 
 已增加 AGENTS.md、统一口径、数据协议、A/B/C 启动任务和交接模板。协议升级 1.1 并保留原 1.0 归档；兼容检查要求同版及干净 Git 证据。B/C 联调、人员交叉复现、统计规则、PR 合并和官方提交仍需对应证据，不能从本轮通过结果推定完成。

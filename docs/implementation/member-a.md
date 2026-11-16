@@ -1,6 +1,6 @@
 # 成员 A：系统执行与采集交付
 
-日期：2026-11-16。代码在 `src/runner`、`src/collector`；分工依据 [work-allocation.md](work-allocation.md)。
+日期：2026-11-16。代码在 `src/runner`、`src/collector`；分工依据 [docs/project/work-allocation.md](../project/work-allocation.md)。
 
 ## 使用
 
@@ -29,7 +29,7 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 
 ## C 的数据接口（当前 schema_version 1.1）
 
-字段、状态和版本兼容的完整约定见 [数据协议](data-contract.md)；旧 1.0 归档保留原样。
+字段、状态和版本兼容的完整约定见 [数据协议](../contracts/data-contract.md)；旧 1.0 归档保留原样。
 
 实验目录含 `config.json`、`environment.json`、`runs.jsonl`、`runs.csv`；每个 run_id 子目录含任务规格、启动日志、标准输出/错误、开始快照、完整测量和最终 `result.json`。JSONL 每行对应一次运行，CSV 是便于读取的扁平子集；JSON 中 null 在 CSV 中为空单元格。指标缺失不填 0。
 
@@ -94,8 +94,8 @@ worker 测量后保持运行，直到被执行器回收或看门狗终止；该�
 
 ## 依据与贡献
 
-本次实现为本仓库新增代码，采用 [MIT](../LICENSE-CODE)；已有文档继续使用原 CC BY-SA 4.0。没有复制第三方项目实现，使用 Python 标准库、已安装的 Linux cgroup/systemd 接口。
+本次实现为本仓库新增代码，采用 [MIT](../../LICENSE-CODE)；已有文档继续使用原 CC BY-SA 4.0。没有复制第三方项目实现，使用 Python 标准库、已安装的 Linux cgroup/systemd 接口。
 
 机制参考：[Linux cgroup v2 文档](https://docs.kernel.org/admin-guide/cgroup-v2.html)、[systemd 资源控制文档](https://www.freedesktop.org/software/systemd/man/latest/systemd.resource-control.html)。文档可能描述较新版本，实际验收以目标机测试结果为准。
 
-实测记录见 [member-a-validation.md](member-a-validation.md)。B/C 模块及非实现者复现、C 报告与真实输出的一致性审核仍需在对应模块交付后完成。
+实测记录见 [docs/validation/member-a-validation.md](../validation/member-a-validation.md)。B/C 模块及非实现者复现、C 报告与真实输出的一致性审核仍需在对应模块交付后完成。

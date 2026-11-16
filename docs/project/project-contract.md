@@ -7,11 +7,11 @@
 | 问题 | 以什么为准 |
 |---|---|
 | 项目目标、术语、范围 | 本文件 |
-| 角色、阶段与截止安排 | work-allocation.md；旧 project-plan.md 仅作历史 |
-| 实际运行输入输出、单位、版本、状态 | data-contract.md、schemas/ 与实际实现；发现不一致必须修正并补测试 |
-| 当前做到了什么、下一步接什么 | agent-handoff.md 与对应提交/验收记录 |
+| 角色、阶段与截止安排 | docs/project/work-allocation.md；旧 docs/history/project-plan.md 仅作历史 |
+| 实际运行输入输出、单位、版本、状态 | docs/contracts/data-contract.md、schemas/ 与实际实现；发现不一致必须修正并补测试 |
+| 当前做到了什么、下一步接什么 | docs/handoff/agent-handoff.md 与对应提交/验收记录 |
 | 实测结果 | 对应提交的原始结果和日志；文档不能覆盖失败证据 |
-| 赛事要求与正式提交 | 官方最新规则、submission-checklist.md 及真实接收状态 |
+| 赛事要求与正式提交 | 官方最新规则、docs/project/submission-checklist.md 及真实接收状态 |
 
 README 是入口，不是独立维护另一份协议。历史证据不重写成当前版本；新实现不得用旧测试日志冒充已验证。遇到冲突时定位拥有该概念的文件、检查代码与证据，明确修改依据；不能通过删除限制来“统一”。
 

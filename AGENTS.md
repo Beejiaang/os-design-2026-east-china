@@ -4,11 +4,12 @@
 
 ## 开始工作前
 
-1. 阅读 `docs/project-contract.md`（统一口径）、`docs/work-allocation.md`（分工与阶段）。
-2. 阅读 `docs/agent-handoff.md` 中对应角色的当前状态、输入、输出和阻碍。
-3. 改动 runner/collector 或消费运行数据时，阅读 `docs/data-contract.md`、`docs/member-a.md` 和对应 `schemas/`；不能凭历史聊天猜字段。
+1. 阅读 `docs/project/project-contract.md`（统一口径）、`docs/project/work-allocation.md`（分工与阶段）。
+2. 阅读 `docs/handoff/agent-handoff.md` 中对应角色的当前状态、输入、输出和阻碍。
+3. 改动 runner/collector 或消费运行数据时，阅读 `docs/contracts/data-contract.md`、`docs/implementation/member-a.md` 和对应 `schemas/`；不能凭历史聊天猜字段。
 4. 执行 `git status --short`、查看当前分支与近期提交；保留已有改动。需要远端最新信息时先 fetch，再检查差异，不自动 reset 或覆盖队友代码。
 5. 明确本次角色 A/B/C、任务范围和验收方式。角色未指定时按用户任务和路径判断；涉及其他角色模块的实质实现先说明范围，不替队友声明完成。
+6. 新增或整理文件前查看 `docs/README.md` 和 `docs/project/directory-layout.md`，按用途进入对应分区；不要在文档根目录继续平铺或创建另一份主工程。
 
 ## 不变的项目口径
 
@@ -21,7 +22,7 @@
 
 ## 数据与实现规则
 
-- 当前输出协议是 run 1.1；旧 1.0 为历史证据。协议字段/单位/状态以 `docs/data-contract.md` 和版本化 schema 为准。不能静默更名、换单位、把 null 改成 0，或让未知状态进入成功样本。
+- 当前输出协议是 run 1.1；旧 1.0 为历史证据。协议字段/单位/状态以 `docs/contracts/data-contract.md` 和版本化 schema 为准。不能静默更名、换单位、把 null 改成 0，或让未知状态进入成功样本。
 - `result.json` 是单次最终记录；JSONL/CSV 是派生索引。`pending.json`、`started.json`、`measurement.json` 不是成功验收记录。
 - 真实运行标为 measured；模拟样例标为 synthetic；故障注入夹具注明用途，不作为性能数据。失败、超时、中断、恢复、清理失败、缺失指标单独列出，不丢弃、不填造数据。
 - 比较前调用兼容前提接口，功能正确性还须 B 校验；C 负责统计判定。未知版本/不兼容/证据不足返回无法比较，不返回正常。
@@ -35,6 +36,6 @@
 - 重要变更用 PR。用户授权推送后，先做相关检查与证据整理，再正常 push；未获授权时留在本地。推送、PR、合并和赛事提交分别报告，不能混为一谈。
 - 常规检查：`PYTHONPATH=src python3 -m unittest discover -s tests -v`；系统验收加 `OSDESIGN_INTEGRATION=1`，在目标 openEuler 执行。普通测试中被跳过的系统项不能记为已通过。
 - 只运行变更所需检查；记录命令、环境、提交号、实际结果、失败及修正。基线与正式实验使用干净提交；工作树试跑标明 dirty。
-- 更新 `docs/agent-handoff.md` 的角色状态、`docs/ai-usage.md` 和对应验证记录；依据证据更新阶段状态，不直接把整个计划勾为完成。
-- 交接至少包含：角色/目标、基于的 commit、改动路径、接口版本、运行命令、真实证据、已知限制、待对方完成项。模板见 `docs/agent-handoff.md`。
+- 更新 `docs/handoff/agent-handoff.md` 的角色状态、`docs/records/ai-usage.md` 和对应验证记录；依据证据更新阶段状态，不直接把整个计划勾为完成。
+- 交接至少包含：角色/目标、基于的 commit、改动路径、接口版本、运行命令、真实证据、已知限制、待对方完成项。模板见 `docs/handoff/agent-handoff.md`。
 - 不因本文件自动向队友发送消息、创建聊天或派生子 Agent。需要人参与或缺少模块时，明确交接阻碍，继续本角色可独立完成的工作。

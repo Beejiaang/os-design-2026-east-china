@@ -15,18 +15,20 @@ python3 -m runner run examples/cpu.json --output results/cpu-first
 OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 ```
 
-要求 Python 3.11+。输出目录必须尚不存在。包含三档 CPU 配额、预热与重复、原始 JSON/CSV、失败和超时处理、子进程清理核验、历史比较前提接口。完整说明及 B/C 接口见 [成员 A 交付](docs/member-a.md)，真实结果见 [验收记录](docs/member-a-validation.md)。
+要求 Python 3.11+。输出目录必须尚不存在。包含三档 CPU 配额、预热与重复、原始 JSON/CSV、失败和超时处理、子进程清理核验、历史比较前提接口。完整说明及 B/C 接口见 [成员 A 交付](docs/implementation/member-a.md)，真实结果见 [验收记录](docs/validation/member-a-validation.md)。
 
-当前输出协议为 run 1.1，含中断与恢复状态；可用 [真实样例](examples/measured-run-1.1.json) 接通解析。最新干净源码在 openEuler 通过 17 项测试及 12 次正常实验；另保留 5 份故障注入最终记录，均单独列出并排除性能样本。恢复命令和机器格式见 [数据协议](docs/data-contract.md)。B/C 模块和人员交叉验收仍待完成。
+当前输出协议为 run 1.1，含中断与恢复状态；可用 [真实样例](examples/measured-run-1.1.json) 接通解析。最新干净源码在 openEuler 通过 17 项测试及 12 次正常实验；另保留 5 份故障注入最终记录，均单独列出并排除性能样本。恢复命令和机器格式见 [数据协议](docs/contracts/data-contract.md)。B/C 模块和人员交叉验收仍待完成。
 
 ## 从这里开始
 
-使用 Agent 开发的队友先读 **[AGENTS.md](AGENTS.md)**，再看 **[统一口径](docs/project-contract.md)**、**[数据协议](docs/data-contract.md)** 和 **[角色交接/可复制启动任务](docs/agent-handoff.md)**。当前 A 集成分支是 `feat/member-a-runner`，未合并前请以该分支为依赖，避免直接从尚无实现的旧 main 开始。
+目录入口：[文档分区导航](docs/README.md)、[工程文件存放规则](docs/project/directory-layout.md)。代码、负载、实验、协议、证据和演示材料分别放在对应目录；占位说明不代表 B/C 功能已完成。
 
-1. 阅读 **[三人分工与阶段验收说明](docs/work-allocation.md)**：A 系统与集成、B 负载与实验、C 分析与报告，含课程关联、接口和验收条件。
-2. 使用 **[提交清单](docs/submission-checklist.md)** 检查工程、文档、测试、视频、来源许可和官方平台提交；勾选须附证据。
+使用 Agent 开发的队友先读 **[AGENTS.md](AGENTS.md)**，再看 **[统一口径](docs/project/project-contract.md)**、**[数据协议](docs/contracts/data-contract.md)** 和 **[角色交接/可复制启动任务](docs/handoff/agent-handoff.md)**。当前 A 集成分支是 `feat/member-a-runner`，未合并前请以该分支为依赖，避免直接从尚无实现的旧 main 开始。
+
+1. 阅读 **[三人分工与阶段验收说明](docs/project/work-allocation.md)**：A 系统与集成、B 负载与实验、C 分析与报告，含课程关联、接口和验收条件。
+2. 使用 **[提交清单](docs/project/submission-checklist.md)** 检查工程、文档、测试、视频、来源许可和官方平台提交；勾选须附证据。
 3. 在 [讨论 Issue](https://github.com/Beejiaang/os-design-2026-east-china/issues/1) 保留问题与依据，按 [协作说明](CONTRIBUTING.md) 提交修改；姓名、实际投入与完成状态由团队补充。
-4. 历史资料：[10 月版学习与计划](docs/project-plan.md)、[八类选题分析](docs/topic-analysis.md)、[队员评价模板](docs/team-review.md)。EulerLens 是历史 B 方向候选。
+4. 历史资料：[10 月版学习与计划](docs/history/project-plan.md)、[八类选题分析](docs/history/topic-analysis.md)、[队员评价模板](docs/history/team-review.md)。EulerLens 是历史 B 方向候选。
 
 **当前内部节点（2026-11-15 重排）：**11/22 完成环境与手动实验，11/29 完成可演示初稿，12/06 核心功能冻结，12/13 实验与主要材料齐全，12/20 完成正式提交核验。按已发章程的 **12/24 作品截止**倒排，后续以官方通知为准。
 
@@ -43,13 +45,13 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 
 | 文件 | 用途 |
 |---|---|
-| [docs/work-allocation.md](docs/work-allocation.md) | 当前分工、范围、阶段验收与课程关联 |
-| [docs/submission-checklist.md](docs/submission-checklist.md) | 正式材料、质量核验与提交记录 |
-| [docs/project-plan.md](docs/project-plan.md) | 历史计划及专项学习资料，执行日期见新分工表 |
-| [docs/topic-analysis.md](docs/topic-analysis.md) | 历史选题比较与综合评价 |
-| [docs/team-review.md](docs/team-review.md) | 三人独立评价、试做记录与决策表 |
-| [docs/sources.md](docs/sources.md) | 规则与技术资料来源、已知限制 |
-| [docs/ai-usage.md](docs/ai-usage.md) | AI 辅助工作记录及后续填写模板 |
+| [docs/project/work-allocation.md](docs/project/work-allocation.md) | 当前分工、范围、阶段验收与课程关联 |
+| [docs/project/submission-checklist.md](docs/project/submission-checklist.md) | 正式材料、质量核验与提交记录 |
+| [docs/history/project-plan.md](docs/history/project-plan.md) | 历史计划及专项学习资料，执行日期见新分工表 |
+| [docs/history/topic-analysis.md](docs/history/topic-analysis.md) | 历史选题比较与综合评价 |
+| [docs/history/team-review.md](docs/history/team-review.md) | 三人独立评价、试做记录与决策表 |
+| [docs/records/sources.md](docs/records/sources.md) | 规则与技术资料来源、已知限制 |
+| [docs/records/ai-usage.md](docs/records/ai-usage.md) | AI 辅助工作记录及后续填写模板 |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | 讨论、分支、PR 与证据记录方式 |
 | [.github/ISSUE_TEMPLATE](.github/ISSUE_TEMPLATE) | 候选题讨论、验证任务模板 |
 
