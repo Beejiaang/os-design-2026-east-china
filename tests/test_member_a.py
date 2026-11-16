@@ -37,7 +37,10 @@ class ContractTests(unittest.TestCase):
         row = {"schema_version": "1.0", "source": "measured", "status": "success", "cleanup_ok": True,
                "quota_verified": True, "environment": {"fingerprint": "x"}, "stdout_sha256": "y",
                "input_id": "fixed", "quota_percent": 50, "timeout_seconds": 2,
-               "workload_version": "v1", "runner_sha256": "runner-v1", "visible_limits": [{"path": "leaf"}, {"path": "parent", "cpu_max": "max 100000"}],
+               "workload_version": "v1", "runner_sha256": "runner-v1", "exit_code": 0,
+               "cpu_stat_delta": {"usage_usec": 500000},
+               "visible_limits": [{"path": "leaf", "cpu_max": "50000 100000", "cpuset_effective": None},
+                                  {"path": "parent", "cpu_max": "max 100000", "cpuset_effective": None}],
                "wall_seconds": 1, "cpu_seconds": 0.5, "warmup": False}
         self.assertTrue(check_compatibility(row, copy.deepcopy(row))["compatible"])
         for key, value in (("status", "timeout"), ("source", "synthetic"), ("cleanup_ok", False),
@@ -45,6 +48,24 @@ class ContractTests(unittest.TestCase):
                            ("quota_verified", False), ("wall_seconds", None), ("environment", {})):
             with self.subTest(key=key):
                 self.assertFalse(check_compatibility(row, dict(row, **{key: value}))["compatible"])
+        for key, value in (("cleanup_ok", "true"), ("quota_verified", 1), ("exit_code", False),
+                           ("environment", None), ("visible_limits", None), ("warmup", None),
+                           ("cpu_stat_delta", None), ("wall_seconds", float("nan")),
+                           ("cpu_seconds", float("inf")), ("timeout_seconds", 0), ("quota_percent", True)):
+            with self.subTest(key=key, value=value):
+                self.assertFalse(check_compatibility(row, dict(row, **{key: value}))["compatible"])
+        for key in row:
+            incomplete = dict(row)
+            del incomplete[key]
+            with self.subTest(missing=key):
+                self.assertFalse(check_compatibility(row, incomplete)["compatible"])
+        # Workload versions may change; the rest of the evidence must match.
+        self.assertTrue(check_compatibility(row, dict(row, workload_version="v2"))["compatible"])
+
+    def test_non_object_records_are_rejected(self):
+        for value in (None, [], "", 5):
+            self.assertFalse(check_compatibility(value, {})["compatible"])
+            self.assertFalse(check_compatibility({}, value)["compatible"])
 
 
 @unittest.skipUnless(os.environ.get("OSDESIGN_INTEGRATION") == "1", "Set OSDESIGN_INTEGRATION=1 on Linux")

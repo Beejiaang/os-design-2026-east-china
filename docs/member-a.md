@@ -58,6 +58,24 @@ preconditions = check_compatibility(baseline_row, current_row)
 
 兼容检查拒绝失败、预热、模拟、缺失关键指标、不一致输入、配额、运行环境、服务实际父级限制、执行器版本及标准输出。负载版本允许不同，因为它是历史回归的比较对象。此接口只提供前提核验，不输出“性能退化/正常”结论。
 
+也可直接检查两个单次运行的 `result.json`：
+
+```bash
+python3 -m runner check-compatibility baseline/result.json current/result.json
+```
+
+退出 0 表示比较前提通过，1 表示不兼容并输出具体原因，2 表示文件读取或 JSON 解析失败。显式要求 measured、success、非预热、清理和配额核验为布尔 true、退出码 0、有效有限指标、cgroup CPU 证据及完整父级限制；不接受用字符串或数字冒充状态。
+
+## 从干净源码复验
+
+提交当前改动后，在项目根目录运行：
+
+```bash
+PYTHON=~/projects/osdesign-venv/bin/python bash scripts/reproduce-member-a.sh
+```
+
+脚本从当前 HEAD 创建独立本地检出，保留 commit、环境、测试日志和新一轮三档实验，并检查该检出的源码未被运行修改。证据默认留在 `work/member-a-reproduction-*`，不覆盖已有目录。它验证干净源码可运行；仍由同一代理在同一机器执行，不能计作队友独立复现或另一台机器验证。
+
 ## 实现与测量边界
 
 执行器为每次运行创建唯一的 systemd 用户临时服务，设置 CPUQuota、CPUAccounting、KillMode=control-group、停止期限和额外 RuntimeMaxSec 看门狗。服务中的 worker 先采集 cgroup 快照，再启动负载并等待，之后写原子 JSON；外部执行器读取结果，再停止服务并核验整个组的清理。worker 自身超时杀死负载进程组，systemd 随后清理仍在组内的后代，包括另建会话的子进程。原始测量在停止服务前采集，避免 cgroup 删除后丢失统计。
