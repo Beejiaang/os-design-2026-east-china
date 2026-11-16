@@ -46,3 +46,21 @@ tar -xzf evidence/member-a/openeuler-20261116.tar.gz -C work/member-a-evidence
 ## 待队友完成的验收
 
 B 接入可校验分组聚合任务并交叉检查 A；C 接入真实结果、分布、报告和历史回归分析。A 再核对 C 的报告与原始记录一致性。非实现者独立复现、统计判定规则和最终赛事提交仍未完成。本记录不替代整个项目验收。
+
+## 第二步：兼容接口与干净源码复验
+
+同日继续按 12/06 的 A 范围推进。实现提交 `02f5c650da9595367a8134330371d9a2e167e055`：补齐无效/缺失记录的拒绝条件、严格状态与指标校验、命令行 `check-compatibility`，增加干净源码复验脚本。
+
+在 openEuler 执行：
+
+```bash
+PYTHON=~/projects/osdesign-venv/bin/python bash scripts/reproduce-member-a.sh work/member-a-stage2-20261116
+```
+
+脚本独立检出上述提交，9 项测试在 2.888 秒内全部通过，新一轮三档共 12 次实验全部成功，输出一致、配额核验和清理均通过；每条实验的 git_commit 均为上述提交，git_dirty 为空，检出源码运行前后保持干净。没有残留 `osdesign-*.service` 单元。
+
+兼容 CLI 另做 7 类检查：同条件真实样本退出 0；不同配额、环境为 null、层级为 null、timeout 状态、非对象记录退出 1；损坏 JSON 退出 2。全部符合预期，无 traceback。故障输入是注入的测试夹具，不作为真实性能样本。
+
+新增证据：[stage2-openeuler-20261116.tar.gz](../evidence/member-a/stage2-openeuler-20261116.tar.gz)，同目录 SHA256SUMS 覆盖两份归档。包含提交号、预检、测试日志、完整新实验及兼容命令检查报告；不包含检出的 `.git` 或故障夹具原文件。
+
+此轮推进了 A 的基线前提接口和复验能力。B/C 联调、队友独立复现及统计回归判定仍保持待验收。

@@ -21,6 +21,13 @@
 - 人工复核：用户/队友代码讲解、独立复现和 B/C 交叉验收尚待完成，不将代理执行等同人工验收
 - 证据：[验收记录](member-a-validation.md)、`evidence/member-a/openeuler-20261116.tar.gz`；未自动上传 GitHub 或正式比赛平台
 
+### 2026-11-16：按计划推进第二步
+
+- 范围：A 的基线兼容前提核验、CLI、干净源码复验及阶段进度登记
+- 修正：缺失 environment/visible_limits 原先可能触发异常，缺少 warmup/exit_code 或状态类型不正确原先可能被接受；新增明确拒绝条件
+- 执行：openEuler 上从干净提交检出，9 项测试及 12 次新实验通过；7 类兼容 CLI 结果符合预期
+- 证据：`evidence/member-a/stage2-openeuler-20261116.tar.gz`；没有将同一代理复验标记为非实现者独立验收，没有替 B/C 填写完成
+
 ## 后续记录模板
 
 - 日期、任务或 Issue：
