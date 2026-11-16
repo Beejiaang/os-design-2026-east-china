@@ -28,6 +28,15 @@
 - 执行：openEuler 上从干净提交检出，9 项测试及 12 次新实验通过；7 类兼容 CLI 结果符合预期
 - 证据：`evidence/member-a/stage2-openeuler-20261116.tar.gz`；没有将同一代理复验标记为非实现者独立验收，没有替 B/C 填写完成
 
+### 2026-11-16：可靠性补强、统一规则与授权推送
+
+- 用户授权：继续可靠性工作，统一队友使用 Agent 时的项目口径与交接规则，全部完成后推送仓库
+- 实现：SIGINT/SIGTERM 记录与清理、执行器丢失后的看门狗和显式恢复、worker 崩溃与快照损坏处理、最终索引/完整性状态、run 1.1 协议和可选格式检查
+- 规则：AGENTS.md、project-contract、data-contract、agent-handoff、角色启动任务、PR 交接字段；保留 B/C 和人工作业的待验收状态
+- 修正：新故障测试暴露 RemainAfterExit 不能为 active/exited 状态提供所需兜底，改为测量后 worker 等待回收；复验通过。worker 崩溃测试原重复两次导致后续任务等待，不是第一次错误未捕获，已把该案例限定为单次
+- 实际验证：干净提交 9c075aa 上 openEuler 17 项测试、12 次正常实验；保留 5 份故障注入最终记录并明确排除性能样本；17 份最终记录符合 1.1 schema
+- 证据：stage3-openeuler-20261116.tar.gz、member-a-validation.md；模型版本未从不可核验信息猜测，人工/队友复验尚未完成
+
 ## 后续记录模板
 
 - 日期、任务或 Issue：

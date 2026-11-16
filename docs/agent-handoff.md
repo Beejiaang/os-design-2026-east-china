@@ -24,6 +24,8 @@ git switch -c feat/b-group-aggregation origin/feat/member-a-runner
 
 A 的中断与清理状态有测试，正式性能基线还需要足够实验设计、B 的功能验证和 C 的规则。系统异常测试不替代负载测试。
 
+最近实际验证的实现提交是 `9c075aa9031ea3b699dbf22b1b2bd7d9b94f38b4`；之后的验证说明/样例/证据提交不改变执行器代码。17 项目标机测试、12 次正常实验及 5 份故障注入最终记录见 [A 验证记录](member-a-validation.md)。可直接读取 [真实 1.1 样例](../examples/measured-run-1.1.json) 接通解析，完整原始目录在 stage3 归档；不要把该单条样例当足够的统计验收样本。
+
 ## B 给 Agent 的启动任务（可复制）
 
 > 你负责本仓库成员 B。先读 AGENTS.md、docs/project-contract.md、docs/data-contract.md、docs/work-allocation.md、docs/agent-handoff.md，并检查分支和已有改动。以当前 A 集成分支/已合并 main 为依赖，实现固定种子、规模可调的输入生成及单进程分组聚合；输出应确定且可被独立参考算法验证。代码放 workloads，配置/实验放 experiments，增加本角色必要测试。不改 runner 的字段、单位、状态或计时语义。提供 workload_version、可追溯 input_id 和 argv；用 A 执行器接入三档实验，保存真实输出、功能校验和限制。不要把故障夹具当 measured 性能数据，不替 C 生成回归结论。完成后按本页模板交接并更新 AI 使用记录；未获用户授权不推送/合并。

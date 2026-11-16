@@ -17,6 +17,8 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 
 要求 Python 3.11+。输出目录必须尚不存在。包含三档 CPU 配额、预热与重复、原始 JSON/CSV、失败和超时处理、子进程清理核验、历史比较前提接口。完整说明及 B/C 接口见 [成员 A 交付](docs/member-a.md)，真实结果见 [验收记录](docs/member-a-validation.md)。
 
+当前输出协议为 run 1.1，含中断与恢复状态；可用 [真实样例](examples/measured-run-1.1.json) 接通解析。最新干净源码在 openEuler 通过 17 项测试及 12 次正常实验；另保留 5 份故障注入最终记录，均单独列出并排除性能样本。恢复命令和机器格式见 [数据协议](docs/data-contract.md)。B/C 模块和人员交叉验收仍待完成。
+
 ## 从这里开始
 
 使用 Agent 开发的队友先读 **[AGENTS.md](AGENTS.md)**，再看 **[统一口径](docs/project-contract.md)**、**[数据协议](docs/data-contract.md)** 和 **[角色交接/可复制启动任务](docs/agent-handoff.md)**。当前 A 集成分支是 `feat/member-a-runner`，未合并前请以该分支为依赖，避免直接从尚无实现的旧 main 开始。

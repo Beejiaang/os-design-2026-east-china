@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.1",
+  "run_id": "958e2e53f1a446ca912249598da0e4a1",
+  "source": "measured",
+  "timestamp_utc": "2026-11-16T04:30:04.496723+00:00",
+  "order_index": 5,
+  "warmup": false,
+  "environment": {
+    "os_release": "NAME=\"openEuler\"\nVERSION=\"24.03 (LTS-SP4)\"\nID=\"openEuler\"\nVERSION_ID=\"24.03\"\nPRETTY_NAME=\"openEuler 24.03 (LTS-SP4)\"\nANSI_COLOR=\"0;31\"",
+    "kernel": "6.6.0-159.4.3.154.oe2403sp4.x86_64",
+    "architecture": "x86_64",
+    "cpu_model": "Intel(R) Core(TM) i5-14600KF",
+    "logical_cpus": 4,
+    "python": "3.11.6",
+    "affinity": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "visible_limits": [
+      {
+        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/session-41.scope",
+        "cpu_max": "max 100000",
+        "cpuset_effective": null
+      },
+      {
+        "path": "/sys/fs/cgroup/user.slice/user-1000.slice",
+        "cpu_max": "max 100000",
+        "cpuset_effective": null
+      },
+      {
+        "path": "/sys/fs/cgroup/user.slice",
+        "cpu_max": "max 100000",
+        "cpuset_effective": null
+      },
+      {
+        "path": "/sys/fs/cgroup",
+        "cpu_max": null,
+        "cpuset_effective": "0-3"
+      }
+    ],
+    "machine_id_sha256": "50eead974efd6179b4645669573189782786e24143b6b279ad4c2fbd3c19f185",
+    "fingerprint": "45324b1154974d897407bc640a0de811a2d65342f30276f867143191048d3451"
+  },
+  "command": [
+    "/usr/bin/python3",
+    "examples/cpu_probe.py"
+  ],
+  "cwd": "/home/holo/projects/os-design-2026-east-china/work/member-a-stage3-20261116/source",
+  "workload_version": "cpu-probe-v1-1500000-sha256",
+  "input_id": "constant-osdesign-cpu-probe-v1",
+  "quota_percent": 50,
+  "timeout_seconds": 30,
+  "unit": "osdesign-958e2e53f1a446ca912249598da0e4a1.service",
+  "status": "success",
+  "error": null,
+  "exit_code": 0,
+  "wall_seconds": 0.8657964970000194,
+  "cpu_seconds": 0.42514199999999996,
+  "cpu_stat_delta": {
+    "usage_usec": 426798,
+    "user_usec": 424819,
+    "system_usec": 1980,
+    "nr_periods": 9,
+    "nr_throttled": 8,
+    "throttled_usec": 394775,
+    "nr_bursts": 0,
+    "burst_usec": 0
+  },
+  "cleanup_ok": true,
+  "artifacts": {
+    "stdout": "958e2e53f1a446ca912249598da0e4a1/stdout.log",
+    "stderr": "958e2e53f1a446ca912249598da0e4a1/stderr.log"
+  },
+  "runner_sha256": "00537111170fbc9d61c92f5b15934c4264848f9e687bab59194b50d7068325b2",
+  "git_commit": "9c075aa9031ea3b699dbf22b1b2bd7d9b94f38b4",
+  "git_dirty": "",
+  "cgroup_path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/osdesign-958e2e53f1a446ca912249598da0e4a1.service",
+  "cpu_max": "50000 100000",
+  "visible_limits": [
+    {
+      "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/osdesign-958e2e53f1a446ca912249598da0e4a1.service",
+      "cpu_max": "50000 100000",
+      "cpuset_effective": null
+    },
+    {
+      "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice",
+      "cpu_max": "max 100000",
+      "cpuset_effective": null
+    },
+    {
+      "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service",
+      "cpu_max": "max 100000",
+      "cpuset_effective": null
+    },
+    {
+      "path": "/sys/fs/cgroup/user.slice/user-1000.slice",
+      "cpu_max": "max 100000",
+      "cpuset_effective": null
+    },
+    {
+      "path": "/sys/fs/cgroup/user.slice",
+      "cpu_max": "max 100000",
+      "cpuset_effective": null
+    },
+    {
+      "path": "/sys/fs/cgroup",
+      "cpu_max": null,
+      "cpuset_effective": "0-3"
+    }
+  ],
+  "cpu_stat_before": {
+    "usage_usec": 14792,
+    "user_usec": 12818,
+    "system_usec": 1973,
+    "nr_periods": 0,
+    "nr_throttled": 0,
+    "throttled_usec": 0,
+    "nr_bursts": 0,
+    "burst_usec": 0
+  },
+  "parent_subtree_control": "cpu memory pids",
+  "cpu_stat_after": {
+    "usage_usec": 441590,
+    "user_usec": 437637,
+    "system_usec": 3953,
+    "nr_periods": 9,
+    "nr_throttled": 8,
+    "throttled_usec": 394775,
+    "nr_bursts": 0,
+    "burst_usec": 0
+  },
+  "quota_verified": true,
+  "stdout_sha256": "7ffbb3cb9d30dcbddf15897d218d153638b414f850756fd1389438b775226899",
+  "cleanup_detail": {
+    "load_state": "not-found",
+    "cgroup_events": null,
+    "stop_stderr": ""
+  }
+}

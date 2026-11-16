@@ -64,3 +64,19 @@ PYTHON=~/projects/osdesign-venv/bin/python bash scripts/reproduce-member-a.sh wo
 新增证据：[stage2-openeuler-20261116.tar.gz](../evidence/member-a/stage2-openeuler-20261116.tar.gz)，同目录 SHA256SUMS 覆盖两份归档。包含提交号、预检、测试日志、完整新实验及兼容命令检查报告；不包含检出的 `.git` 或故障夹具原文件。
 
 此轮推进了 A 的基线前提接口和复验能力。B/C 联调、队友独立复现及统计回归判定仍保持待验收。
+
+## 第三步：中断、崩溃、恢复与协作规则
+
+源代码提交：`9c075aa9031ea3b699dbf22b1b2bd7d9b94f38b4`。在 openEuler 从该干净提交独立检出，运行 `scripts/reproduce-member-a.sh work/member-a-stage3-20261116`。
+
+- 17 项测试全部通过，9.089 秒；其中真实系统项覆盖 SIGINT、SIGTERM、中间快照损坏、worker SIGKILL、执行器 SIGKILL 后看门狗与恢复、脱离会话的后代清理、活跃执行器恢复拒绝和跨启动恢复拒绝。
+- 用户管理器不可用、预检权限失败、配置拼写错误的测试使用明确的故障模拟，不声称实际撤销系统权限。
+- 初轮新测试发现 RemainAfterExit 服务进入 active/exited 后运行时限不足以兜底，改为 worker 在测量后保持运行，直到正常回收或看门狗终止；修正后复验通过。初轮失败日志没有作为通过证据。
+- 新一轮 12 次三档实验全部 success，quota_verified/cleanup_ok 全为 true，输出哈希一致，schema_version 全为 1.1，git_dirty 全为空。实验 manifest 为 complete、planned_count=12、finalized_count=12、pending_count=0。
+- 保留 5 份故障注入最终记录：SIGINT、SIGTERM、损坏开始快照三份 interrupted，worker 崩溃一份 error，强制丢失执行器并恢复一份 aborted；都不进入性能样本。
+- 使用可选 jsonschema 开发工具验证 12 份正常记录和 5 份异常最终记录均符合 run-1.1；配置示例符合 config-1.0。恢复 CLI 对已恢复目录再次执行返回 complete=true、checks=[]，未重复改写记录。
+- 最终检查无残留 `osdesign-*.service`，主工作目录和干净检出均无源码改动。
+
+证据：[stage3-openeuler-20261116.tar.gz](../evidence/member-a/stage3-openeuler-20261116.tar.gz)，包含提交号、预检、测试日志、12 次完整实验及单独标注的故障注入目录；校验值在 SHA256SUMS。[measured-run-1.1.json](../examples/measured-run-1.1.json) 是其中一个未经改写的正式样本快照，artifacts 的相对路径指向归档中原实验目录，并非 examples 目录。
+
+已增加 AGENTS.md、统一口径、数据协议、A/B/C 启动任务和交接模板。协议升级 1.1 并保留原 1.0 归档；兼容检查要求同版及干净 Git 证据。B/C 联调、人员交叉复现、统计规则、PR 合并和官方提交仍需对应证据，不能从本轮通过结果推定完成。
