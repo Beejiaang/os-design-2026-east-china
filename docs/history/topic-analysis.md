@@ -262,4 +262,4 @@ AI 辅助应分小步进行：先写预期与测试，再生成实现，随后�
 - [ ] 官方赛题框架、提交期限与平台流程的最新公告。
 - [ ] 最终题目、最小范围、负责人和停止扩展条件。
 
-来源索引与证据限制见 [docs/records/sources.md](../records/sources.md)。个人评价与决策记录见 [docs/history/team-review.md](docs/history/team-review.md)。
+来源索引与证据限制见 [docs/records/sources.md](../records/sources.md)。个人评价与决策记录见 [docs/history/team-review.md](team-review.md)。
