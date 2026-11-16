@@ -1,0 +1,10 @@
+{
+  "command": ["/usr/bin/python3", "examples/cpu_probe.py"],
+  "workload_version": "cpu-probe-v1-1500000-sha256",
+  "input_id": "constant-osdesign-cpu-probe-v1",
+  "quotas": [null, 100, 50],
+  "repeats": 3,
+  "warmups": 1,
+  "order_seed": 20261116,
+  "timeout_seconds": 30
+}

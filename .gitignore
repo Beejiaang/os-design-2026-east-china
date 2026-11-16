@@ -28,3 +28,10 @@ tmp/
 *.ova
 *.vhdx
 results/raw/
+
+# Member A build products and local experiment data
+*.egg-info/
+build/
+dist/
+results/
+work/
