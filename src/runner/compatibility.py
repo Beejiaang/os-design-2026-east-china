@@ -1,5 +1,6 @@
 """Conservative preconditions for C's historical comparison; no regression verdict."""
 import math
+import re
 
 
 def check_compatibility(baseline, current):
@@ -19,11 +20,13 @@ def check_compatibility(baseline, current):
             reasons.append(name + ": compatibility evidence missing")
         if not isinstance(row.get("stdout_sha256"), str) or not row["stdout_sha256"]:
             reasons.append(name + ": output evidence missing")
-        if row.get("schema_version") != "1.0":
+        if row.get("schema_version") not in ("1.0", "1.1"):
             reasons.append(name + ": unsupported schema")
         for field in ("input_id", "workload_version", "runner_sha256"):
             if not isinstance(row.get(field), str) or not row[field]:
                 reasons.append(name + ": missing " + field)
+        if not isinstance(row.get("git_commit"), str) or not re.fullmatch(r"[0-9a-f]{40}", row["git_commit"]) or row.get("git_dirty") != "":
+            reasons.append(name + ": clean, identifiable code revision required")
         for field in ("wall_seconds", "cpu_seconds"):
             if type(row.get(field)) not in (int, float) or not math.isfinite(row[field]) or row[field] < 0:
                 reasons.append(name + ": missing/invalid " + field)
@@ -38,7 +41,7 @@ def check_compatibility(baseline, current):
         delta = row.get("cpu_stat_delta")
         if not isinstance(delta, dict) or type(delta.get("usage_usec")) is not int or delta["usage_usec"] < 0:
             reasons.append(name + ": cgroup CPU usage evidence missing/invalid")
-    for key in ("input_id", "quota_percent", "timeout_seconds", "stdout_sha256", "runner_sha256"):
+    for key in ("schema_version", "input_id", "quota_percent", "timeout_seconds", "stdout_sha256", "runner_sha256"):
         if baseline.get(key) != current.get(key):
             reasons.append(key + " differs")
     if baseline.get("environment") != current.get("environment"):

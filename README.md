@@ -19,6 +19,8 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 
 ## 从这里开始
 
+使用 Agent 开发的队友先读 **[AGENTS.md](AGENTS.md)**，再看 **[统一口径](docs/project-contract.md)**、**[数据协议](docs/data-contract.md)** 和 **[角色交接/可复制启动任务](docs/agent-handoff.md)**。当前 A 集成分支是 `feat/member-a-runner`，未合并前请以该分支为依赖，避免直接从尚无实现的旧 main 开始。
+
 1. 阅读 **[三人分工与阶段验收说明](docs/work-allocation.md)**：A 系统与集成、B 负载与实验、C 分析与报告，含课程关联、接口和验收条件。
 2. 使用 **[提交清单](docs/submission-checklist.md)** 检查工程、文档、测试、视频、来源许可和官方平台提交；勾选须附证据。
 3. 在 [讨论 Issue](https://github.com/Beejiaang/os-design-2026-east-china/issues/1) 保留问题与依据，按 [协作说明](CONTRIBUTING.md) 提交修改；姓名、实际投入与完成状态由团队补充。

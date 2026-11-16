@@ -50,6 +50,11 @@ def main():
                                  - usage_before.ru_utime - usage_before.ru_stime),
                     cpu_stat_after=after, cpu_stat_delta=stat_delta(before, after))
         atomic_json(directory / "measurement.json", data)
+    # Stay running until the supervisor stops this unit. RuntimeMaxSec does not
+    # bound a RemainAfterExit service once it has entered active/exited state.
+    # The post-measurement wait is outside all recorded performance intervals.
+    while True:
+        time.sleep(60)
 
 
 if __name__ == "__main__":

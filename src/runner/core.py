@@ -1,8 +1,6 @@
-import csv
 import hashlib
 import json
 import math
-import os
 import random
 import subprocess
 import sys
@@ -11,13 +9,19 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
-from collector.system import doctor, read
+from collector.system import doctor
 from runner.worker import atomic_json
+from runner.lifecycle import SCHEMA_VERSION, cleanup, owner_identity, write_summaries
 
 
 def validate(config):
     if not isinstance(config, dict):
         raise ValueError("config must be an object")
+    unknown = set(config) - {"command", "workload_version", "input_id", "quotas", "repeats", "warmups", "order_seed", "timeout_seconds", "cwd"}
+    if unknown:
+        raise ValueError("Unknown configuration fields: " + ", ".join(sorted(unknown)))
+    if "cwd" in config and (not isinstance(config["cwd"], str) or not config["cwd"] or "\0" in config["cwd"]):
+        raise ValueError("cwd must be a nonempty directory path")
     command = config.get("command")
     if not isinstance(command, list) or not command or any(not isinstance(s, str) or not s or "\0" in s for s in command):
         raise ValueError("command must be a nonempty argv list")
@@ -51,7 +55,7 @@ def run_one(config, quota, index, warmup, root, env):
                 timeout_seconds=config.get("timeout_seconds", 30))
     atomic_json(directory / "spec.json", spec)
     unit = "osdesign-" + run_id + ".service"
-    row = {"schema_version": "1.0", "run_id": run_id, "source": "measured",
+    row = {"schema_version": SCHEMA_VERSION, "run_id": run_id, "source": "measured",
            "timestamp_utc": datetime.now(timezone.utc).isoformat(), "order_index": index,
            "warmup": warmup, "environment": env, "command": spec["command"],
            "cwd": spec["cwd"], "workload_version": config["workload_version"],
@@ -60,8 +64,10 @@ def run_one(config, quota, index, warmup, root, env):
            "status": "error", "error": None, "exit_code": None,
            "wall_seconds": None, "cpu_seconds": None, "cpu_stat_delta": None,
            "cleanup_ok": False, "artifacts": {"stdout": f"{run_id}/stdout.log", "stderr": f"{run_id}/stderr.log"}}
+    source = Path(__file__).resolve().parents[1]
     row["runner_sha256"] = hashlib.sha256(b"".join(
-        path.read_bytes() for path in sorted(Path(__file__).resolve().parents[1].glob("*/*.py")))).hexdigest()
+        path.read_bytes() for path in sorted(path for package in ("runner", "collector")
+                                            for path in (source / package).glob("*.py")))).hexdigest()
     for name, command in (("git_commit", ["git", "rev-parse", "HEAD"]),
                           ("git_dirty", ["git", "status", "--porcelain"])):
         try:
@@ -69,8 +75,9 @@ def run_one(config, quota, index, warmup, root, env):
             row[name] = provenance.stdout.strip() if provenance.returncode == 0 else None
         except (OSError, subprocess.TimeoutExpired):
             row[name] = None
-    args = ["systemd-run", "--user", "--quiet", "--unit=" + unit, "--service-type=exec",
-            "--property=RemainAfterExit=yes", "--property=CPUAccounting=yes",
+    atomic_json(directory / "pending.json", {"kind": "osdesign-pending-v1", "owner": owner_identity(), "record": row})
+    args = ["systemd-run", "--user", "--quiet", "--collect", "--unit=" + unit, "--service-type=exec",
+            "--property=CPUAccounting=yes",
             "--property=KillMode=control-group", "--property=TimeoutStopSec=2s",
             "--property=RuntimeMaxSec=" + str(spec["timeout_seconds"] + 5) + "s",
             "--working-directory=" + spec["cwd"],
@@ -113,22 +120,18 @@ def run_one(config, quota, index, warmup, root, env):
             row.update(status="metrics_missing", error="Required performance metrics unavailable")
         with (directory / "stdout.log").open("rb") as stream:
             row["stdout_sha256"] = hashlib.file_digest(stream, "sha256").hexdigest()
+    except KeyboardInterrupt as exc:
+        row.update(status="interrupted", error="Supervisor cancelled; no further runs scheduled",
+                   interrupt_signal=getattr(exc, "signum", 2))
     except (OSError, RuntimeError, ValueError, subprocess.TimeoutExpired, TimeoutError) as exc:
         row.update(status="error", error=str(exc))
     finally:
         if group is None and (directory / "started.json").exists():
-            group = Path(json.loads((directory / "started.json").read_text())["cgroup_path"])
-        try:
-            stopped = ctl("stop", unit)
-            ctl("reset-failed", unit)
-            state = ctl("show", unit, "--property=LoadState", "--value").stdout.strip()
-            populated = read(group / "cgroup.events") if group else None
-            row["cleanup_ok"] = state == "not-found" and (group is None or not group.exists() or
-                                                        "populated 0" in (populated or ""))
-            row["cleanup_detail"] = {"load_state": state, "cgroup_events": populated,
-                                      "stop_stderr": stopped.stderr.strip()}
-        except (OSError, subprocess.TimeoutExpired) as exc:
-            row["cleanup_detail"] = str(exc)
+            try:
+                group = Path(json.loads((directory / "started.json").read_text())["cgroup_path"])
+            except (ValueError, KeyError, TypeError):
+                pass
+        row["cleanup_ok"], row["cleanup_detail"] = cleanup(unit, group)
         if not row["cleanup_ok"]:
             row["execution_status"] = row["status"]
             row.update(status="cleanup_failed", error="Unable to verify service and descendant cleanup")
@@ -151,6 +154,8 @@ def experiment(config, output):
         random.Random(config.get("order_seed", 0)).shuffle(block)
         schedule.extend(block)
     rows = []
+    atomic_json(root / "experiment-status.json", {"state": "running", "planned_count": len(schedule),
+                "finalized_count": 0, "pending_count": 0})
     with (root / "runs.jsonl").open("w", encoding="utf-8") as stream:
         for index, (quota, warmup) in enumerate(schedule):
             row = run_one(config, quota, index, warmup, root, preflight["environment"])
@@ -158,14 +163,7 @@ def experiment(config, output):
             stream.write(json.dumps(row, ensure_ascii=False) + "\n")
             stream.flush()
             print(f'{index + 1}/{len(schedule)} quota={quota} status={row["status"]}', flush=True)
-            if not row["cleanup_ok"]:
+            if not row["cleanup_ok"] or row["status"] == "interrupted":
                 break
-    fields = ["run_id", "order_index", "warmup", "quota_percent", "status", "exit_code",
-              "wall_seconds", "cpu_seconds", "cleanup_ok", "error"]
-    with (root / "runs.csv").open("w", newline="", encoding="utf-8") as stream:
-        writer = csv.DictWriter(stream, fields, extrasaction="ignore")
-        writer.writeheader()
-        for row in rows:
-            # CSV null is an empty cell; JSON retains explicit null.
-            writer.writerow(row)
+    write_summaries(root, rows)
     return rows

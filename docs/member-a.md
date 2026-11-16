@@ -27,7 +27,9 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 
 `quotas` 默认 `[null,100,50]`。100% 是一个逻辑 CPU 的时间上限，50% 是半个；null 表示本工具没有设置本地配额，仍受祖先和宿主机限制。`repeats` 默认 3；`warmups` 默认 0；`order_seed` 默认 0，使用固定种子打乱顺序，预热统一先运行。失败样本也保留，清理失败时立即停止后续实验。
 
-## C 的数据接口（schema_version 1.0）
+## C 的数据接口（当前 schema_version 1.1）
+
+字段、状态和版本兼容的完整约定见 [数据协议](data-contract.md)；旧 1.0 归档保留原样。
 
 实验目录含 `config.json`、`environment.json`、`runs.jsonl`、`runs.csv`；每个 run_id 子目录含任务规格、启动日志、标准输出/错误、开始快照、完整测量和最终 `result.json`。JSONL 每行对应一次运行，CSV 是便于读取的扁平子集；JSON 中 null 在 CSV 中为空单元格。指标缺失不填 0。
 
@@ -44,7 +46,7 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 | cpu_seconds | 已回收子进程的 user+system CPU 时间，秒 |
 | cpu_stat_before / after / delta | cgroup CPU 原始统计与差值；usage_usec、user_usec、system_usec、throttled_usec 单位微秒，nr_periods、nr_throttled 为计数；保留内核实际提供的键 |
 | stdout_sha256 | 标准输出 SHA256；输出含运行时长等非确定内容时不适合直接做历史比较 |
-| status / exit_code / error | success、failed、timeout、error、metrics_missing 或 cleanup_failed；错误说明和实际退出码，未知用 null |
+| status / exit_code / error | success、failed、timeout、error、metrics_missing、cleanup_failed、interrupted、aborted；错误说明和实际退出码，未知用 null |
 | cleanup_ok / cleanup_detail | 临时单元已卸载且 cgroup 已删除或为空的核验与原始证据 |
 | artifacts | 相对于实验目录的 stdout、stderr 路径 |
 
@@ -56,7 +58,7 @@ preconditions = check_compatibility(baseline_row, current_row)
 # 先检查 compatible，再由 C 实现分布、阈值和回归分析
 ```
 
-兼容检查拒绝失败、预热、模拟、缺失关键指标、不一致输入、配额、运行环境、服务实际父级限制、执行器版本及标准输出。负载版本允许不同，因为它是历史回归的比较对象。此接口只提供前提核验，不输出“性能退化/正常”结论。
+兼容检查拒绝失败、预热、模拟、缺失关键指标、不一致输入、配额、运行环境、服务实际父级限制、执行器版本及标准输出；还要求同版协议和干净、可识别的 Git 提交。负载版本允许不同，因为它是历史回归的比较对象。此接口只提供前提核验，不输出“性能退化/正常”结论。
 
 也可直接检查两个单次运行的 `result.json`：
 
@@ -79,6 +81,8 @@ PYTHON=~/projects/osdesign-venv/bin/python bash scripts/reproduce-member-a.sh
 ## 实现与测量边界
 
 执行器为每次运行创建唯一的 systemd 用户临时服务，设置 CPUQuota、CPUAccounting、KillMode=control-group、停止期限和额外 RuntimeMaxSec 看门狗。服务中的 worker 先采集 cgroup 快照，再启动负载并等待，之后写原子 JSON；外部执行器读取结果，再停止服务并核验整个组的清理。worker 自身超时杀死负载进程组，systemd 随后清理仍在组内的后代，包括另建会话的子进程。原始测量在停止服务前采集，避免 cgroup 删除后丢失统计。
+
+worker 测量后保持运行，直到被执行器回收或看门狗终止；该等待不计入记录指标。原 RemainAfterExit 方案无法保证 active/exited 状态的运行时限，因此已替换。SIGINT/SIGTERM 记录 interrupted；强制丢失执行器后使用 `python3 -m runner recover 实验目录`，核验后记录 aborted，禁止改成成功样本。具体退出码、所有权检查与局限见数据协议。
 
 无配额时 systemd 可能不为叶节点启用 CPU 控制器，此时叶节点 `cpu.max` 不存在；程序同时读取父节点 `cgroup.subtree_control` 来核验“未设置本地配额”，不会把缺失文件伪造为 max，也不把父级约束忽略。
 

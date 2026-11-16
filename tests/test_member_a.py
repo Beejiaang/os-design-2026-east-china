@@ -38,6 +38,7 @@ class ContractTests(unittest.TestCase):
                "quota_verified": True, "environment": {"fingerprint": "x"}, "stdout_sha256": "y",
                "input_id": "fixed", "quota_percent": 50, "timeout_seconds": 2,
                "workload_version": "v1", "runner_sha256": "runner-v1", "exit_code": 0,
+               "git_commit": "c" * 40, "git_dirty": "",
                "cpu_stat_delta": {"usage_usec": 500000},
                "visible_limits": [{"path": "leaf", "cpu_max": "50000 100000", "cpuset_effective": None},
                                   {"path": "parent", "cpu_max": "max 100000", "cpuset_effective": None}],
@@ -51,7 +52,8 @@ class ContractTests(unittest.TestCase):
         for key, value in (("cleanup_ok", "true"), ("quota_verified", 1), ("exit_code", False),
                            ("environment", None), ("visible_limits", None), ("warmup", None),
                            ("cpu_stat_delta", None), ("wall_seconds", float("nan")),
-                           ("cpu_seconds", float("inf")), ("timeout_seconds", 0), ("quota_percent", True)):
+                           ("cpu_seconds", float("inf")), ("timeout_seconds", 0), ("quota_percent", True),
+                           ("git_dirty", " M workload.py"), ("schema_version", "1.1")):
             with self.subTest(key=key, value=value):
                 self.assertFalse(check_compatibility(row, dict(row, **{key: value}))["compatible"])
         for key in row:
