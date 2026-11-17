@@ -1,6 +1,6 @@
 # 材料、版本与 SHA256 对应表
 
-生成时 Git HEAD：`33e441ce9f14b2a273b20ff8204cdec5a58d0b11`；分支：`improve/22-current-materials`。
+生成时 Git HEAD：`c5498b9ea9dc58722a7316e8137b515ecd5f4214`；分支：`improve/22-current-materials`。
 
 生成时除本表外的改动路径：[]。
 
