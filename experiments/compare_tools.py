@@ -3,6 +3,7 @@ import argparse
 import json
 import math
 import random
+import shlex
 import statistics
 import subprocess
 import sys
@@ -88,12 +89,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--time-binary", required=True, type=Path)
+    parser.add_argument("--hyperfine-binary", type=Path)
     parser.add_argument("--repeats", type=int, default=5)
     parser.add_argument("--rows", type=int, default=4000000)
     args = parser.parse_args()
     if not 1 <= args.repeats <= 30 or not 1 <= args.rows <= 10000000:
         parser.error("Require repeats [1,30] and rows [1,10000000]")
     time_binary = args.time_binary.resolve(strict=True)
+    hyperfine = args.hyperfine_binary.resolve(strict=True) if args.hyperfine_binary else None
     preflight = doctor()
     if not preflight["supported"]:
         raise RuntimeError(str(preflight["errors"]))
@@ -112,6 +115,9 @@ def main():
                 "systemd": subprocess.check_output(["systemd-run", "--version"], text=True),
                 "git_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
                 "time_binary_sha256": sha256(time_binary)}
+    if hyperfine:
+        versions.update(hyperfine=subprocess.check_output([str(hyperfine), "--version"], text=True),
+                        hyperfine_binary_sha256=sha256(hyperfine))
     for name, value in (("environment", preflight), ("input", metadata), ("reference", expected), ("config", config), ("versions", versions)):
         (output / (name + ".json")).write_text(json.dumps(value, indent=2))
     (output / "project").mkdir()
@@ -146,20 +152,59 @@ def main():
             print(f"{index + 1}/{len(schedule)} {tool} quota={quota} status={row['status']} correct={correct}", flush=True)
             if not row["cleanup_ok"] or row["status"] == "interrupted":
                 break
+        if hyperfine and len(records) == len(schedule) and all(r["cleanup_ok"] for r in records):
+            quotas = [None, 100, 50]
+            random.Random(20261117).shuffle(quotas)
+            for quota in quotas:
+                batch = output / "hyperfine" / str(quota)
+                batch.mkdir(parents=True)
+                (batch / "request.json").write_text(json.dumps({"config": config, "quota": quota,
+                                                               "time_binary": str(time_binary)}, indent=2))
+                command = shlex.join([sys.executable, str(ROOT / "experiments/hyperfine_trial.py"), str(batch)])
+                argv = [str(hyperfine), "--shell=none", "--warmup", "1", "--runs", str(args.repeats),
+                        "--export-json", str(batch / "hyperfine.json"), command]
+                (batch / "argv.json").write_text(json.dumps(argv, indent=2))
+                measured = subprocess.run(argv, capture_output=True, text=True,
+                                          timeout=(config["timeout_seconds"] + 30) * (args.repeats + 1))
+                (batch / "launch.log").write_text(measured.stdout + measured.stderr)
+                if measured.returncode:
+                    raise RuntimeError(f"Hyperfine failed; retained trials: {batch}")
+                timing = json.loads((batch / "hyperfine.json").read_text())["results"][0]
+                trials = sorted(batch.glob("trial-*"))
+                if len(trials) != args.repeats + 1 or len(timing["times"]) != args.repeats:
+                    raise ValueError("Unexpected hyperfine trial count")
+                for trial_index, directory in enumerate(trials):
+                    row = json.loads((directory / "native-result.json").read_text())
+                    stdout = directory / "stdout.log"
+                    records.append({"kind": "tool-comparison-v1", "source": "measured",
+                                    "tool": "hyperfine-systemd", "quota_percent": quota,
+                                    "warmup": trial_index == 0, "order_index": len(records),
+                                    "status": row["status"], "cleanup_ok": row["cleanup_ok"],
+                                    "quota_verified": row["quota_verified"],
+                                    "functional_ok": stdout.is_file() and check_output(stdout, expected),
+                                    "stdout_sha256": sha256(stdout) if stdout.is_file() else None,
+                                    "wall_seconds": row["wall_seconds"], "cpu_seconds": row["cpu_seconds"],
+                                    "outer_seconds": None if trial_index == 0 else timing["times"][trial_index - 1],
+                                    "parent_limits": row.get("visible_limits", [])[1:],
+                                    "hyperfine_parameters": {"warmup": 1, "runs": args.repeats, "shell": "none"},
+                                    "artifacts": str(directory)})
+                (output / "comparison.jsonl").write_text("".join(json.dumps(r) + "\n" for r in records))
+                print(f"hyperfine quota={quota}: {len(trials)} trials retained", flush=True)
     finally:
         restore_handlers(previous)
     unchanged = sha256(output / "input.csv") == metadata["sha256"] and sha256(workload) == workload_hash
     valid = [r for r in records if r["status"] == "success" and r["functional_ok"] and r["cleanup_ok"] and r["quota_verified"]]
     parents_equal = bool(records) and all(r["parent_limits"] and r["parent_limits"] == records[0]["parent_limits"] for r in records)
     groups = []
-    for tool in ("project", "gnu-time-systemd"):
+    for tool in (("project", "gnu-time-systemd", "hyperfine-systemd") if hyperfine else ("project", "gnu-time-systemd")):
         for quota in (None, 100, 50):
             sample = [r for r in valid if not r["warmup"] and r["tool"] == tool and r["quota_percent"] == quota]
             groups.append({"tool": tool, "quota_percent": quota, "n": len(sample), **{
                 field + "_median": statistics.median(r[field] for r in sample) if sample else None
                 for field in ("wall_seconds", "cpu_seconds", "outer_seconds")}})
-    complete = len(records) == len(schedule) == len(valid) and unchanged and parents_equal
-    summary = {"complete": complete, "planned_count": len(schedule), "final_count": len(records),
+    planned = len(schedule) + (3 * (args.repeats + 1) if hyperfine else 0)
+    complete = len(records) == planned == len(valid) and unchanged and parents_equal
+    summary = {"complete": complete, "planned_count": planned, "final_count": len(records),
                "valid_count": len(valid), "input_and_workload_unchanged": unchanged, "parent_limits_equal": parents_equal,
                "groups": groups, "note": "Different timer resolutions and instrumentation; descriptive agreement only, no speed ranking. Harness adds quota snapshots, correctness, repeats and cleanup checks to native tools."}
     (output / "summary.json").write_text(json.dumps(summary, indent=2))
