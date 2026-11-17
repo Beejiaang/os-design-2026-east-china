@@ -2,7 +2,20 @@
 
 2026 年操作系统设计赛华东区域赛参赛项目仓库，涵盖选题分析、技术方案、源代码、测试实验、开发文档与演示材料。
 
-三人团队已选择 **OS 应用开发赛道（赛道 2）的方向 A**，当前执行范围为 **面向 openEuler 数据处理任务的 CPU 资源约束与性能回归分析工具**。成员 A 的执行与采集核心已实现，并在 openEuler 验证；数据聚合负载、统计分析与完整报告待 B/C 接入。
+三人团队已选择 **OS 应用开发赛道（赛道 2）的方向 A**，当前执行范围为 **面向 openEuler 数据处理任务的 CPU 资源约束与性能回归分析工具**。执行采集、固定输入分组聚合、独立正确性校验和离线报告已接通；在 openEuler 与 Ubuntu WSL 分别完成代理实测。非实现者验收仍需完成。
+
+## 运行完整数据任务
+
+在支持 cgroup v2 / systemd 用户服务的 Linux 中，从源码仓库根目录运行：
+
+```bash
+python3 -m pip install -e '.[report]'
+python3 experiments/run_pipeline.py --output results/group-first
+```
+
+一条命令生成固定种子 CSV，执行三档配额、每档一次预热及五次测量，使用独立 SQLite 聚合校验输出，生成原始结果、summary.json 和离线 report.html。输出目录必须不存在；详细安装、离线重算、历史比较及测量边界见 [完整流程说明](docs/implementation/pipeline.md)，实测和限制见 [集成验证](docs/validation/pipeline-validation.md)。
+
+历史比较仅输出探索性阈值信号及无法比较原因；未验收统计准确率，不把 `no_threshold_signal` 解释为“无退化”。已知变慢变体可加 `--passes 2`，结果保持一致，工作量明确增加。
 
 ## 运行成员 A 的核心
 
@@ -17,13 +30,13 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 
 要求 Python 3.11+。输出目录必须尚不存在。包含三档 CPU 配额、预热与重复、原始 JSON/CSV、失败和超时处理、子进程清理核验、历史比较前提接口。完整说明及 B/C 接口见 [成员 A 交付](docs/implementation/member-a.md)，真实结果见 [验收记录](docs/validation/member-a-validation.md)。
 
-当前输出协议为 run 1.1，含中断与恢复状态；可用 [真实样例](examples/measured-run-1.1.json) 接通解析。最新干净源码在 openEuler 通过 17 项测试及 12 次正常实验；另保留 5 份故障注入最终记录，均单独列出并排除性能样本。恢复命令和机器格式见 [数据协议](docs/contracts/data-contract.md)。B/C 模块和人员交叉验收仍待完成。
+当前输出协议为 run 1.1，含中断与恢复状态；可用 [真实样例](examples/measured-run-1.1.json) 接通解析。2026-11-16 的 A 干净源码在 openEuler 通过 17 项测试及 12 次正常实验；另保留 5 份故障注入最终记录，均单独列出并排除性能样本。恢复命令和机器格式见 [数据协议](docs/contracts/data-contract.md)。新增 B/C 验证不能直接继承这份目标系统结论。
 
 ## 从这里开始
 
 目录入口：[文档分区导航](docs/README.md)、[工程文件存放规则](docs/project/directory-layout.md)。代码、负载、实验、协议、证据和演示材料分别放在对应目录；占位说明不代表 B/C 功能已完成。
 
-使用 Agent 开发的队友先读 **[AGENTS.md](AGENTS.md)**，再看 **[统一口径](docs/project/project-contract.md)**、**[数据协议](docs/contracts/data-contract.md)** 和 **[角色交接/可复制启动任务](docs/handoff/agent-handoff.md)**。当前 A 集成分支是 `feat/member-a-runner`，未合并前请以该分支为依赖，避免直接从尚无实现的旧 main 开始。
+使用 Agent 开发的队友先读 **[AGENTS.md](AGENTS.md)**，再看 **[统一口径](docs/project/project-contract.md)**、**[数据协议](docs/contracts/data-contract.md)** 和 **[角色交接/可复制启动任务](docs/handoff/agent-handoff.md)**。A 原集成分支是 `feat/member-a-runner`；新增全链路在本地 `feat/bc-end-to-end`，推送/PR/合并状态见交接，不默认远端已包含它。
 
 1. 阅读 **[三人分工与阶段验收说明](docs/project/work-allocation.md)**：A 系统与集成、B 负载与实验、C 分析与报告，含课程关联、接口和验收条件。
 2. 使用 **[提交清单](docs/project/submission-checklist.md)** 检查工程、文档、测试、视频、来源许可和官方平台提交；勾选须附证据。
@@ -38,7 +51,7 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 
 - 本 GitHub 仓库是团队持续协作的主仓库，用于分享、讨论，以及后续源代码、测试、开发文档与演示材料的版本管理。
 - 赛事正式提交与开发过程留痕按组委会 GitLab 要求执行；选题后尽早建立比赛仓库并同步，不能以本 GitHub 仓库代替正式提交。
-- 当前已有执行与采集原型及真实实验；完整数据任务、统计回归检测与离线报告仍待接入，没有已验证的性能提升或诊断准确率。
+- 当前已有完整数据任务、独立校验和离线报告，openEuler 全链路代理实测通过；统计准确率与非实现者验收仍待完成，没有已验证的业务性能提升或诊断准确率。
 - 本仓库不存放报名证件、个人联系方式、令牌、虚拟机镜像或用户提供的原始赛事 PDF。
 
 ## 资料结构
@@ -59,4 +72,4 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 
 本仓库原创文档采用 [CC BY-SA 4.0](LICENSE)，程序代码采用 [MIT](LICENSE-CODE)。第三方资料及引用内容保留原许可。
 
-最近更新：**2026-11-16（Asia/Shanghai）**。赛事动态以官方平台最新公告为准。
+最近更新：**2026-11-17（Asia/Shanghai）**。赛事动态以官方平台最新公告为准。

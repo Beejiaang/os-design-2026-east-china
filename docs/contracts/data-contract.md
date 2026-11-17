@@ -78,3 +78,11 @@ PYTHONPATH=src python3 -m runner recover results/原实验目录
 兼容接口检查输入、资源、实际父级、环境、输出、干净 Git 版本和执行器代码哈希，允许 workload_version 不同。runner_sha256 只覆盖 runner/collector，避免报告模块改动污染执行器指纹。前提通过仍需 B 的独立正确性证据及 C 的统计规则。
 
 可选格式检查：安装开发依赖后运行 `python3 scripts/validate_contracts.py 路径/runs.jsonl`，配置加 `--config`。它验证 1.1 结构，不替代功能、配额或兼容检查；1.0 历史文件不通过当前 1.1 schema 是预期行为。
+
+## B/C 附加派生文件（2026-11-17）
+
+新增文件不修改 run 1.1 / config 1.0 字段或状态；已有调用方无需迁移。旧 CPU 探针数据没有 B 的独立正确性记录，仍可查阅，但不会自动成为聚合任务的已校验性能样本。
+
+`correctness.json` 的 kind 为 `group-correctness-v1`，method 为 `sqlite-group-by-exact-output-v1`，携带 input_id、workload_version、真正布尔型 input_unchanged，以及 runs 对象（run_id → {ok, stdout_sha256}）。ok 只表明对应输出与独立参考相同，不覆盖运行状态/配额/清理/完整性核验。C 还需核对原始 stdout 的实际哈希；缺失、未知方法或不匹配均拒绝进入已校验样本。
+
+`summary.json`/HTML 是 analysis_version 1.0 的派生结果。complete 表示元数据/整轮执行满足完整性，不能代替逐条功能校验；eligible、excluded、issues、groups 的 comparable/reasons 和原始 run_id 一起解释。历史规则输出 unable_to_compare、slowdown_needs_review、no_threshold_signal，均不是 runner 状态，不写回 result.json。规则含义、最少样本与阈值见 [完整流程说明](../implementation/pipeline.md)。
