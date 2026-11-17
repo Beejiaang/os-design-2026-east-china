@@ -1,0 +1,101 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CPU 配额实验报告</title><style>
+body{font:16px/1.6 system-ui,sans-serif;background:#f3f6fa;color:#192b3d;max-width:1200px;margin:32px auto;padding:0 24px}
+h1{font-size:30px}section{background:white;border:1px solid #dae2eb;border-radius:12px;padding:20px;margin:20px 0;overflow:auto}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}td,th{border-bottom:1px solid #ddd;text-align:left;padding:10px}
+pre{white-space:pre-wrap;word-break:break-word;font-size:13px}.badge{background:#dfe9f4;padding:8px 16px;border-radius:8px}
+</style><h1>数据聚合 · CPU 配额实验报告</h1><p class="badge">实验完整：True · 最终记录：8 / 8</p><p>Descriptive configuration contrast only. No validated regression verdict or root cause. Unlimited means no local quota set.</p><p>目录：C:\Users\Ho&#x27;lo\Desktop\2026年操作系统设计赛华东区域赛\os-design-2026-east-china\results\comparison-20261117\results\regression\boundary-15\experiment</p><section><h2>配置对照</h2><p>null 表示本工具未设置本地配额；100% 是一个逻辑 CPU 的上限。倍数仅在可比条件通过时展示。</p><table><tr><th>配额 %</th><th>样本数</th><th>耗时中位数 s</th><th>最小 s</th><th>最大 s</th><th>CPU 中位数 s</th><th>相对 null</th><th>可比</th></tr><tr><td>100</td><td>7</td><td>1.8178</td><td>1.8177</td><td>1.8179</td><td>1.7733</td><td>None</td><td>True</td></tr></table></section><section><h2>逐次耗时分布</h2><p>每个点对应一条已校验的非预热记录；重叠点可能不可分辨。原始值见下表。不完整实验中的点仅作记录展示。</p><svg role="img" aria-label="每次已校验运行的耗时，单位秒" viewBox="0 0 900 125" style="min-width:600px;width:100%"><line x1="150.0" y1="15" x2="150.0" y2="90" stroke="#dde4ed"/><text x="150.0" y="115" text-anchor="middle" fill="#526478">0.00 s</text><line x1="320.0" y1="15" x2="320.0" y2="90" stroke="#dde4ed"/><text x="320.0" y="115" text-anchor="middle" fill="#526478">0.50 s</text><line x1="490.0" y1="15" x2="490.0" y2="90" stroke="#dde4ed"/><text x="490.0" y="115" text-anchor="middle" fill="#526478">1.00 s</text><line x1="660.0" y1="15" x2="660.0" y2="90" stroke="#dde4ed"/><text x="660.0" y="115" text-anchor="middle" fill="#526478">1.50 s</text><line x1="830.0" y1="15" x2="830.0" y2="90" stroke="#dde4ed"/><text x="830.0" y="115" text-anchor="middle" fill="#526478">2.00 s</text><text x="5" y="45" font-size="13">100%</text><circle cx="768.1443856120292" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>194c08f0fd864851980c41d641c35a3a: 1.8178 s</title></circle><circle cx="768.0962874122183" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>20ee9ebd588c4206bfe81a3fff32516a: 1.8177 s</title></circle><circle cx="768.1419328401338" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>612d46bb8fc34b61a07a419a52f57d91: 1.8178 s</title></circle><circle cx="768.1779528473036" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>ac7fd333384143c9b5d2c96659d64ab3: 1.8179 s</title></circle><circle cx="768.1101440599632" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>b6bc866a3d2b45bbbdba1542e2772b01: 1.8177 s</title></circle><circle cx="768.1109163106958" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>bdd584adc2f843c5aa7a441d6951e1a9: 1.8177 s</title></circle><circle cx="768.1818181818181" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>ca8ed2f121b348c6a2b5f16d7c984b09: 1.8179 s</title></circle></svg></section><section><h2>已校验的非预热测量</h2><table><tr><th>run_id</th><th>配额 %</th><th>耗时 s</th><th>CPU s</th><th>最终原始记录</th></tr><tr><td>194c08f0fd864851980c41d641c35a3a</td><td>100</td><td>1.8178</td><td>1.7654</td><td>C:\Users\Ho&#x27;lo\Desktop\2026年操作系统设计赛华东区域赛\os-design-2026-east-china\results\comparison-20261117\results\regression\boundary-15\experiment\194c08f0fd864851980c41d641c35a3a\result.json</td></tr><tr><td>20ee9ebd588c4206bfe81a3fff32516a</td><td>100</td><td>1.8177</td><td>1.7641</td><td>C:\Users\Ho&#x27;lo\Desktop\2026年操作系统设计赛华东区域赛\os-design-2026-east-china\results\comparison-20261117\results\regression\boundary-15\experiment\20ee9ebd588c4206bfe81a3fff32516a\result.json</td></tr><tr><td>612d46bb8fc34b61a07a419a52f57d91</td><td>100</td><td>1.8178</td><td>1.7665</td><td>C:\Users\Ho&#x27;lo\Desktop\2026年操作系统设计赛华东区域赛\os-design-2026-east-china\results\comparison-20261117\results\regression\boundary-15\experiment\612d46bb8fc34b61a07a419a52f57d91\result.json</td></tr><tr><td>ac7fd333384143c9b5d2c96659d64ab3</td><td>100</td><td>1.8179</td><td>1.7750</td><td>C:\Users\Ho&#x27;lo\Desktop\2026年操作系统设计赛华东区域赛\os-design-2026-east-china\results\comparison-20261117\results\regression\boundary-15\experiment\ac7fd333384143c9b5d2c96659d64ab3\result.json</td></tr><tr><td>b6bc866a3d2b45bbbdba1542e2772b01</td><td>100</td><td>1.8177</td><td>1.7964</td><td>C:\Users\Ho&#x27;lo\Desktop\2026年操作系统设计赛华东区域赛\os-design-2026-east-china\results\comparison-20261117\results\regression\boundary-15\experiment\b6bc866a3d2b45bbbdba1542e2772b01\result.json</td></tr><tr><td>bdd584adc2f843c5aa7a441d6951e1a9</td><td>100</td><td>1.8177</td><td>1.7733</td><td>C:\Users\Ho&#x27;lo\Desktop\2026年操作系统设计赛华东区域赛\os-design-2026-east-china\results\comparison-20261117\results\regression\boundary-15\experiment\bdd584adc2f843c5aa7a441d6951e1a9\result.json</td></tr><tr><td>ca8ed2f121b348c6a2b5f16d7c984b09</td><td>100</td><td>1.8179</td><td>1.7825</td><td>C:\Users\Ho&#x27;lo\Desktop\2026年操作系统设计赛华东区域赛\os-design-2026-east-china\results\comparison-20261117\results\regression\boundary-15\experiment\ca8ed2f121b348c6a2b5f16d7c984b09\result.json</td></tr></table></section><section><h2>历史比较 · 探索性复核规则</h2><p>Exploratory review signal only; no statistical significance, validated accuracy, no-regression or root-cause claim. Observed range sensitivity is not a confidence interval.</p><p>最少样本数：5；预设变化阈值：0.15</p><p>阈值敏感=true 表示两组已观察到的耗时范围可组合出阈值两侧的比值，需留意波动；这不是置信区间。精确范围见追溯数据。</p><table><tr><th>配额 %</th><th>基线 n</th><th>当前 n</th><th>耗时比</th><th>规则输出</th><th>阈值敏感</th><th>原因</th></tr><tr><td>100</td><td>7</td><td>7</td><td>1.1598</td><td>变慢信号，需复核</td><td>False</td><td></td></tr></table></section><section><h2>历史比较的观察范围</h2><p>已观察范围敏感性，不是置信区间。虚线为 1+threshold；颜色仅提示是否跨阈值。各图按自身范围缩放，数值以标签为准。</p><div><h3>配额 100%</h3><svg role="img" aria-label="已观察比值范围 1.1594 至 1.1599；阈值参考线 1.1500；不是置信区间" viewBox="0 0 430 115" style="min-width:300px;width:100%"><title>已观察比值范围 1.1594 至 1.1599；阈值参考线 1.1500；不是置信区间</title><line x1="30" y1="45" x2="390" y2="45" stroke="#dae2eb"/><line x1="99.26" y1="22" x2="99.26" y2="62" stroke="#7d8da0"/><line x1="307.04" y1="15" x2="307.04" y2="65" stroke="#a32a40" stroke-dasharray="4 3"/><line x1="320.13" y1="45" x2="320.74" y2="45" stroke="#168a86" stroke-width="8" stroke-linecap="round"/><text x="99.26" y="85" text-anchor="middle" font-size="12">1.00</text><text x="307.04" y="12" text-anchor="middle" font-size="12">阈值 1.15</text><text x="30" y="108" font-size="12">范围 1.1594–1.1599</text></svg></div></section><section><h2>排除、问题与追溯证据</h2><pre>{
+  &quot;issues&quot;: [],
+  &quot;excluded&quot;: [
+    {
+      &quot;run_id&quot;: &quot;9c2dadeab9cf4e1e84a41b8ce30c2ae3&quot;,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;reasons&quot;: [
+        &quot;baseline: explicit non-warmup run required&quot;,
+        &quot;current: explicit non-warmup run required&quot;,
+        &quot;warmup&quot;
+      ]
+    }
+  ],
+  &quot;group_reasons&quot;: [
+    {
+      &quot;quota&quot;: 100,
+      &quot;reasons&quot;: []
+    }
+  ],
+  &quot;history&quot;: {
+    &quot;rule&quot;: &quot;exploratory-median-v1&quot;,
+    &quot;minimum&quot;: 5,
+    &quot;threshold&quot;: 0.15,
+    &quot;comparisons&quot;: [
+      {
+        &quot;quota_percent&quot;: 100,
+        &quot;baseline_n&quot;: 7,
+        &quot;current_n&quot;: 7,
+        &quot;baseline_run_ids&quot;: [
+          &quot;23c875f5796141308cab3950c6645611&quot;,
+          &quot;4d6d41d60f4449e9b9d3d1b4351c74dd&quot;,
+          &quot;536170ec68a043f883e30f6e12ef6ec3&quot;,
+          &quot;82ce7043c1af4b1da1f32493d6011be6&quot;,
+          &quot;939ee480707f4150ac04aa42e07ec403&quot;,
+          &quot;c5a69f3bd961423d8e1f2787c8a7c8e5&quot;,
+          &quot;cf6c40e870044bfa8a112e999bb3dcf5&quot;
+        ],
+        &quot;current_run_ids&quot;: [
+          &quot;194c08f0fd864851980c41d641c35a3a&quot;,
+          &quot;20ee9ebd588c4206bfe81a3fff32516a&quot;,
+          &quot;612d46bb8fc34b61a07a419a52f57d91&quot;,
+          &quot;ac7fd333384143c9b5d2c96659d64ab3&quot;,
+          &quot;b6bc866a3d2b45bbbdba1542e2772b01&quot;,
+          &quot;bdd584adc2f843c5aa7a441d6951e1a9&quot;,
+          &quot;ca8ed2f121b348c6a2b5f16d7c984b09&quot;
+        ],
+        &quot;wall_ratio&quot;: 1.1597745476625316,
+        &quot;verdict&quot;: &quot;slowdown_needs_review&quot;,
+        &quot;reasons&quot;: [],
+        &quot;observed_range_ratio_bounds&quot;: [
+          1.1594497399847221,
+          1.1598875902429209
+        ],
+        &quot;threshold_sensitive&quot;: false
+      }
+    ],
+    &quot;sensitivity_version&quot;: &quot;observed-range-v1&quot;,
+    &quot;note&quot;: &quot;Exploratory review signal only; no statistical significance, validated accuracy, no-regression or root-cause claim. Observed range sensitivity is not a confidence interval.&quot;
+  },
+  &quot;artifacts&quot;: {
+    &quot;194c08f0fd864851980c41d641c35a3a&quot;: {
+      &quot;result&quot;: &quot;C:\\Users\\Ho&#x27;lo\\Desktop\\2026年操作系统设计赛华东区域赛\\os-design-2026-east-china\\results\\comparison-20261117\\results\\regression\\boundary-15\\experiment\\194c08f0fd864851980c41d641c35a3a\\result.json&quot;,
+      &quot;sha256&quot;: &quot;c264387a4462f9a2f977a6668bd63f8c24e3d0a4787966c93af784c572e3c783&quot;
+    },
+    &quot;20ee9ebd588c4206bfe81a3fff32516a&quot;: {
+      &quot;result&quot;: &quot;C:\\Users\\Ho&#x27;lo\\Desktop\\2026年操作系统设计赛华东区域赛\\os-design-2026-east-china\\results\\comparison-20261117\\results\\regression\\boundary-15\\experiment\\20ee9ebd588c4206bfe81a3fff32516a\\result.json&quot;,
+      &quot;sha256&quot;: &quot;e1ea9b25a34bbaa971f4f84ece0d33245d8a21e47067a411fb53424965f440f3&quot;
+    },
+    &quot;612d46bb8fc34b61a07a419a52f57d91&quot;: {
+      &quot;result&quot;: &quot;C:\\Users\\Ho&#x27;lo\\Desktop\\2026年操作系统设计赛华东区域赛\\os-design-2026-east-china\\results\\comparison-20261117\\results\\regression\\boundary-15\\experiment\\612d46bb8fc34b61a07a419a52f57d91\\result.json&quot;,
+      &quot;sha256&quot;: &quot;b520cb445b1b6ba60bf16219c256eda8f16f6667721db33696db59556a5ec004&quot;
+    },
+    &quot;9c2dadeab9cf4e1e84a41b8ce30c2ae3&quot;: {
+      &quot;result&quot;: &quot;C:\\Users\\Ho&#x27;lo\\Desktop\\2026年操作系统设计赛华东区域赛\\os-design-2026-east-china\\results\\comparison-20261117\\results\\regression\\boundary-15\\experiment\\9c2dadeab9cf4e1e84a41b8ce30c2ae3\\result.json&quot;,
+      &quot;sha256&quot;: &quot;5e9215883a8aa6e9018b539f1c93d67c21b984ce267454995fbbbff83c7bcf05&quot;
+    },
+    &quot;ac7fd333384143c9b5d2c96659d64ab3&quot;: {
+      &quot;result&quot;: &quot;C:\\Users\\Ho&#x27;lo\\Desktop\\2026年操作系统设计赛华东区域赛\\os-design-2026-east-china\\results\\comparison-20261117\\results\\regression\\boundary-15\\experiment\\ac7fd333384143c9b5d2c96659d64ab3\\result.json&quot;,
+      &quot;sha256&quot;: &quot;a2194735cf4ecdc757f23bb5764641c215ffaae6328afa919eb396d2592f7e77&quot;
+    },
+    &quot;b6bc866a3d2b45bbbdba1542e2772b01&quot;: {
+      &quot;result&quot;: &quot;C:\\Users\\Ho&#x27;lo\\Desktop\\2026年操作系统设计赛华东区域赛\\os-design-2026-east-china\\results\\comparison-20261117\\results\\regression\\boundary-15\\experiment\\b6bc866a3d2b45bbbdba1542e2772b01\\result.json&quot;,
+      &quot;sha256&quot;: &quot;a0425e9cfef1ee59208b97cec2bdb13adb08e9f5fc2d226e891e94038dd189ba&quot;
+    },
+    &quot;bdd584adc2f843c5aa7a441d6951e1a9&quot;: {
+      &quot;result&quot;: &quot;C:\\Users\\Ho&#x27;lo\\Desktop\\2026年操作系统设计赛华东区域赛\\os-design-2026-east-china\\results\\comparison-20261117\\results\\regression\\boundary-15\\experiment\\bdd584adc2f843c5aa7a441d6951e1a9\\result.json&quot;,
+      &quot;sha256&quot;: &quot;6ef8a12ad5337ce5aa5a1a31923d969b9c6839b3562e9af758d979eade472ab5&quot;
+    },
+    &quot;ca8ed2f121b348c6a2b5f16d7c984b09&quot;: {
+      &quot;result&quot;: &quot;C:\\Users\\Ho&#x27;lo\\Desktop\\2026年操作系统设计赛华东区域赛\\os-design-2026-east-china\\results\\comparison-20261117\\results\\regression\\boundary-15\\experiment\\ca8ed2f121b348c6a2b5f16d7c984b09\\result.json&quot;,
+      &quot;sha256&quot;: &quot;96ec0a72e0bd66f1c4aa8cc210f191594633219a3457c395e13da9211fa011c0&quot;
+    }
+  }
+}</pre></section></html>

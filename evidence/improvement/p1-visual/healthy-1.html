@@ -1,0 +1,101 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CPU 配额实验报告</title><style>
+body{font:16px/1.6 system-ui,sans-serif;background:#f3f6fa;color:#192b3d;max-width:1200px;margin:32px auto;padding:0 24px}
+h1{font-size:30px}section{background:white;border:1px solid #dae2eb;border-radius:12px;padding:20px;margin:20px 0;overflow:auto}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}td,th{border-bottom:1px solid #ddd;text-align:left;padding:10px}
+pre{white-space:pre-wrap;word-break:break-word;font-size:13px}.badge{background:#dfe9f4;padding:8px 16px;border-radius:8px}
+</style><h1>数据聚合 · CPU 配额实验报告</h1><p class="badge">实验完整：True · 最终记录：8 / 8</p><p>Descriptive configuration contrast only. No validated regression verdict or root cause. Unlimited means no local quota set.</p><p>目录：C:\Users\Ho&#x27;lo\Desktop\2026年操作系统设计赛华东区域赛\os-design-2026-east-china\results\comparison-20261117\results\regression\healthy-1\experiment</p><section><h2>配置对照</h2><p>null 表示本工具未设置本地配额；100% 是一个逻辑 CPU 的上限。倍数仅在可比条件通过时展示。</p><table><tr><th>配额 %</th><th>样本数</th><th>耗时中位数 s</th><th>最小 s</th><th>最大 s</th><th>CPU 中位数 s</th><th>相对 null</th><th>可比</th></tr><tr><td>100</td><td>7</td><td>1.5674</td><td>1.5672</td><td>1.6175</td><td>1.5415</td><td>None</td><td>True</td></tr></table></section><section><h2>逐次耗时分布</h2><p>每个点对应一条已校验的非预热记录；重叠点可能不可分辨。原始值见下表。不完整实验中的点仅作记录展示。</p><svg role="img" aria-label="每次已校验运行的耗时，单位秒" viewBox="0 0 900 125" style="min-width:600px;width:100%"><line x1="150.0" y1="15" x2="150.0" y2="90" stroke="#dde4ed"/><text x="150.0" y="115" text-anchor="middle" fill="#526478">0.00 s</text><line x1="320.0" y1="15" x2="320.0" y2="90" stroke="#dde4ed"/><text x="320.0" y="115" text-anchor="middle" fill="#526478">0.44 s</text><line x1="490.0" y1="15" x2="490.0" y2="90" stroke="#dde4ed"/><text x="490.0" y="115" text-anchor="middle" fill="#526478">0.89 s</text><line x1="660.0" y1="15" x2="660.0" y2="90" stroke="#dde4ed"/><text x="660.0" y="115" text-anchor="middle" fill="#526478">1.33 s</text><line x1="830.0" y1="15" x2="830.0" y2="90" stroke="#dde4ed"/><text x="830.0" y="115" text-anchor="middle" fill="#526478">1.78 s</text><text x="5" y="45" font-size="13">100%</text><circle cx="749.4574886837805" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>29c311f9105e41a4bd6fa03cf9c8d443: 1.5685 s</title></circle><circle cx="768.1818181818181" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>69d3b358d3e74746b9b60e5e334366ac: 1.6175 s</title></circle><circle cx="749.0622014121055" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>8f3db9de50ed4c5c9052363cbe6b0439: 1.5675 s</title></circle><circle cx="749.025441311012" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>928d3871e55443a28244c2537d1aaf10: 1.5674 s</title></circle><circle cx="748.9501787264209" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>de1893a2bf7f4ea49e8e2949088596d0: 1.5672 s</title></circle><circle cx="749.034888164695" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>ec14ce57d48f4ea58278328bbc1aa093: 1.5674 s</title></circle><circle cx="748.9565765066816" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>fb142dbcd4794d5cb76c944ef9f94e60: 1.5672 s</title></circle></svg></section><section><h2>已校验的非预热测量</h2><table><tr><th>run_id</th><th>配额 %</th><th>耗时 s</th><th>CPU s</th><th>最终原始记录</th></tr><tr><td>29c311f9105e41a4bd6fa03cf9c8d443</td><td>100</td><td>1.5685</td><td>1.5355</td><td>C:\Users\Ho&#x27;lo\Desktop\2026年操作系统设计赛华东区域赛\os-design-2026-east-china\results\comparison-20261117\results\regression\healthy-1\experiment\29c311f9105e41a4bd6fa03cf9c8d443\result.json</td></tr><tr><td>69d3b358d3e74746b9b60e5e334366ac</td><td>100</td><td>1.6175</td><td>1.5676</td><td>C:\Users\Ho&#x27;lo\Desktop\2026年操作系统设计赛华东区域赛\os-design-2026-east-china\results\comparison-20261117\results\regression\healthy-1\experiment\69d3b358d3e74746b9b60e5e334366ac\result.json</td></tr><tr><td>8f3db9de50ed4c5c9052363cbe6b0439</td><td>100</td><td>1.5675</td><td>1.5415</td><td>C:\Users\Ho&#x27;lo\Desktop\2026年操作系统设计赛华东区域赛\os-design-2026-east-china\results\comparison-20261117\results\regression\healthy-1\experiment\8f3db9de50ed4c5c9052363cbe6b0439\result.json</td></tr><tr><td>928d3871e55443a28244c2537d1aaf10</td><td>100</td><td>1.5674</td><td>1.5420</td><td>C:\Users\Ho&#x27;lo\Desktop\2026年操作系统设计赛华东区域赛\os-design-2026-east-china\results\comparison-20261117\results\regression\healthy-1\experiment\928d3871e55443a28244c2537d1aaf10\result.json</td></tr><tr><td>de1893a2bf7f4ea49e8e2949088596d0</td><td>100</td><td>1.5672</td><td>1.5366</td><td>C:\Users\Ho&#x27;lo\Desktop\2026年操作系统设计赛华东区域赛\os-design-2026-east-china\results\comparison-20261117\results\regression\healthy-1\experiment\de1893a2bf7f4ea49e8e2949088596d0\result.json</td></tr><tr><td>ec14ce57d48f4ea58278328bbc1aa093</td><td>100</td><td>1.5674</td><td>1.5352</td><td>C:\Users\Ho&#x27;lo\Desktop\2026年操作系统设计赛华东区域赛\os-design-2026-east-china\results\comparison-20261117\results\regression\healthy-1\experiment\ec14ce57d48f4ea58278328bbc1aa093\result.json</td></tr><tr><td>fb142dbcd4794d5cb76c944ef9f94e60</td><td>100</td><td>1.5672</td><td>1.5467</td><td>C:\Users\Ho&#x27;lo\Desktop\2026年操作系统设计赛华东区域赛\os-design-2026-east-china\results\comparison-20261117\results\regression\healthy-1\experiment\fb142dbcd4794d5cb76c944ef9f94e60\result.json</td></tr></table></section><section><h2>历史比较 · 探索性复核规则</h2><p>Exploratory review signal only; no statistical significance, validated accuracy, no-regression or root-cause claim. Observed range sensitivity is not a confidence interval.</p><p>最少样本数：5；预设变化阈值：0.15</p><p>阈值敏感=true 表示两组已观察到的耗时范围可组合出阈值两侧的比值，需留意波动；这不是置信区间。精确范围见追溯数据。</p><table><tr><th>配额 %</th><th>基线 n</th><th>当前 n</th><th>耗时比</th><th>规则输出</th><th>阈值敏感</th><th>原因</th></tr><tr><td>100</td><td>7</td><td>7</td><td>1.0000</td><td>未触发阈值（不表示无退化）</td><td>False</td><td></td></tr></table></section><section><h2>历史比较的观察范围</h2><p>已观察范围敏感性，不是置信区间。虚线为 1+threshold；颜色仅提示是否跨阈值。各图按自身范围缩放，数值以标签为准。</p><div><h3>配额 100%</h3><svg role="img" aria-label="已观察比值范围 0.9997 至 1.0320；阈值参考线 1.1500；不是置信区间" viewBox="0 0 430 115" style="min-width:300px;width:100%"><title>已观察比值范围 0.9997 至 1.0320；阈值参考线 1.1500；不是置信区间</title><line x1="30" y1="45" x2="390" y2="45" stroke="#dae2eb"/><line x1="102.39" y1="22" x2="102.39" y2="62" stroke="#7d8da0"/><line x1="318.10" y1="15" x2="318.10" y2="65" stroke="#a32a40" stroke-dasharray="4 3"/><line x1="101.90" y1="45" x2="148.42" y2="45" stroke="#168a86" stroke-width="8" stroke-linecap="round"/><text x="102.39" y="85" text-anchor="middle" font-size="12">1.00</text><text x="318.10" y="12" text-anchor="middle" font-size="12">阈值 1.15</text><text x="30" y="108" font-size="12">范围 0.9997–1.0320</text></svg></div></section><section><h2>排除、问题与追溯证据</h2><pre>{
+  &quot;issues&quot;: [],
+  &quot;excluded&quot;: [
+    {
+      &quot;run_id&quot;: &quot;3e18fc9f319e4df587896d7be9585bde&quot;,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;reasons&quot;: [
+        &quot;baseline: explicit non-warmup run required&quot;,
+        &quot;current: explicit non-warmup run required&quot;,
+        &quot;warmup&quot;
+      ]
+    }
+  ],
+  &quot;group_reasons&quot;: [
+    {
+      &quot;quota&quot;: 100,
+      &quot;reasons&quot;: []
+    }
+  ],
+  &quot;history&quot;: {
+    &quot;rule&quot;: &quot;exploratory-median-v1&quot;,
+    &quot;minimum&quot;: 5,
+    &quot;threshold&quot;: 0.15,
+    &quot;comparisons&quot;: [
+      {
+        &quot;quota_percent&quot;: 100,
+        &quot;baseline_n&quot;: 7,
+        &quot;current_n&quot;: 7,
+        &quot;baseline_run_ids&quot;: [
+          &quot;23c875f5796141308cab3950c6645611&quot;,
+          &quot;4d6d41d60f4449e9b9d3d1b4351c74dd&quot;,
+          &quot;536170ec68a043f883e30f6e12ef6ec3&quot;,
+          &quot;82ce7043c1af4b1da1f32493d6011be6&quot;,
+          &quot;939ee480707f4150ac04aa42e07ec403&quot;,
+          &quot;c5a69f3bd961423d8e1f2787c8a7c8e5&quot;,
+          &quot;cf6c40e870044bfa8a112e999bb3dcf5&quot;
+        ],
+        &quot;current_run_ids&quot;: [
+          &quot;29c311f9105e41a4bd6fa03cf9c8d443&quot;,
+          &quot;69d3b358d3e74746b9b60e5e334366ac&quot;,
+          &quot;8f3db9de50ed4c5c9052363cbe6b0439&quot;,
+          &quot;928d3871e55443a28244c2537d1aaf10&quot;,
+          &quot;de1893a2bf7f4ea49e8e2949088596d0&quot;,
+          &quot;ec14ce57d48f4ea58278328bbc1aa093&quot;,
+          &quot;fb142dbcd4794d5cb76c944ef9f94e60&quot;
+        ],
+        &quot;wall_ratio&quot;: 1.000011151115639,
+        &quot;verdict&quot;: &quot;no_threshold_signal&quot;,
+        &quot;reasons&quot;: [],
+        &quot;observed_range_ratio_bounds&quot;: [
+          0.99966353322263,
+          1.0320084667000842
+        ],
+        &quot;threshold_sensitive&quot;: false
+      }
+    ],
+    &quot;sensitivity_version&quot;: &quot;observed-range-v1&quot;,
+    &quot;note&quot;: &quot;Exploratory review signal only; no statistical significance, validated accuracy, no-regression or root-cause claim. Observed range sensitivity is not a confidence interval.&quot;
+  },
+  &quot;artifacts&quot;: {
+    &quot;29c311f9105e41a4bd6fa03cf9c8d443&quot;: {
+      &quot;result&quot;: &quot;C:\\Users\\Ho&#x27;lo\\Desktop\\2026年操作系统设计赛华东区域赛\\os-design-2026-east-china\\results\\comparison-20261117\\results\\regression\\healthy-1\\experiment\\29c311f9105e41a4bd6fa03cf9c8d443\\result.json&quot;,
+      &quot;sha256&quot;: &quot;784fdf6d09f4e0ecb25e49ddb2f877526a47ab9c09df14af9c8e0d52210a50c6&quot;
+    },
+    &quot;3e18fc9f319e4df587896d7be9585bde&quot;: {
+      &quot;result&quot;: &quot;C:\\Users\\Ho&#x27;lo\\Desktop\\2026年操作系统设计赛华东区域赛\\os-design-2026-east-china\\results\\comparison-20261117\\results\\regression\\healthy-1\\experiment\\3e18fc9f319e4df587896d7be9585bde\\result.json&quot;,
+      &quot;sha256&quot;: &quot;e07402a28cd8f590c8f32ad0b07250cd02f396e5db028669db8754932a2e5710&quot;
+    },
+    &quot;69d3b358d3e74746b9b60e5e334366ac&quot;: {
+      &quot;result&quot;: &quot;C:\\Users\\Ho&#x27;lo\\Desktop\\2026年操作系统设计赛华东区域赛\\os-design-2026-east-china\\results\\comparison-20261117\\results\\regression\\healthy-1\\experiment\\69d3b358d3e74746b9b60e5e334366ac\\result.json&quot;,
+      &quot;sha256&quot;: &quot;0fa979362955bfa978657da6dbee2c995974a777d5957934fd4860a208a3c80d&quot;
+    },
+    &quot;8f3db9de50ed4c5c9052363cbe6b0439&quot;: {
+      &quot;result&quot;: &quot;C:\\Users\\Ho&#x27;lo\\Desktop\\2026年操作系统设计赛华东区域赛\\os-design-2026-east-china\\results\\comparison-20261117\\results\\regression\\healthy-1\\experiment\\8f3db9de50ed4c5c9052363cbe6b0439\\result.json&quot;,
+      &quot;sha256&quot;: &quot;3460b531e32332ede2b906b4e23fc0978d0eebf0422faacb5b45fd644fca9ac9&quot;
+    },
+    &quot;928d3871e55443a28244c2537d1aaf10&quot;: {
+      &quot;result&quot;: &quot;C:\\Users\\Ho&#x27;lo\\Desktop\\2026年操作系统设计赛华东区域赛\\os-design-2026-east-china\\results\\comparison-20261117\\results\\regression\\healthy-1\\experiment\\928d3871e55443a28244c2537d1aaf10\\result.json&quot;,
+      &quot;sha256&quot;: &quot;854792d866972bb19ca919512e7fb1e6a5aa4c507959c8ee98f8cced4c486543&quot;
+    },
+    &quot;de1893a2bf7f4ea49e8e2949088596d0&quot;: {
+      &quot;result&quot;: &quot;C:\\Users\\Ho&#x27;lo\\Desktop\\2026年操作系统设计赛华东区域赛\\os-design-2026-east-china\\results\\comparison-20261117\\results\\regression\\healthy-1\\experiment\\de1893a2bf7f4ea49e8e2949088596d0\\result.json&quot;,
+      &quot;sha256&quot;: &quot;08df75095d43795f9604e518e3eb94a5cb12bddc27cbf00d7b199e6502b6cb91&quot;
+    },
+    &quot;ec14ce57d48f4ea58278328bbc1aa093&quot;: {
+      &quot;result&quot;: &quot;C:\\Users\\Ho&#x27;lo\\Desktop\\2026年操作系统设计赛华东区域赛\\os-design-2026-east-china\\results\\comparison-20261117\\results\\regression\\healthy-1\\experiment\\ec14ce57d48f4ea58278328bbc1aa093\\result.json&quot;,
+      &quot;sha256&quot;: &quot;53640a03bbb16cfbcde911ea49c68391e531c52ce2f1d00d90f913bee23fe89d&quot;
+    },
+    &quot;fb142dbcd4794d5cb76c944ef9f94e60&quot;: {
+      &quot;result&quot;: &quot;C:\\Users\\Ho&#x27;lo\\Desktop\\2026年操作系统设计赛华东区域赛\\os-design-2026-east-china\\results\\comparison-20261117\\results\\regression\\healthy-1\\experiment\\fb142dbcd4794d5cb76c944ef9f94e60\\result.json&quot;,
+      &quot;sha256&quot;: &quot;09ce77071f8d45fb2da2326819f0a5c4651ae41fa9e274b962bbf3aa286e2da6&quot;
+    }
+  }
+}</pre></section></html>

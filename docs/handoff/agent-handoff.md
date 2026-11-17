@@ -233,3 +233,11 @@ A 的中断与清理状态有测试，正式性能基线还需要足够实验设
 - 修改范围：src/runner/core.py、tests/test_source_fingerprint.py、schemas/run-1.1.schema.json、docs/contracts/data-contract.md、docs/implementation/member-a.md。run 1.1 / config 1.0 不变，无消费者迁移。
 - 验证：新增2项路径/嵌套文件/内容分界测试；本地36项27通过9跳过，Ruff通过。src-py-v2算法版本在域分隔和协议中显式说明；run1.1字段形状不变，新旧指纹不可混比。目标机逐源码复验待归档。
 - 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。
+
+## 改进任务 10：三种规模独立正确性及内存实测（2026-11-17）
+
+角色：A 集成，用户授权按 tasklist 跨角色推进。基于 `0be73a7`；分支 `improve/10-scale-sweep`，交付提交见该分支 Git HEAD（避免自引用哈希）。
+
+- 修改范围：experiments/scale_sweep.py、tests/test_scale_sweep.py、docs/validation/improvement-p1-validation.md、evidence/improvement。run 1.1 / config 1.0 不变，无消费者迁移。
+- 验证：bb288cb：openEuler37项0跳过+默认18次完整流程+pip check+Ruff；规模扫描54次逐份SQLite/配额/内存/清理通过。六个代码任务分别复验的日志、源码与限制见docs/validation/improvement-p1-validation.md。
+- 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。
