@@ -224,3 +224,9 @@
 - 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/20-changelog`，基于 `19b223f`。
 - 产物：CHANGELOG.md、README.md、docs/project/platform-readiness.md。人工负责成员未填写。
 - 检查及限制：读取Git历史、pyproject旧版本及现有注释标签核对；本地Markdown链接检查通过。仅文档变更，不重跑目标机测试，不创建或修改标签。 不将代理检查改标人工验收。
+
+### 2026-11-17 改进任务 21：交付改名条件复核并保持现状
+
+- 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/21-delivery-name-policy`，基于 `7360e66`。
+- 产物：docs/project/platform-readiness.md。人工负责成员未填写。
+- 检查及限制：实际重测tracked字节36,731,608，对象库测量已记入平台准备；未发生大文件迁移，按清单条件不执行改名。仅文档及链接检查，无运行代码改动。 不将代理检查改标人工验收。
