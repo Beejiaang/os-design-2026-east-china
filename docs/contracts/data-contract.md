@@ -90,3 +90,11 @@ PYTHONPATH=src python3 -m runner recover results/原实验目录
 2026-11-17 补充：历史比较可附加 `sensitivity_version=observed-range-v1`、`observed_range_ratio_bounds`、`threshold_sensitive`。范围为当前最小值/基线最大值至当前最大值/基线最小值；基线最小值必须大于零。范围跨过 1+threshold 时标敏感；前提不满足或无法计算时为 null。它只是已观察范围的描述，不是置信区间或显著性检验；exploratory-median-v1 的最少样本、阈值、verdict 均未改变。旧消费者可忽略附加诊断字段，旧报告不补造这些字段。
 
 本次根据现有 worker 细化 wall_seconds 的文档边界，未改变计时点、单位、run/config schema 或 runner 哈希；历史原始数据保持原样。B/C 比较不同计时工具时需使用此实际范围，不把工具间差值当作算法性能改进。
+
+## Linux负载干扰证据（任务11，linux-load-v1）
+
+成功预检后，runner在整轮调度外侧追加host-load.jsonl：开始、结束及期间约每5秒读取执行环境的/proc/loadavg。每行带kind=linux-load-v1、UTC与单调时间、前三个1/5/15分钟负载值、raw原文和error；读取/解析失败保留loadavg=null与原因，写入失败列入metadata.errors，不造零值。
+
+这是执行Linux（本项目为openEuler来宾）的运行队列/不可中断等待综合负载，不是CPU利用率，也不能声称读取了Windows物理宿主机。environment.json顶层新增host_load引用（path、interval_seconds、samples、errors），独立附加证据格式v1；未加入每条result.environment，run1.1/config1.0不变，旧environment.json缺少该引用表示未采样，不能补造。
+
+采样不进入指纹、兼容或阈值判定，不改负载wall计时点；采样自身可能产生微小观测开销。出现异常或取消时仍停止采样线程并尝试保存末次记录；强制杀死执行器不能保证结束样本。B/C可查阅该文件解释干扰，缺失/错误不自动将任务改为成功或失败。

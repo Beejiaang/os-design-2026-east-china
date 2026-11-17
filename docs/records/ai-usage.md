@@ -187,3 +187,9 @@
 - 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/18-extras`，基于 `f96e456`。
 - 产物：pyproject.toml、docs/implementation/pipeline.md。人工负责成员未填写。
 - 检查及限制：Windows3.12 editable安装.[dev]及pip check通过；report extra保留为唯一jsonschema声明。目标机全量验证待本轮归档；不改变执行器依赖。 不将代理检查改标人工验收。
+
+### 2026-11-17 改进任务 11：Linux负载旁路采样
+
+- 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/11-host-load`，基于 `5e0a9d9`。
+- 产物：src/collector/host_load.py、src/runner/core.py、tests/test_host_load.py、docs/contracts/data-contract.md。人工负责成员未填写。
+- 检查及限制：新增3项采样/异常/写入失败单测；本地32项23通过9跳过，Ruff通过；目标机全量和完整流程按此源码单独复验归档。environment.json附加证据格式linux-load-v1，run/config不变，采样不参与判定。 不将代理检查改标人工验收。

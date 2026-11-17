@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from collector.system import doctor
+from collector.host_load import HostLoadSampler
 from runner.worker import atomic_json
 from runner.lifecycle import SCHEMA_VERSION, cleanup, owner_identity, write_summaries
 
@@ -156,14 +157,21 @@ def experiment(config, output):
     rows = []
     atomic_json(root / "experiment-status.json", {"state": "running", "planned_count": len(schedule),
                 "finalized_count": 0, "pending_count": 0})
-    with (root / "runs.jsonl").open("w", encoding="utf-8") as stream:
-        for index, (quota, warmup) in enumerate(schedule):
-            row = run_one(config, quota, index, warmup, root, preflight["environment"])
-            rows.append(row)
-            stream.write(json.dumps(row, ensure_ascii=False) + "\n")
-            stream.flush()
-            print(f'{index + 1}/{len(schedule)} quota={quota} status={row["status"]}', flush=True)
-            if not row["cleanup_ok"] or row["status"] == "interrupted":
-                break
+    sampler = HostLoadSampler(root)
+    preflight["host_load"] = sampler.metadata()
+    atomic_json(root / "environment.json", preflight)
+    try:
+        with sampler, (root / "runs.jsonl").open("w", encoding="utf-8") as stream:
+            for index, (quota, warmup) in enumerate(schedule):
+                row = run_one(config, quota, index, warmup, root, preflight["environment"])
+                rows.append(row)
+                stream.write(json.dumps(row, ensure_ascii=False) + "\n")
+                stream.flush()
+                print(f'{index + 1}/{len(schedule)} quota={quota} status={row["status"]}', flush=True)
+                if not row["cleanup_ok"] or row["status"] == "interrupted":
+                    break
+    finally:
+        preflight["host_load"] = sampler.metadata()
+        atomic_json(root / "environment.json", preflight)
     write_summaries(root, rows)
     return rows

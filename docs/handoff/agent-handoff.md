@@ -209,3 +209,11 @@ A 的中断与清理状态有测试，正式性能基线还需要足够实验设
 - 修改范围：pyproject.toml、docs/implementation/pipeline.md。run 1.1 / config 1.0 不变，无消费者迁移。
 - 验证：Windows3.12 editable安装.[dev]及pip check通过；report extra保留为唯一jsonschema声明。目标机全量验证待本轮归档；不改变执行器依赖。
 - 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。
+
+## 改进任务 11：Linux负载旁路采样（2026-11-17）
+
+角色：A 集成，用户授权按 tasklist 跨角色推进。基于 `5e0a9d9`；分支 `improve/11-host-load`，交付提交见该分支 Git HEAD（避免自引用哈希）。
+
+- 修改范围：src/collector/host_load.py、src/runner/core.py、tests/test_host_load.py、docs/contracts/data-contract.md。run 1.1 / config 1.0 不变，无消费者迁移。
+- 验证：新增3项采样/异常/写入失败单测；本地32项23通过9跳过，Ruff通过；目标机全量和完整流程按此源码单独复验归档。environment.json附加证据格式linux-load-v1，run/config不变，采样不参与判定。
+- 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。
