@@ -16,3 +16,5 @@
 | 历史资料 | [旧计划](history/project-plan.md)、[选题分析](history/topic-analysis.md)、[讨论模板](history/team-review.md) | 保留决策过程，不覆盖当前计划和协议 |
 
 文件存放边界见 [工程分区规则](project/directory-layout.md)。新增文档放到相应分区，并补充本页或对应交接入口，不在 docs 根目录继续平铺。
+
+本轮改进：[P0任务进度](validation/improvement-progress.md)、[评审导读](reviewers-guide.md)、[开发时间线](history/timeline.md)、[材料版本对应表](validation/material-versions.md)。

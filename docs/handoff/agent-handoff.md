@@ -1,3 +1,9 @@
+# 最新接续：Tasklist P0 已执行
+
+2026-11-17：当前本地串联分支 **improve/09-gitlab-copy**，包含任务1–9；起点main / 54ef928，main未改。各任务分支/提交/路径与检查见[完整进度](../validation/improvement-progress.md)，本轮各任务交接在文末。运行测量源码d8a331e，CI/清单最终代码源码a4f4c04，两者均在openEuler完成29项0跳过、默认18次完整流程及pip check；新增工具对照54次全部通过。材料表脚本独立生成，旧RC1二进制不重生成。
+
+CI仅本地/目标机手动等价命令验证，未运行GitHub在线矩阵。本轮未推送、未建PR、未合并回main、未打tag、未正式提交；P1待下一轮。下方“当前候选/当前接续”均为RC1历史交接，不能覆盖本段。人员与视频事项继续待人工。
+
 # 当前候选交付更新
 
 完整集成入口：[PR3](https://github.com/Beejiaang/os-design-2026-east-china/pull/3)；原A的PR2已合并。候选ZIP、七页Word/PDF、十页PPT及原始证据见[交付入口](../../demo/delivery/README.md)，源码快照30e6a31，目标机冻结复验086aff7，29项0跳过与18次完整流程通过。后续从已合并的main或当前集成分支接续，先fetch并核对PR实际状态；不要照下文历史A首轮启动模板重复实现B/C。
