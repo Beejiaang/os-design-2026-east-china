@@ -5,8 +5,11 @@ from pathlib import Path
 
 
 def render(summary, output, comparison=None):
-    esc = lambda value: html.escape(str(value), quote=True)
-    fmt = lambda value: esc(f"{value:.4f}" if type(value) is float else value)
+    def esc(value):
+        return html.escape(str(value), quote=True)
+
+    def fmt(value):
+        return esc(f"{value:.4f}" if type(value) is float else value)
     groups = "".join("<tr>" + "".join("<td>" + fmt(group.get(key)) + "</td>" for key in
                      ("quota_percent", "n", "wall_median_seconds", "wall_min_seconds", "wall_max_seconds",
                       "cpu_median_seconds", "wall_ratio_to_unlimited", "comparable")) + "</tr>" for group in summary["groups"])

@@ -21,9 +21,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: python -m pip install -e '.[dev]'
       - run: python -m pip check
+      - run: python -m ruff check src workloads experiments tests scripts
       # systemd/cgroup integration tests require a real target environment.
       # Existing OSDESIGN_INTEGRATION gates deliberately skip them here.
       - run: python -m unittest discover -s tests -v
       - run: python scripts/validate_contracts.py examples/cpu.json --config
       - run: python scripts/validate_contracts.py examples/measured-run-1.1.json
-      # Ruff is not configured yet (task 17); enable it after that task.

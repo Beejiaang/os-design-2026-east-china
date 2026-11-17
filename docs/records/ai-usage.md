@@ -175,3 +175,9 @@
 - 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/19-freeze-policy`，基于 `b0aa997`。
 - 产物：AGENTS.md。人工负责成员未填写。
 - 检查及限制：文档事实核对与本地链接检查；未更改运行代码。 不将代理检查改标人工验收。
+
+### 2026-11-17 改进任务 17：Ruff默认规则与CI接入
+
+- 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/17-ruff`，基于 `0e30e7f`。
+- 产物：pyproject.toml、.github/workflows/ci.yml、src/report/html.py、tests/test_member_a.py。人工负责成员未填写。
+- 检查及限制：Ruff0.17.5默认E4/E7/E9/F规则通过；只删除一个未用import及将两个lambda机械改成def。本地29项20通过9跳过；因src改动，目标机全量验证在本轮证据记录中补齐，未据此宣称目标机通过。 不将代理检查改标人工验收。
