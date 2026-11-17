@@ -21,7 +21,7 @@ python3 experiments/run_pipeline.py --output results/group-first
 
 已在 openEuler 完成本队与 GNU time + systemd-run 的 36 次正常任务对照，以及健康复测/额外 5%、15%、25% 工作量的 48 次规则实验。最终 29 项目标机测试全部通过；每份输出均独立校验，预热单列排除。方法、量化表和底层工具贡献见 [同类工具实测说明](docs/implementation/tool-comparison.md)，版本与原始证据见 [扩展验证](docs/validation/comparison-validation.md)。
 
-新增“阈值敏感”展示只描述已观察范围是否跨阈值，不改变原 15% 中位数规则，不是置信区间。本队与原生命令的计时范围/精度不同，不能按耗时表给工具排速度名次。代码仍在本地分支，远端/PR 状态见交接。
+新增“阈值敏感”展示只描述已观察范围是否跨阈值，不改变原 15% 中位数规则，不是置信区间。本队与原生命令的计时范围/精度不同，不能按耗时表给工具排速度名次。代码和材料已推送集成分支，PR/合并的实际状态见交接。
 
 ## 运行成员 A 的核心
 
@@ -38,13 +38,17 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 
 当前输出协议为 run 1.1，含中断与恢复状态；可用 [真实样例](examples/measured-run-1.1.json) 接通解析。2026-11-16 的 A 干净源码在 openEuler 通过 17 项测试及 12 次正常实验；另保留 5 份故障注入最终记录，均单独列出并排除性能样本。恢复命令和机器格式见 [数据协议](docs/contracts/data-contract.md)。新增 B/C 验证不能直接继承这份目标系统结论。
 
+## 候选交付 RC1
+
+正式技术稿：[设计与测试报告](docs/implementation/design-and-test-report.md)、[可编辑 Word](demo/delivery/设计与测试报告_RC1.docx)、[PDF](demo/delivery/设计与测试报告_RC1.pdf)。十页 PPT 已完成原生 PowerPoint 逐页版式检查。版本、哈希与本轮实际检查见[候选验证](docs/validation/release-validation.md)，官方入口与所缺账号事实见[平台准备](docs/project/platform-readiness.md)。人工验收和视频演示按本轮要求留待后续；不能据此视为已提交参赛。
+
 ## 从这里开始
 
 演示与人员复验：[答辩工作稿](demo/presentation/答辩初稿_20261117_v1.pptx)、[讲解与20问](demo/defense-notes.md)、[非实现者复验指南](docs/validation/peer-reproduction.md)、[复验交付包](demo/delivery/README.md)。本轮另在新源码检出和全新 venv 验证可编辑安装、29 项测试及三档小试，记录见 [安装复验](docs/validation/reproduction-validation.md)。这些代理操作仍不能代替人员交叉验收。
 
 目录入口：[文档分区导航](docs/README.md)、[工程文件存放规则](docs/project/directory-layout.md)。代码、负载、实验、协议、证据和演示材料分别放在对应目录；占位说明不代表 B/C 功能已完成。
 
-使用 Agent 开发的队友先读 **[AGENTS.md](AGENTS.md)**，再看 **[统一口径](docs/project/project-contract.md)**、**[数据协议](docs/contracts/data-contract.md)** 和 **[角色交接/可复制启动任务](docs/handoff/agent-handoff.md)**。A 原集成分支是 `feat/member-a-runner`，首轮全链路为 `feat/bc-end-to-end`，对照/诊断为 `feat/b-comparison-validation`，当前材料/交接在本地 `feat/c-defense-reproduction`；推送/PR/合并状态见交接，不默认远端已包含它。
+使用 Agent 开发的队友先读 **[AGENTS.md](AGENTS.md)**，再看 **[统一口径](docs/project/project-contract.md)**、**[数据协议](docs/contracts/data-contract.md)** 和 **[角色交接/可复制启动任务](docs/handoff/agent-handoff.md)**。A 原集成分支是 `feat/member-a-runner`，首轮全链路为 `feat/bc-end-to-end`，对照/诊断为 `feat/b-comparison-validation`，旧材料/交接保留在 `feat/c-defense-reproduction`，当前候选集成分支为 `feat/a-release-preparation`；推送/PR/合并状态见交接，不默认远端已包含它。
 
 1. 阅读 **[三人分工与阶段验收说明](docs/project/work-allocation.md)**：A 系统与集成、B 负载与实验、C 分析与报告，含课程关联、接口和验收条件。
 2. 使用 **[提交清单](docs/project/submission-checklist.md)** 检查工程、文档、测试、视频、来源许可和官方平台提交；勾选须附证据。

@@ -6,6 +6,7 @@
 |---|---|---|
 | 项目约定 | [统一口径](project/project-contract.md)、[分工计划](project/work-allocation.md)、[提交清单](project/submission-checklist.md) | 做什么、谁负责、阶段和正式交付条件 |
 | 数据协议 | [数据协议](contracts/data-contract.md) | 字段、状态、单位、版本和恢复语义；机器格式在 schemas/ |
+| 候选交付 | [设计测试总稿](implementation/design-and-test-report.md)、[版本核验](validation/release-validation.md)、[平台准备](project/platform-readiness.md) | 工程与材料的版本对应、已检查范围和外部阻碍 |
 | 实现说明 | [成员 A](implementation/member-a.md)、[聚合与报告流程](implementation/pipeline.md)、[系统设计](implementation/system-design.md)、[同类工具对照](implementation/tool-comparison.md) | 执行器、独立校验、分析、离线报告、贡献边界 |
 | 验证记录 | [A 的实测记录](validation/member-a-validation.md)、[完整流程验证](validation/pipeline-validation.md)、[扩展对照与边界验证](validation/comparison-validation.md) | 对应提交、环境、命令与原始证据 |
 | 安装与人员复验 | [新环境安装记录](validation/reproduction-validation.md)、[人员复验指南](validation/peer-reproduction.md)、[空白模板](validation/peer-review-template.md) | 区分代理安装检查与真实非实现者验收 |
