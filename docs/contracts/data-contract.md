@@ -41,7 +41,7 @@
 
 ## 单位与边界
 
-- wall_seconds：单调时钟秒，从启动负载到回收直接子进程，包含进程启动/回收开销。
+- wall_seconds：worker 内单调时钟秒，计时点位于读取初始 cpu.stat 之后、保存服务内快照/started.json 和启动负载之前，终点在直接子进程等待及末次 CPU 采样之后。包含区间内的快照保存、文件打开、进程启动和等待/回收开销；不是纯算法计算耗时，也不是整个外部实验命令耗时。
 - cpu_seconds：已回收子进程 user+system 秒，不含 worker 自身；超时后未回收后代可能未被此计数覆盖。
 - cpu_stat_*：保留内核原键；usage_usec、user_usec、system_usec、throttled_usec 为微秒，nr_periods、nr_throttled 为次数。差值包含采样间隔内的 worker 开销。
 - 测量完成后的 worker 等待不在已记录指标区间内；其用途是等待执行器回收并保持 RuntimeMaxSec 看门狗有效。
@@ -78,3 +78,15 @@ PYTHONPATH=src python3 -m runner recover results/原实验目录
 兼容接口检查输入、资源、实际父级、环境、输出、干净 Git 版本和执行器代码哈希，允许 workload_version 不同。runner_sha256 只覆盖 runner/collector，避免报告模块改动污染执行器指纹。前提通过仍需 B 的独立正确性证据及 C 的统计规则。
 
 可选格式检查：安装开发依赖后运行 `python3 scripts/validate_contracts.py 路径/runs.jsonl`，配置加 `--config`。它验证 1.1 结构，不替代功能、配额或兼容检查；1.0 历史文件不通过当前 1.1 schema 是预期行为。
+
+## B/C 附加派生文件（2026-11-17）
+
+新增文件不修改 run 1.1 / config 1.0 字段或状态；已有调用方无需迁移。旧 CPU 探针数据没有 B 的独立正确性记录，仍可查阅，但不会自动成为聚合任务的已校验性能样本。
+
+`correctness.json` 的 kind 为 `group-correctness-v1`，method 为 `sqlite-group-by-exact-output-v1`，携带 input_id、workload_version、真正布尔型 input_unchanged，以及 runs 对象（run_id → {ok, stdout_sha256}）。ok 只表明对应输出与独立参考相同，不覆盖运行状态/配额/清理/完整性核验。C 还需核对原始 stdout 的实际哈希；缺失、未知方法或不匹配均拒绝进入已校验样本。
+
+`summary.json`/HTML 是 analysis_version 1.0 的派生结果。complete 表示元数据/整轮执行满足完整性，不能代替逐条功能校验；eligible、excluded、issues、groups 的 comparable/reasons 和原始 run_id 一起解释。历史规则输出 unable_to_compare、slowdown_needs_review、no_threshold_signal，均不是 runner 状态，不写回 result.json。规则含义、最少样本与阈值见 [完整流程说明](../implementation/pipeline.md)。
+
+2026-11-17 补充：历史比较可附加 `sensitivity_version=observed-range-v1`、`observed_range_ratio_bounds`、`threshold_sensitive`。范围为当前最小值/基线最大值至当前最大值/基线最小值；基线最小值必须大于零。范围跨过 1+threshold 时标敏感；前提不满足或无法计算时为 null。它只是已观察范围的描述，不是置信区间或显著性检验；exploratory-median-v1 的最少样本、阈值、verdict 均未改变。旧消费者可忽略附加诊断字段，旧报告不补造这些字段。
+
+本次根据现有 worker 细化 wall_seconds 的文档边界，未改变计时点、单位、run/config schema 或 runner 哈希；历史原始数据保持原样。B/C 比较不同计时工具时需使用此实际范围，不把工具间差值当作算法性能改进。

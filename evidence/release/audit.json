@@ -1,0 +1,66 @@
+{
+  "source_commit": "086aff71451ffaa4bd15a967a61984e445c5a720",
+  "finalized": 18,
+  "schema_pass": 18,
+  "eligible_nonwarmup": 15,
+  "excluded_warmups": 3,
+  "issues": [],
+  "groups": [
+    {
+      "quota_percent": null,
+      "n": 5,
+      "run_ids": [
+        "4b4ec010980c4a2887b0bda7dc42a432",
+        "66a62f28d67647e2a60f0eebeaa1694b",
+        "787294f73606490b81f16b8361c6dd16",
+        "798976afe4f04116805bf236154ac301",
+        "9e7c454c374a4b458c7a02a11b05d275"
+      ],
+      "wall_median_seconds": 0.8157004380000217,
+      "wall_min_seconds": 0.7656499619997703,
+      "wall_max_seconds": 0.8157897690007303,
+      "cpu_median_seconds": 0.7731229999999999,
+      "comparable": true,
+      "reasons": [],
+      "wall_ratio_to_unlimited": 1.0
+    },
+    {
+      "quota_percent": 50,
+      "n": 5,
+      "run_ids": [
+        "1a36663ba5494f7eaa222cda548eea45",
+        "1ac453d9881344258df23ac1b94b4d80",
+        "81285653d3dd4ae3afafa60247d86929",
+        "bcc9bff31c4144919dd8dd387fd36ff1",
+        "ef65f73338d140718941773129894e29"
+      ],
+      "wall_median_seconds": 1.5174673520004944,
+      "wall_min_seconds": 1.5173224640002445,
+      "wall_max_seconds": 1.5674065690000134,
+      "cpu_median_seconds": 0.775262,
+      "comparable": true,
+      "reasons": [],
+      "wall_ratio_to_unlimited": 1.8603243069491329
+    },
+    {
+      "quota_percent": 100,
+      "n": 5,
+      "run_ids": [
+        "0e0826ff2cc04aa6bc64581b12d6fef2",
+        "123ba4909100474db85578310371ad7b",
+        "3bff2108061a40ac9644c4cb6ce8f0b2",
+        "89533cbd64ee4f5db00757eef5c86d8b",
+        "c5de0aa7caea416c9e6615ad49850904"
+      ],
+      "wall_median_seconds": 0.815819821000332,
+      "wall_min_seconds": 0.8156147030003922,
+      "wall_max_seconds": 0.8159494139999879,
+      "cpu_median_seconds": 0.7700319999999999,
+      "comparable": true,
+      "reasons": [],
+      "wall_ratio_to_unlimited": 1.0001463564254092
+    }
+  ],
+  "correctness": "all 18 independently verified by pipeline and bound stdout hashes checked again",
+  "original_paths": "preserved, not rewritten"
+}

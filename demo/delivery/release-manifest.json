@@ -1,0 +1,17 @@
+{
+  "kind": "osdesign-materials-rc1",
+  "date": "2026-11-17",
+  "implementation_snapshot": "2697479",
+  "measurement_sources": [
+    "2ac22b7",
+    "8d76aed"
+  ],
+  "analysis_source": "25b7f32",
+  "human_acceptance": "excluded_pending",
+  "video": "excluded_pending",
+  "files": {
+    "demo/delivery/设计与测试报告_RC1.docx": "9f0f683518502a23c52daf00ecc7e72e0c102933516b230422efa304b66081ec",
+    "demo/delivery/设计与测试报告_RC1.pdf": "542c606cdbcc86d2487268fe823c1a621fe1843058339491480599061bd3a8c9",
+    "demo/presentation/答辩初稿_20261117_v1.pptx": "9951ee0c63aaefc542e3508d2c7231aa57f24b6a17eae1a38b3b10345213f515"
+  }
+}

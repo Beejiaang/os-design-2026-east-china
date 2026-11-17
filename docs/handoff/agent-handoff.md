@@ -1,6 +1,20 @@
+# 当前候选交付更新
+
+完整集成入口：[PR3](https://github.com/Beejiaang/os-design-2026-east-china/pull/3)；原A的PR2已合并。候选ZIP、七页Word/PDF、十页PPT及原始证据见[交付入口](../../demo/delivery/README.md)，源码快照30e6a31，目标机冻结复验086aff7，29项0跳过与18次完整流程通过。后续从已合并的main或当前集成分支接续，先fetch并核对PR实际状态；不要照下文历史A首轮启动模板重复实现B/C。
+
+2026-11-17：用户要求除人工验收和视频演示外继续完成其余事项。本轮角色为A集成，范围覆盖正式技术稿、PPT原生检查、冻结复验、交付包与仓库整合。当前分支feat/a-release-preparation，基于2697479；运行逻辑未改，旧分支和原始记录保留。正式设计稿与平台缺项见[候选验证](../validation/release-validation.md)、[平台准备](../project/platform-readiness.md)。下文历史“未推送”“PPT未原生检查”以本段及候选验证为准；人员与视频未代办。
+
 # Agent 交接与当前状态
 
-日期：2026-11-16。先读根目录 `AGENTS.md`、[统一口径](../project/project-contract.md)、[数据协议](../contracts/data-contract.md)。本页是接续入口；实测细节和 commit 以验证记录与 Git 为准。
+日期：2026-11-17。先读根目录 `AGENTS.md`、[统一口径](../project/project-contract.md)、[数据协议](../contracts/data-contract.md)。本页是接续入口；实测细节和 commit 以验证记录与 Git 为准。
+
+**当前接续：`feat/c-defense-reproduction`。** 基于 `57c865e`，本轮没有改运行实现。新增十页答辩工作稿、讲解与20问、人员复验指南/空白模板和固定源码复验包；新源码检出/全新 venv 完成可编辑安装、29 项测试及三档小试，见 [安装复验](../validation/reproduction-validation.md)。尚未非实现者验收、正式视频/平台提交或推送/PR/共享合并。
+
+上轮对照分支 `feat/b-comparison-validation` 基于 `d649f7f`，测量源码 `8d76aed`，最终派生诊断/报告源码 `25b7f32`；29 项目标机测试通过，新增 36 次原生对照及 48 次边界实验。见 [对照方法](../implementation/tool-comparison.md)、[扩展验证](../validation/comparison-validation.md)。当前复验包故意固定该轮完整快照 57c865e，材料另行标工作稿。
+
+上一轮新增 B/C 与集成代码在本地 `feat/bc-end-to-end`，基于 `a0d6edd`；不要从零重写负载和报告。初轮负载测量源码为 `2ac22b7`；元数据异常处理修正与分析为 `1028dd8`，证据见 [初轮集成验证](../validation/pipeline-validation.md)。原始数据提交不改写。
+
+交付时 Windows 原工程与 openEuler 原开发目录 `/home/holo/projects/os-design-2026-east-china` 同步到当前分支；原 A/B/C 首轮分支保留。初轮实验位于 `/home/holo/projects/osdesign-integration-20261117/results`，本轮位于 `/home/holo/projects/osdesign-comparison-20261117/results`；共享归档分别在 evidence/integration 与 evidence/comparison。独立复验检出不是另一份主工程。
 
 ## 先找到正确代码
 
@@ -18,19 +32,23 @@ git switch -c feat/b-group-aggregation origin/feat/member-a-runner
 
 | 角色 | 已有输入/产物 | 下一项任务 | 当前阻碍/不能宣称的完成 |
 |---|---|---|---|
-| A | runner/collector、三档执行采集、异常/取消/恢复、1.1 协议、兼容接口、干净源码复验脚本；证据见 docs/validation/member-a-validation.md | B/C 接入后做集成、核对 C 报告与原始 run_id；配合交叉验收 | 不能称 B/C 或完整阶段完成；队友复现未完成 |
-| B | 通用 argv 执行器、CPU 探针、真实结果格式、配置 schema | 实现固定种子输入和单进程分组聚合、独立参考校验、实验配置及正负样本 | 尚无正式分组聚合代码；不要把 CPU 探针当正式数据负载 |
-| C | A 的原始 JSONL/CSV 与归档、run schema、兼容函数、协议与状态规则 | 结构校验、样本分类、配置对照、离线报告；再做兼容前提下的历史比较 | 尚无 src/analysis、src/report；不宣称回归判定或报告已验收 |
+| A | 执行、采集、异常/恢复、run 1.1；已接 B/C，核验最终记录和清理 | 配合非实现者复验；审查新接口变动 | 不代替人员交叉验收或整阶段验收 |
+| B | 固定输入/独立校验；首轮 54 次、本轮 84 次目标机执行；GNU time+systemd-run 正常场景对照；额外 5/15/25% 样本 | 非实现者复验、更多机器/波动样本、其他完整框架对照评估 | 不宣称真实生产退化事故、普遍准确率或已覆盖全部同类工具 |
+| C | 分析/报告、范围敏感性、十页可编辑答辩稿与备注、讲解20问、人员复验指南/包 | 浏览器视觉核验、更广规则验收、正式视频与最终答辩规格 | PPT 是工作稿，已完成代理 PowerPoint 原生逐页版式检查；代理实测不等于人工作业验收 |
 
 A 的中断与清理状态有测试，正式性能基线还需要足够实验设计、B 的功能验证和 C 的规则。系统异常测试不替代负载测试。
 
 最近实际验证的实现提交是 `9c075aa9031ea3b699dbf22b1b2bd7d9b94f38b4`；之后的验证说明/样例/证据提交不改变执行器代码。17 项目标机测试、12 次正常实验及 5 份故障注入最终记录见 [A 验证记录](../validation/member-a-validation.md)。可直接读取 [真实 1.1 样例](../../examples/measured-run-1.1.json) 接通解析，完整原始目录在 stage3 归档；不要把该单条样例当足够的统计验收样本。
 
-## B 给 Agent 的启动任务（可复制）
+## 旧角色启动模板（保留职责边界，当前应接续现有实现）
+
+以下模板写于 B/C 未实现时。当前首先核对上面的最新交付与源码；把“实现”改为审查/复验/必要修正，不重复建另一套工程。
+
+### B 给 Agent 的启动任务
 
 > 你负责本仓库成员 B。先读 AGENTS.md、docs/project/project-contract.md、docs/contracts/data-contract.md、docs/project/work-allocation.md、docs/handoff/agent-handoff.md，并检查分支和已有改动。以当前 A 集成分支/已合并 main 为依赖，实现固定种子、规模可调的输入生成及单进程分组聚合；输出应确定且可被独立参考算法验证。代码放 workloads，配置/实验放 experiments，增加本角色必要测试。不改 runner 的字段、单位、状态或计时语义。提供 workload_version、可追溯 input_id 和 argv；用 A 执行器接入三档实验，保存真实输出、功能校验和限制。不要把故障夹具当 measured 性能数据，不替 C 生成回归结论。完成后按本页模板交接并更新 AI 使用记录；未获用户授权不推送/合并。
 
-## C 给 Agent 的启动任务（可复制）
+### C 给 Agent 的启动任务
 
 > 你负责本仓库成员 C。先读 AGENTS.md、docs/project/project-contract.md、docs/contracts/data-contract.md、docs/project/work-allocation.md、docs/handoff/agent-handoff.md，并检查分支和已有改动。基于 A 的 run 1.1 最终记录实现 src/analysis 与 src/report：先校验版本/结构与整轮完整性，区分失败、缺失、中断、恢复、模拟和预热；做同任务不同配额的描述性配置对照及离线 HTML，数字按 run_id 追溯。历史比较先调用 runner.compatibility.check_compatibility，前提不符显示无法比较原因；不能输出“无退化”。B 正确性或样本证据不足时明确列出，不凭 stdout 哈希宣称功能正确。不改原始数据或 A 的测量/状态语义。用真实数据核对报告，保留误差和局限。完成后按本页模板交接并更新 AI 使用记录；未获用户授权不推送/合并。
 

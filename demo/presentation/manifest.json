@@ -1,0 +1,19 @@
+{
+  "kind": "defense-draft-v1",
+  "date": "2026-11-17",
+  "status": "working_draft_not_submitted",
+  "artifact_ref": "artifact_JArUogEVrzoglHdnr3cFbQ6IwLrGpU85",
+  "live_state_version": 3,
+  "file": "答辩初稿_20261117_v1.pptx",
+  "sha256": "9951ee0c63aaefc542e3508d2c7231aa57f24b6a17eae1a38b3b10345213f515",
+  "slide_count": 10,
+  "editable_charts": 2,
+  "editable_tables": 3,
+  "chart_data_workbooks": "two embedded snapshots from complete literal measurement values, no source Excel formulas",
+  "speaker_notes": true,
+  "source_snapshot": "57c865e",
+  "measurement_commit": "8d76aed0b4a619c7c0d6f6d09881b5bbfbae0934",
+  "analysis_commit": "25b7f32",
+  "source_evidence": "evidence/comparison/comparison-openeuler-20261117.tar.gz",
+  "note": "Live deck remains editable. The PPTX is a synchronized working copy. No human cross-acceptance or official submission is implied."
+}

@@ -29,6 +29,12 @@
 
 ## 事实、建议与待验证内容
 
+### 2026-11-17 原生命令实测补充
+
+- **S10** [GNU time 官方计时单位](https://www.gnu.org/software/time/manual/html_node/Time-Resources.html)、[官方源码下载](https://ftp.gnu.org/gnu/time/time-1.10.tar.xz)：用于核对 wall/user/system 含义及固定 1.10 源码来源。源码内容哈希、用户目录构建与实际二进制版本见 evidence/comparison；未验证上游签名，不把本次下载哈希说成签名验真。
+- **S11** [systemd-run 255 官方说明](https://www.freedesktop.org/software/systemd/man/255/systemd-run.html)：机制参考。本轮网页直接读取超时，实际使用选项另以已安装 255 的 --help、每次 argv、cgroup 快照和成功运行核验；没有用新版网页替代本机验证。
+- 本轮只实测 GNU time + systemd-run 的固定负载正常场景，并与本队流程对照。未据此宣称 hyperfine、lkp-tests、mugen 或 openEuler 调优框架的性能与能力。比较脚本/独立校验/服务内快照是本队补充，不是 GNU time 自带功能。
+
 - **规则事实：** 上述赛事 PDF 中明确规定的范围、参考权重和交付要求。
 - **技术事实：** 官方文档描述的机制及工具能力，实际可用性仍取决于所用版本和配置。
 - **建议：** 本文的方向排名、初稿范围、团队适配性与难度判断。
