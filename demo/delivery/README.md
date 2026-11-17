@@ -1,3 +1,9 @@
+# 当前候选材料 RC2
+
+新材料：[9页报告Word](设计与测试报告_RC2.docx)、[PDF](设计与测试报告_RC2.pdf)、[12页可编辑PPT](../presentation/答辩材料_RC2.pptx)、[RC2独立清单](release-manifest-rc2.json)。本版纳入P0/P1/P2，原测量源码与材料版本分别记录，详见[材料核验](../../docs/validation/release-validation-rc2.md)。
+
+RC2是候选材料名称，未打新tag、未人工验收、未含正式视频或赛事接收。旧RC1字节与清单保留；下方ZIP和旧复验包仍固定其历史快照。当前源码运行逻辑与已验证bb288cb一致，新的候选包构建后另记其精确源码提交，不能把旧ZIP当成最新源码。
+
 # 同伴复验交付包
 
 ## 当前候选交付 RC1

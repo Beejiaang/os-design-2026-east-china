@@ -1,6 +1,6 @@
 # 评审导读
 
-建议先读三份：[README](../README.md) → [设计与测试报告 RC1（PDF）](../demo/delivery/设计与测试报告_RC1.pdf) → [提交清单](project/submission-checklist.md)。依次了解项目、实现与真实测试、尚缺的人员和平台条件；PDF 固定 RC1，之后新增实验以验证记录为准。
+建议先读三份：[README](../README.md) → [设计与测试报告 RC2（PDF）](../demo/delivery/设计与测试报告_RC2.pdf) → [提交清单](project/submission-checklist.md)。依次了解项目、实现与真实测试、尚缺的人员和平台条件；PDF为RC2材料，原测量版本逐项列明，旧RC1另行保留。
 
 | 深入查看 | 用途与入口 |
 |---|---|

@@ -21,6 +21,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--wheels", type=Path)
+    parser.add_argument("--label", choices=("RC1", "RC2"), default="RC1")
     args = parser.parse_args()
     if git("status", "--porcelain").strip():
         parser.error("commit the reviewed changes before packaging")
@@ -42,7 +43,7 @@ def main():
         for path in sorted(args.wheels.glob("*.whl")):
             files["wheels/" + path.name] = path.read_bytes()
     files["README.txt"] = (
-        "候选交付 RC1，未人工验收，未含正式视频或赛事接收凭据\n"
+        "候选交付 " + args.label + "，未人工验收，未含正式视频或赛事接收凭据\n"
         "源码提交 " + commit + "\n"
         "运行：先读 project/README.md 与 project/docs/validation/peer-reproduction.md\n"
         "源码快照可直接检出运行，Git 历史可用 git clone 包内 bundle 文件恢复\n"
@@ -50,7 +51,7 @@ def main():
         "离线安装：在 project 目录执行 python3 -m pip install --no-index --find-links ../wheels -e '.[report]'\n"
         "文件完整性：核对 MANIFEST.json 中各文件 SHA256；哈希不证明正式提交或人工验收\n"
     ).encode("utf-8")
-    manifest = {"kind": "osdesign-candidate-release-v1", "source_commit": commit,
+    manifest = {"kind": "osdesign-candidate-release-v1", "release_label": args.label, "source_commit": commit,
                 "source_ref": branch, "human_acceptance": "excluded_pending",
                 "video": "excluded_pending", "competition_submission": "not_confirmed",
                 "files": {n: hashlib.sha256(data).hexdigest() for n, data in sorted(files.items())}}

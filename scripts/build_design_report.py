@@ -3,6 +3,8 @@
 Authoring dependency: python-docx (not a runner dependency). Render and inspect
 all pages after changing this builder or the report source.
 """
+import argparse
+import re
 from pathlib import Path
 from docx import Document
 from docx.shared import Inches, Pt, RGBColor
@@ -24,6 +26,11 @@ def shade(cell, fill):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--source", type=Path, default=SOURCE)
+    parser.add_argument("--output", type=Path, default=OUTPUT)
+    parser.add_argument("--release-label", default="RC1")
+    args = parser.parse_args()
     doc = Document()
     section = doc.sections[0]
     section.page_width, section.page_height = Inches(8.5), Inches(11)
@@ -47,7 +54,7 @@ def main():
     field = OxmlElement("w:fldSimple")
     field.set(qn("w:instr"), "PAGE")
     footer._p.append(field)
-    lines = SOURCE.read_text(encoding="utf-8").splitlines()
+    lines = args.source.read_text(encoding="utf-8").splitlines()
     index = 0
     while index < len(lines):
         line = lines[index]
@@ -57,6 +64,12 @@ def main():
             doc.add_paragraph(line[2:], "Title")
         elif line.startswith("## "):
             doc.add_paragraph(line[3:], "Heading 1")
+        elif line.startswith("!["):
+            match = re.fullmatch(r"!\[([^]]*)\]\(([^)]+)\)", line)
+            if not match:
+                raise ValueError("Invalid image line: " + line)
+            doc.add_picture(str(args.source.parent / match[2]), width=Inches(6.5))
+            doc.add_paragraph(match[1]).paragraph_format.space_after = Pt(6)
         elif line.startswith("```"):
             index += 1
             while index < len(lines) and not lines[index].startswith("```"):
@@ -75,7 +88,8 @@ def main():
             table = doc.add_table(rows=0, cols=len(rows[0]))
             table.alignment = WD_TABLE_ALIGNMENT.CENTER
             table.autofit = False
-            widths = ({3: [1.45, 1.65, 3.8], 4: [2.6, 1.1, 1.6, 1.6]})[len(rows[0])]
+            widths = ({3: [1.45, 1.65, 3.8], 4: [2.6, 1.1, 1.6, 1.6]}).get(
+                len(rows[0]), [6.9 / len(rows[0])] * len(rows[0]))
             for col, width in zip(table.columns, widths):
                 col.width = Inches(width)
             for ri, values in enumerate(rows):
@@ -119,14 +133,14 @@ def main():
         index += 1
     doc.core_properties.title = "面向 openEuler 数据处理任务的 CPU 资源约束与性能回归分析工具设计与测试报告"
     doc.core_properties.author = "项目技术资料整理"
-    doc.core_properties.subject = "候选交付版 RC1 设计测试与同类工具比较"
+    doc.core_properties.subject = f"候选交付版 {args.release_label} 设计测试与同类工具比较"
     # Remove decorative paragraph borders inherited from the bundled template.
     for element in (doc.styles.element, doc.element):
         for border in list(element.iter(qn("w:pBdr"))):
             border.getparent().remove(border)
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    doc.save(OUTPUT)
-    print(OUTPUT)
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    doc.save(args.output)
+    print(args.output)
 
 
 if __name__ == "__main__":

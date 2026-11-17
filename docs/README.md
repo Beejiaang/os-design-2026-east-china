@@ -22,3 +22,5 @@
 P1本轮：[执行进度](validation/improvement-p1-progress.md)、[目标机复验与规模实测](validation/improvement-p1-validation.md)、[统一术语表](contracts/glossary.md)。
 
 P2本轮：[执行进度与总状态](validation/improvement-p2-progress.md)、[CHANGELOG](../CHANGELOG.md)。任务21按迁移前提未成立保持文件名。
+
+最新材料：[RC2报告](implementation/design-and-test-report-rc2.md)、[RC2核验](validation/release-validation-rc2.md)、[交付入口](../demo/delivery/README.md)。RC1保留历史字节，RC2独立清单管理。

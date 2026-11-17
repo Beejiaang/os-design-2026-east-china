@@ -42,7 +42,11 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 
 当前输出协议为 run 1.1，含中断与恢复状态；可用 [真实样例](examples/measured-run-1.1.json) 接通解析。2026-11-16 的 A 干净源码在 openEuler 通过 17 项测试及 12 次正常实验；另保留 5 份故障注入最终记录，均单独列出并排除性能样本。恢复命令和机器格式见 [数据协议](docs/contracts/data-contract.md)。新增 B/C 验证不能直接继承这份目标系统结论。
 
-## 候选交付 RC1
+## 当前候选材料 RC2
+
+[P0/P1/P2更新后的设计与测试报告](docs/implementation/design-and-test-report-rc2.md)、[9页PDF](demo/delivery/设计与测试报告_RC2.pdf)、[可编辑Word](demo/delivery/设计与测试报告_RC2.docx)、[12页PPT](demo/presentation/答辩材料_RC2.pptx)已生成。数值按各批原测量提交追溯，运行源码仍与bb288cb一致；[本轮核验与限制](docs/validation/release-validation-rc2.md)说明文档渲染、图表数据、材料哈希与未完成人工事项。RC2未新建标签或正式发布。
+
+## 历史候选交付 RC1
 
 正式技术稿：[设计与测试报告](docs/implementation/design-and-test-report.md)、[可编辑 Word](demo/delivery/设计与测试报告_RC1.docx)、[PDF](demo/delivery/设计与测试报告_RC1.pdf)。十页 PPT 已完成原生 PowerPoint 逐页版式检查。版本、哈希与本轮实际检查见[候选验证](docs/validation/release-validation.md)，官方入口与所缺账号事实见[平台准备](docs/project/platform-readiness.md)。人工验收和视频演示按本轮要求留待后续；不能据此视为已提交参赛。
 

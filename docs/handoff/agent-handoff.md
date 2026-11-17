@@ -1,3 +1,9 @@
+# 最新接续：RC2材料同步
+
+2026-11-17，基于7ef8f88，当前串联分支improve/22-current-materials。9页报告Word/PDF和12页可编辑PPT已纳入P0/P1/P2；独立RC2 manifest保存哈希，RC1原文件/标签不变。详见[本轮核验](../validation/release-validation-rc2.md)及[交付入口](../../demo/delivery/README.md)。原测量源码bb288cb等分别注明，未重标为材料提交。
+
+本轮不改运行代码，仅作者/打包/材料表工具及材料文档；未推送、未建PR、未合并、未创建标签，人员/视频/平台仍待完成。下方“旧RC1未重生成/材料未更新”为历史记录，以本段新增RC2材料为准，旧文件本身仍不覆盖。
+
 # 最新接续：Tasklist P2 已处理
 
 2026-11-17：基于19b223f，当前本地串联分支 **improve/21-delivery-name-policy**，包含全部P0/P1及本轮P2文档；main仍为54ef928。任务20在7360e66补齐CHANGELOG及标签建议；任务21在030ba00复核迁移条件未成立，保持交付文件名。详见[P2进度与限制](../validation/improvement-p2-progress.md)。
