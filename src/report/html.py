@@ -44,5 +44,12 @@ pre{white-space:pre-wrap;word-break:break-word;font-size:13px}.badge{background:
                     plot += f'<circle cx="{x}" cy="{y}" r="5" fill="#168a86" fill-opacity="0.55"><title>{esc(row["run_id"])}: {row["wall_seconds"]:.4f} s</title></circle>'
         document += "<section><h2>逐次耗时分布</h2><p>每个点对应一条已校验的非预热记录；重叠点可能不可分辨。原始值见下表。不完整实验中的点仅作记录展示。</p>" + plot + "</svg></section>"
     document += "<section><h2>已校验的非预热测量</h2><table><tr><th>run_id</th><th>配额 %</th><th>耗时 s</th><th>CPU s</th><th>最终原始记录</th></tr>" + runs + "</table></section>"
+    if comparison is not None:
+        labels = {"unable_to_compare": "无法比较", "slowdown_needs_review": "变慢信号，需复核",
+                  "no_threshold_signal": "未触发阈值（不表示无退化）"}
+        history_rows = "".join("<tr>" + "".join("<td>" + fmt(value) + "</td>" for value in
+                               (row["quota_percent"], row["baseline_n"], row["current_n"], row["wall_ratio"],
+                                labels[row["verdict"]], "; ".join(row["reasons"]))) + "</tr>" for row in comparison["comparisons"])
+        document += "<section><h2>历史比较 · 探索性复核规则</h2><p>" + esc(comparison["note"]) + "</p><p>最少样本数：" + esc(comparison["minimum"]) + "；预设变化阈值：" + esc(comparison["threshold"]) + "</p><table><tr><th>配额 %</th><th>基线 n</th><th>当前 n</th><th>耗时比</th><th>规则输出</th><th>原因</th></tr>" + history_rows + "</table></section>"
     document += "<section><h2>排除、问题与追溯证据</h2><pre>" + esc(details) + "</pre></section></html>"
     Path(output).write_text(document, encoding="utf-8")
