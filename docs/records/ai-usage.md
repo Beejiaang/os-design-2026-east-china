@@ -157,3 +157,9 @@
 - 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/12-sampling-rationale`，基于 `44dbddd`。
 - 产物：docs/implementation/pipeline.md。人工负责成员未填写。
 - 检查及限制：文档事实核对与本地链接检查；未更改运行代码。 不将代理检查改标人工验收。
+
+### 2026-11-17 改进任务 15：README三行状态头
+
+- 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/15-readme-status`，基于 `0df6e0d`。
+- 产物：README.md。人工负责成员未填写。
+- 检查及限制：文档事实核对与本地链接检查；未更改运行代码。 不将代理检查改标人工验收。
