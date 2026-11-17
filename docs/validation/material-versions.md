@@ -1,6 +1,6 @@
 # 材料、版本与 SHA256 对应表
 
-生成时 Git HEAD：`be348d2e86a7b1cb9445debe01ec1ef4fea01148`；分支：`improve/10-scale-sweep`。
+生成时 Git HEAD：`a824ea3e51e4be5d15621c93c85b88e1d2804f51`；分支：`improve/21-delivery-name-policy`。
 
 生成时除本表外的改动路径：[]。
 
