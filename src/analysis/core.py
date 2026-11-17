@@ -53,8 +53,9 @@ def analyze(directory):
     config = {}
     planned = None
     try:
-        config = read_json(root / "config.json")
-        validate(config)
+        candidate_config = read_json(root / "config.json")
+        validate(candidate_config)
+        config = candidate_config
         planned = len(config.get("quotas", [None, 100, 50])) * (config.get("repeats", 3) + config.get("warmups", 0))
         schedule = Counter((q, w) for q in config.get("quotas", [None, 100, 50])
                            for w, n in ((True, config.get("warmups", 0)), (False, config.get("repeats", 3)))
@@ -83,9 +84,10 @@ def analyze(directory):
             issues.append("Unfinalized checkpoint: " + path.parent.name)
     correctness = {}
     try:
-        correctness = read_json(root / "correctness.json")
-        if not isinstance(correctness, dict):
+        candidate_correctness = read_json(root / "correctness.json")
+        if not isinstance(candidate_correctness, dict):
             raise ValueError("Correctness must be an object")
+        correctness = candidate_correctness
     except (OSError, ValueError) as exc:
         issues.append("Correctness evidence unavailable: " + str(exc))
     for row in records:

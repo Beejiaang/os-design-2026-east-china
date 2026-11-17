@@ -103,6 +103,16 @@ class AnalysisTests(unittest.TestCase):
         (self.root / "correctness.json").unlink()
         self.assertFalse(analyze(self.root)["eligible"])
 
+    def test_malformed_metadata_is_reported_without_crashing(self):
+        for filename in ("config.json", "correctness.json", "experiment-status.json"):
+            with self.subTest(filename=filename):
+                self.make_experiment()
+                self.write(self.root / filename, [])
+                summary = analyze(self.root)
+                self.assertFalse(summary["complete"])
+                self.assertTrue(summary["issues"])
+                self.assertTrue(all(not group["comparable"] for group in summary["groups"]))
+
     def test_history_sample_and_compatibility_gates(self):
         summary = analyze(self.root)
         self.assertEqual(compare(summary, summary)["comparisons"][0]["verdict"], "unable_to_compare")
