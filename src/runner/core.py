@@ -48,6 +48,20 @@ def ctl(*args, timeout=10):
     return subprocess.run(["systemctl", "--user", *args], capture_output=True, text=True, timeout=timeout)
 
 
+def source_fingerprint(source):
+    """src-py-v2: domain + length-framed POSIX path and original file bytes."""
+    source = Path(source)
+    digest = hashlib.sha256(b"osdesign-src-py-v2\0")
+    for path in sorted(source.rglob("*.py"), key=lambda p: p.relative_to(source).as_posix()):
+        name = path.relative_to(source).as_posix().encode("utf-8")
+        content = path.read_bytes()
+        digest.update(len(name).to_bytes(8, "big"))
+        digest.update(name)
+        digest.update(len(content).to_bytes(8, "big"))
+        digest.update(content)
+    return digest.hexdigest()
+
+
 def run_one(config, quota, index, warmup, root, env):
     run_id = uuid.uuid4().hex
     directory = root / run_id
@@ -66,9 +80,7 @@ def run_one(config, quota, index, warmup, root, env):
            "wall_seconds": None, "cpu_seconds": None, "cpu_stat_delta": None,
            "cleanup_ok": False, "artifacts": {"stdout": f"{run_id}/stdout.log", "stderr": f"{run_id}/stderr.log"}}
     source = Path(__file__).resolve().parents[1]
-    row["runner_sha256"] = hashlib.sha256(b"".join(
-        path.read_bytes() for path in sorted(path for package in ("runner", "collector")
-                                            for path in (source / package).glob("*.py")))).hexdigest()
+    row["runner_sha256"] = source_fingerprint(source)
     for name, command in (("git_commit", ["git", "rev-parse", "HEAD"]),
                           ("git_dirty", ["git", "status", "--porcelain"])):
         try:

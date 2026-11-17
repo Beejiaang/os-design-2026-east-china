@@ -199,3 +199,9 @@
 - 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/13-range-visualization`，基于 `1bde76a`。
 - 产物：src/report/html.py、tests/test_range_bar.py。人工负责成员未填写。
 - 检查及限制：新增2项SVG几何/缺失数据测试；本地34项25通过9跳过，Ruff通过。原compare未改；目标机全量及真实数据重生成截图待本轮验证归档。 不将代理检查改标人工验收。
+
+### 2026-11-17 改进任务 14：全src长度分帧源码指纹
+
+- 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/14-source-fingerprint`，基于 `2d60a88`。
+- 产物：src/runner/core.py、tests/test_source_fingerprint.py、schemas/run-1.1.schema.json、docs/contracts/data-contract.md、docs/implementation/member-a.md。人工负责成员未填写。
+- 检查及限制：新增2项路径/嵌套文件/内容分界测试；本地36项27通过9跳过，Ruff通过。src-py-v2算法版本在域分隔和协议中显式说明；run1.1字段形状不变，新旧指纹不可混比。目标机逐源码复验待归档。 不将代理检查改标人工验收。

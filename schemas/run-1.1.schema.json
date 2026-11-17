@@ -28,7 +28,7 @@
     "cpu_stat_delta": {"type": ["object", "null"], "additionalProperties": {"type": "integer"}},
     "cleanup_ok": {"type": "boolean"},
     "cleanup_detail": {"type": ["object", "string"]},
-    "runner_sha256": {"$ref": "#/$defs/sha256"},
+    "runner_sha256": {"$ref": "#/$defs/sha256", "description": "Code identity SHA256; src-py-v2 uses domain-separated length-framed relative paths and bytes of all src/**/*.py. Historical legacy-v1 records retain runner/collector concatenation hashes; never rewrite them."},
     "stdout_sha256": {"$ref": "#/$defs/sha256"},
     "git_commit": {"type": ["string", "null"], "pattern": "^[0-9a-f]{40}$"},
     "git_dirty": {"type": ["string", "null"]},

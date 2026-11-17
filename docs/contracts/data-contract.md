@@ -75,7 +75,7 @@ PYTHONPATH=src python3 -m runner recover results/原实验目录
 
 先验证版本/结构和实验完整性，再把非 success、预热、synthetic、功能未校验样本分别列出。对同配额历史样本调用兼容接口，再由 C 的规则分析；不同配额走配置对照，不能拿兼容函数拒绝不同配额来宣称配置对照失败。
 
-兼容接口检查输入、资源、实际父级、环境、输出、干净 Git 版本和执行器代码哈希，允许 workload_version 不同。runner_sha256 只覆盖 runner/collector，避免报告模块改动污染执行器指纹。前提通过仍需 B 的独立正确性证据及 C 的统计规则。
+兼容接口检查输入、资源、实际父级、环境、输出、干净 Git 版本和执行器代码哈希，允许 workload_version 不同。runner_sha256现采用版本化算法src-py-v2覆盖src全部Python源码；历史runner/collector无分隔拼接算法标为legacy-v1。详见下节迁移说明。前提通过仍需 B 的独立正确性证据及 C 的统计规则。
 
 可选格式检查：安装开发依赖后运行 `python3 scripts/validate_contracts.py 路径/runs.jsonl`，配置加 `--config`。它验证 1.1 结构，不替代功能、配额或兼容检查；1.0 历史文件不通过当前 1.1 schema 是预期行为。
 
@@ -98,3 +98,11 @@ PYTHONPATH=src python3 -m runner recover results/原实验目录
 这是执行Linux（本项目为openEuler来宾）的运行队列/不可中断等待综合负载，不是CPU利用率，也不能声称读取了Windows物理宿主机。environment.json顶层新增host_load引用（path、interval_seconds、samples、errors），独立附加证据格式v1；未加入每条result.environment，run1.1/config1.0不变，旧environment.json缺少该引用表示未采样，不能补造。
 
 采样不进入指纹、兼容或阈值判定，不改负载wall计时点；采样自身可能产生微小观测开销。出现异常或取消时仍停止采样线程并尝试保存末次记录；强制杀死执行器不能保证结束样本。B/C可查阅该文件解释干扰，缺失/错误不自动将任务改为成功或失败。
+
+## 源码指纹算法src-py-v2（任务14）
+
+runner_sha256字段仍为64位十六进制SHA256的代码身份门槛，run1.1的字段形状、单位、状态和消费者接口不变；算法覆盖策略显式升级为src-py-v2，不静默沿用旧说明。新实现取src下递归全部.py，按UTF-8相对POSIX路径排序；SHA256输入先放 `osdesign-src-py-v2` 加一个NUL字节，然后每文件依次放：路径UTF-8字节长度（8字节无符号大端）、路径、内容长度（8字节无符号大端）、原始内容。没有换行正规化，实际运行字节改变就应重新建基线。
+
+legacy-v1只拼接runner/collector顶层.py原始字节，不包含相对路径或长度；旧归档按原测量提交识别，保留原哈希。新旧算法的摘要不同，兼容接口会返回runner_sha256 differs，不能重写旧记录强行通过；旧旧对照仍按已有前提读取。算法版本已在schema描述与源代码域分隔中固定，不向result增加字段，所以不增加run schema版本；若以后给字段改名/单位/状态或新增字段，再按前文升级协议。
+
+B/C迁移：在相同新源码快照重新运行基线、健康和变慢场景后比较；任何src模块（含报告或分析）的改动都会使新记录与旧快照不可比。这比legacy-v1保守，可能拒绝仅展示层变更后的比较，是本任务主动接受的取舍；不能因此声称算法或负载发生退化。负载/输入身份仍由独立字段及SQLite校验约束。

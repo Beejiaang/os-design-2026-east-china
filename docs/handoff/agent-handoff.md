@@ -225,3 +225,11 @@ A 的中断与清理状态有测试，正式性能基线还需要足够实验设
 - 修改范围：src/report/html.py、tests/test_range_bar.py。run 1.1 / config 1.0 不变，无消费者迁移。
 - 验证：新增2项SVG几何/缺失数据测试；本地34项25通过9跳过，Ruff通过。原compare未改；目标机全量及真实数据重生成截图待本轮验证归档。
 - 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。
+
+## 改进任务 14：全src长度分帧源码指纹（2026-11-17）
+
+角色：A 集成，用户授权按 tasklist 跨角色推进。基于 `2d60a88`；分支 `improve/14-source-fingerprint`，交付提交见该分支 Git HEAD（避免自引用哈希）。
+
+- 修改范围：src/runner/core.py、tests/test_source_fingerprint.py、schemas/run-1.1.schema.json、docs/contracts/data-contract.md、docs/implementation/member-a.md。run 1.1 / config 1.0 不变，无消费者迁移。
+- 验证：新增2项路径/嵌套文件/内容分界测试；本地36项27通过9跳过，Ruff通过。src-py-v2算法版本在域分隔和协议中显式说明；run1.1字段形状不变，新旧指纹不可混比。目标机逐源码复验待归档。
+- 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。

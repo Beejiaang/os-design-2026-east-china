@@ -39,7 +39,7 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 | timestamp_utc / order_index / warmup | UTC 时间、执行顺序、是否预热 |
 | environment | 系统、内核、CPU、Python、亲和性、控制进程可见限制、机器标识哈希、保守环境指纹 |
 | command / cwd / workload_version / input_id | 参数、工作目录、负载版本、输入标识 |
-| git_commit / git_dirty / runner_sha256 | 实验目录 Git 版本、未提交状态、执行器与采集器代码哈希 |
+| git_commit / git_dirty / runner_sha256 | 实验目录 Git 版本、未提交状态、src全部Python源码指纹（src-py-v2；历史legacy-v1见协议） |
 | quota_percent / cpu_max / quota_verified | 请求配额、服务内实际限制、核验结果 |
 | visible_limits / parent_subtree_control | 服务内叶节点与全部可见祖先限制、父节点控制器启用状态 |
 | wall_seconds | worker 从初始 cpu.stat 后、服务内快照保存前计时，到负载等待及末次采样后的单调时钟耗时，秒；含区间内采集/等待开销 |
