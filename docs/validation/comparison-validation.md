@@ -70,3 +70,21 @@ GNU time 1.10 在普通用户目录编译，无全局安装；保留构建日志
 本轮新增 **84 次实际执行、72 条非预热测量与 12 条被排除预热**，输出和资源/清理检查均通过。有限的健康对照未触发信号，明显额外工作量触发信号，样本不足/不兼容拒绝比较；这不构成普遍误报/漏报率、统计功效、生产性能、根因或独特创新性的证明。
 
 还需非实现者复验、更多机器/波动与阈值附近样本、其他完整框架的适用性对照、浏览器视觉验收、视频/PPT与比赛流程。代码/证据本地提交，不自动推送、建 PR、共享合并或正式赛事提交。
+
+## 固定样本集阈值检出矩阵（任务 2）
+
+对上述 48 次真实记录重新读取、核验 stdout 哈希和既有独立正确性证据，再用未修改的 compare() 分别传入 10%/15%/25%。这是事后敏感性分析；正式默认仍为预设 15%，没有据此调参。行是额外工作量，**不是实测 wall 增长百分比**。每格括号为基线/当前非预热样本数，两组健康复测分别展示，不合并共享基线。
+
+| 额外工作量 | 阈值 10% | 阈值 15% | 阈值 25% |
+|---|---|---|---|
+| 0% 健康复测1 | no_threshold_signal (7/7) | no_threshold_signal (7/7) | no_threshold_signal (7/7) |
+| 0% 健康复测2 | no_threshold_signal (7/7) | no_threshold_signal (7/7) | no_threshold_signal (7/7) |
+| 5% | no_threshold_signal (7/7) | no_threshold_signal (7/7) | no_threshold_signal (7/7) |
+| 15% | slowdown_needs_review (7/7) | slowdown_needs_review (7/7) | no_threshold_signal (7/7) |
+| 25% | slowdown_needs_review (7/7) | slowdown_needs_review (7/7) | slowdown_needs_review (7/7) |
+
+[逐格 run_id、比值和理由](../../evidence/comparison/threshold-matrix-20261117.json)绑定原始归档 SHA256；每个 run_id 对应归档 results/regression/场景/experiment/run_id/result.json。预热不进入比较，未新增测量。所有格子均满足兼容前提，故未出现 unable_to_compare；其拒绝分支另见上述负向检查。
+
+补充对照：较早两百万行 --passes 2 的三档中位数比为 1.9213/1.9215/2.0565，原预设 15% 均提示复核，见[初轮原始验证](pipeline-validation.md#历史复核规则检查)，与本表不同输入，不混合样本。
+
+这是固定样本集的观察，不是普遍准确率、统计显著性、误报/漏报率或阈值最优性验收；25% 档超过 25% 阈值源于本批实测比值约 1.2557，不能由工作量参数直接推断。

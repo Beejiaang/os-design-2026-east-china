@@ -83,3 +83,11 @@ A 的中断与清理状态有测试，正式性能基线还需要足够实验设
 - [ ] 执行 README 示例和本角色测试，保留真实命令与日志
 - [ ] 对 B 的确定性输出进行独立校验，并让 C 的报告可追溯到 run_id
 - [ ] 记录差异/问题并复验修复；确认不是把同一代理复验标成人员交叉验收
+
+## 改进任务 2：固定样本阈值矩阵（2026-11-17）
+
+角色：A 集成，用户授权按 tasklist 跨角色推进。基于 `54ef9281905b5316010b5484d62795fb8fb092ab`；分支 `improve/02-threshold-matrix`，交付提交见该分支 Git HEAD（避免自引用哈希）。
+
+- 修改范围：docs/validation/comparison-validation.md、evidence/comparison/threshold-matrix-20261117.json、evidence/comparison/SHA256SUMS。run 1.1 / config 1.0 不变，无消费者迁移。
+- 验证：重新分析六场景共 48 条记录；15 格可比，逐格保留 run_id；Markdown 链接检查通过。
+- 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。

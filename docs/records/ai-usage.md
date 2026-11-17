@@ -92,3 +92,9 @@
 - Word生成器以Markdown为源。打包的render_docx.py因Windows缺少LibreOffice失败，记录错误后使用原生Word经UI导出PDF，再用bundled Poppler逐页栅格检查，修正继承标题线和末尾孤页，最终七页。
 - 正常Git凭据推送集成分支成功；PR/合并与冻结目标机证据另见候选验证。未修改运行逻辑和既有原始记录。
 - HTML浏览器file协议操作此前被自动审批拒绝，未绕过；报名、导师、人员事实及官方GitLab未提供，保持缺项，不冒充已提交。
+
+### 2026-11-17 改进任务 2：固定样本阈值矩阵
+
+- 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/02-threshold-matrix`，基于 `54ef928`。
+- 产物：docs/validation/comparison-validation.md、evidence/comparison/threshold-matrix-20261117.json、evidence/comparison/SHA256SUMS。人工负责成员未填写。
+- 检查及限制：重新分析六场景共 48 条记录；15 格可比，逐格保留 run_id；Markdown 链接检查通过。 不将代理检查改标人工验收。

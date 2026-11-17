@@ -1,0 +1,502 @@
+{
+  "kind": "fixed-sample-threshold-matrix-v1",
+  "source_archive": "evidence/comparison/comparison-openeuler-20261117.tar.gz",
+  "source_sha256": "4cd8a2efc8211a3c8232826f2c9754e5a608e2735442ad3a5f8dbb1b6de25cf5",
+  "cells": [
+    {
+      "scenario": "healthy-1",
+      "threshold": 0.1,
+      "quota_percent": 100,
+      "baseline_n": 7,
+      "current_n": 7,
+      "baseline_run_ids": [
+        "23c875f5796141308cab3950c6645611",
+        "4d6d41d60f4449e9b9d3d1b4351c74dd",
+        "536170ec68a043f883e30f6e12ef6ec3",
+        "82ce7043c1af4b1da1f32493d6011be6",
+        "939ee480707f4150ac04aa42e07ec403",
+        "c5a69f3bd961423d8e1f2787c8a7c8e5",
+        "cf6c40e870044bfa8a112e999bb3dcf5"
+      ],
+      "current_run_ids": [
+        "29c311f9105e41a4bd6fa03cf9c8d443",
+        "69d3b358d3e74746b9b60e5e334366ac",
+        "8f3db9de50ed4c5c9052363cbe6b0439",
+        "928d3871e55443a28244c2537d1aaf10",
+        "de1893a2bf7f4ea49e8e2949088596d0",
+        "ec14ce57d48f4ea58278328bbc1aa093",
+        "fb142dbcd4794d5cb76c944ef9f94e60"
+      ],
+      "wall_ratio": 1.000011151115639,
+      "verdict": "no_threshold_signal",
+      "reasons": [],
+      "observed_range_ratio_bounds": [
+        0.99966353322263,
+        1.0320084667000842
+      ],
+      "threshold_sensitive": false
+    },
+    {
+      "scenario": "healthy-1",
+      "threshold": 0.15,
+      "quota_percent": 100,
+      "baseline_n": 7,
+      "current_n": 7,
+      "baseline_run_ids": [
+        "23c875f5796141308cab3950c6645611",
+        "4d6d41d60f4449e9b9d3d1b4351c74dd",
+        "536170ec68a043f883e30f6e12ef6ec3",
+        "82ce7043c1af4b1da1f32493d6011be6",
+        "939ee480707f4150ac04aa42e07ec403",
+        "c5a69f3bd961423d8e1f2787c8a7c8e5",
+        "cf6c40e870044bfa8a112e999bb3dcf5"
+      ],
+      "current_run_ids": [
+        "29c311f9105e41a4bd6fa03cf9c8d443",
+        "69d3b358d3e74746b9b60e5e334366ac",
+        "8f3db9de50ed4c5c9052363cbe6b0439",
+        "928d3871e55443a28244c2537d1aaf10",
+        "de1893a2bf7f4ea49e8e2949088596d0",
+        "ec14ce57d48f4ea58278328bbc1aa093",
+        "fb142dbcd4794d5cb76c944ef9f94e60"
+      ],
+      "wall_ratio": 1.000011151115639,
+      "verdict": "no_threshold_signal",
+      "reasons": [],
+      "observed_range_ratio_bounds": [
+        0.99966353322263,
+        1.0320084667000842
+      ],
+      "threshold_sensitive": false
+    },
+    {
+      "scenario": "healthy-1",
+      "threshold": 0.25,
+      "quota_percent": 100,
+      "baseline_n": 7,
+      "current_n": 7,
+      "baseline_run_ids": [
+        "23c875f5796141308cab3950c6645611",
+        "4d6d41d60f4449e9b9d3d1b4351c74dd",
+        "536170ec68a043f883e30f6e12ef6ec3",
+        "82ce7043c1af4b1da1f32493d6011be6",
+        "939ee480707f4150ac04aa42e07ec403",
+        "c5a69f3bd961423d8e1f2787c8a7c8e5",
+        "cf6c40e870044bfa8a112e999bb3dcf5"
+      ],
+      "current_run_ids": [
+        "29c311f9105e41a4bd6fa03cf9c8d443",
+        "69d3b358d3e74746b9b60e5e334366ac",
+        "8f3db9de50ed4c5c9052363cbe6b0439",
+        "928d3871e55443a28244c2537d1aaf10",
+        "de1893a2bf7f4ea49e8e2949088596d0",
+        "ec14ce57d48f4ea58278328bbc1aa093",
+        "fb142dbcd4794d5cb76c944ef9f94e60"
+      ],
+      "wall_ratio": 1.000011151115639,
+      "verdict": "no_threshold_signal",
+      "reasons": [],
+      "observed_range_ratio_bounds": [
+        0.99966353322263,
+        1.0320084667000842
+      ],
+      "threshold_sensitive": false
+    },
+    {
+      "scenario": "healthy-2",
+      "threshold": 0.1,
+      "quota_percent": 100,
+      "baseline_n": 7,
+      "current_n": 7,
+      "baseline_run_ids": [
+        "23c875f5796141308cab3950c6645611",
+        "4d6d41d60f4449e9b9d3d1b4351c74dd",
+        "536170ec68a043f883e30f6e12ef6ec3",
+        "82ce7043c1af4b1da1f32493d6011be6",
+        "939ee480707f4150ac04aa42e07ec403",
+        "c5a69f3bd961423d8e1f2787c8a7c8e5",
+        "cf6c40e870044bfa8a112e999bb3dcf5"
+      ],
+      "current_run_ids": [
+        "0f338eb30dc744c4836e623330c9b381",
+        "3b5b4dcea3f0476ea4ac9ad36f5e60e9",
+        "3f4f5ec76b9f4a48b36c5bcddf6ad3b7",
+        "7b7ea19f38424bd4ac3bf2de274a732b",
+        "de242f0e8dc74fa19870be45b6ad89f0",
+        "f19073fea3274992bd926d9ee70d0a72",
+        "fa1c2a9470cf422e87ea442abefe14cd"
+      ],
+      "wall_ratio": 0.9999303268997408,
+      "verdict": "no_threshold_signal",
+      "reasons": [],
+      "observed_range_ratio_bounds": [
+        0.9996789060608722,
+        1.0001340717333367
+      ],
+      "threshold_sensitive": false
+    },
+    {
+      "scenario": "healthy-2",
+      "threshold": 0.15,
+      "quota_percent": 100,
+      "baseline_n": 7,
+      "current_n": 7,
+      "baseline_run_ids": [
+        "23c875f5796141308cab3950c6645611",
+        "4d6d41d60f4449e9b9d3d1b4351c74dd",
+        "536170ec68a043f883e30f6e12ef6ec3",
+        "82ce7043c1af4b1da1f32493d6011be6",
+        "939ee480707f4150ac04aa42e07ec403",
+        "c5a69f3bd961423d8e1f2787c8a7c8e5",
+        "cf6c40e870044bfa8a112e999bb3dcf5"
+      ],
+      "current_run_ids": [
+        "0f338eb30dc744c4836e623330c9b381",
+        "3b5b4dcea3f0476ea4ac9ad36f5e60e9",
+        "3f4f5ec76b9f4a48b36c5bcddf6ad3b7",
+        "7b7ea19f38424bd4ac3bf2de274a732b",
+        "de242f0e8dc74fa19870be45b6ad89f0",
+        "f19073fea3274992bd926d9ee70d0a72",
+        "fa1c2a9470cf422e87ea442abefe14cd"
+      ],
+      "wall_ratio": 0.9999303268997408,
+      "verdict": "no_threshold_signal",
+      "reasons": [],
+      "observed_range_ratio_bounds": [
+        0.9996789060608722,
+        1.0001340717333367
+      ],
+      "threshold_sensitive": false
+    },
+    {
+      "scenario": "healthy-2",
+      "threshold": 0.25,
+      "quota_percent": 100,
+      "baseline_n": 7,
+      "current_n": 7,
+      "baseline_run_ids": [
+        "23c875f5796141308cab3950c6645611",
+        "4d6d41d60f4449e9b9d3d1b4351c74dd",
+        "536170ec68a043f883e30f6e12ef6ec3",
+        "82ce7043c1af4b1da1f32493d6011be6",
+        "939ee480707f4150ac04aa42e07ec403",
+        "c5a69f3bd961423d8e1f2787c8a7c8e5",
+        "cf6c40e870044bfa8a112e999bb3dcf5"
+      ],
+      "current_run_ids": [
+        "0f338eb30dc744c4836e623330c9b381",
+        "3b5b4dcea3f0476ea4ac9ad36f5e60e9",
+        "3f4f5ec76b9f4a48b36c5bcddf6ad3b7",
+        "7b7ea19f38424bd4ac3bf2de274a732b",
+        "de242f0e8dc74fa19870be45b6ad89f0",
+        "f19073fea3274992bd926d9ee70d0a72",
+        "fa1c2a9470cf422e87ea442abefe14cd"
+      ],
+      "wall_ratio": 0.9999303268997408,
+      "verdict": "no_threshold_signal",
+      "reasons": [],
+      "observed_range_ratio_bounds": [
+        0.9996789060608722,
+        1.0001340717333367
+      ],
+      "threshold_sensitive": false
+    },
+    {
+      "scenario": "mild-5",
+      "threshold": 0.1,
+      "quota_percent": 100,
+      "baseline_n": 7,
+      "current_n": 7,
+      "baseline_run_ids": [
+        "23c875f5796141308cab3950c6645611",
+        "4d6d41d60f4449e9b9d3d1b4351c74dd",
+        "536170ec68a043f883e30f6e12ef6ec3",
+        "82ce7043c1af4b1da1f32493d6011be6",
+        "939ee480707f4150ac04aa42e07ec403",
+        "c5a69f3bd961423d8e1f2787c8a7c8e5",
+        "cf6c40e870044bfa8a112e999bb3dcf5"
+      ],
+      "current_run_ids": [
+        "0c1dfb92d68b4f01b2b65546f7006760",
+        "111a908e481646259e7ebd1efeb70d86",
+        "28de36243dd74b9390d688add38f9eb1",
+        "8010dd52d69348bbb63f6e06bd9d801e",
+        "aee257eeab974c7d8f55e6c41d33625e",
+        "b3df135ce5c148f39aef5347f864fbab",
+        "e4e5828c745e41bdb78b1e2f77285336"
+      ],
+      "wall_ratio": 1.063955102496947,
+      "verdict": "no_threshold_signal",
+      "reasons": [],
+      "observed_range_ratio_bounds": [
+        1.0317262275249952,
+        1.0641001063139923
+      ],
+      "threshold_sensitive": false
+    },
+    {
+      "scenario": "mild-5",
+      "threshold": 0.15,
+      "quota_percent": 100,
+      "baseline_n": 7,
+      "current_n": 7,
+      "baseline_run_ids": [
+        "23c875f5796141308cab3950c6645611",
+        "4d6d41d60f4449e9b9d3d1b4351c74dd",
+        "536170ec68a043f883e30f6e12ef6ec3",
+        "82ce7043c1af4b1da1f32493d6011be6",
+        "939ee480707f4150ac04aa42e07ec403",
+        "c5a69f3bd961423d8e1f2787c8a7c8e5",
+        "cf6c40e870044bfa8a112e999bb3dcf5"
+      ],
+      "current_run_ids": [
+        "0c1dfb92d68b4f01b2b65546f7006760",
+        "111a908e481646259e7ebd1efeb70d86",
+        "28de36243dd74b9390d688add38f9eb1",
+        "8010dd52d69348bbb63f6e06bd9d801e",
+        "aee257eeab974c7d8f55e6c41d33625e",
+        "b3df135ce5c148f39aef5347f864fbab",
+        "e4e5828c745e41bdb78b1e2f77285336"
+      ],
+      "wall_ratio": 1.063955102496947,
+      "verdict": "no_threshold_signal",
+      "reasons": [],
+      "observed_range_ratio_bounds": [
+        1.0317262275249952,
+        1.0641001063139923
+      ],
+      "threshold_sensitive": false
+    },
+    {
+      "scenario": "mild-5",
+      "threshold": 0.25,
+      "quota_percent": 100,
+      "baseline_n": 7,
+      "current_n": 7,
+      "baseline_run_ids": [
+        "23c875f5796141308cab3950c6645611",
+        "4d6d41d60f4449e9b9d3d1b4351c74dd",
+        "536170ec68a043f883e30f6e12ef6ec3",
+        "82ce7043c1af4b1da1f32493d6011be6",
+        "939ee480707f4150ac04aa42e07ec403",
+        "c5a69f3bd961423d8e1f2787c8a7c8e5",
+        "cf6c40e870044bfa8a112e999bb3dcf5"
+      ],
+      "current_run_ids": [
+        "0c1dfb92d68b4f01b2b65546f7006760",
+        "111a908e481646259e7ebd1efeb70d86",
+        "28de36243dd74b9390d688add38f9eb1",
+        "8010dd52d69348bbb63f6e06bd9d801e",
+        "aee257eeab974c7d8f55e6c41d33625e",
+        "b3df135ce5c148f39aef5347f864fbab",
+        "e4e5828c745e41bdb78b1e2f77285336"
+      ],
+      "wall_ratio": 1.063955102496947,
+      "verdict": "no_threshold_signal",
+      "reasons": [],
+      "observed_range_ratio_bounds": [
+        1.0317262275249952,
+        1.0641001063139923
+      ],
+      "threshold_sensitive": false
+    },
+    {
+      "scenario": "boundary-15",
+      "threshold": 0.1,
+      "quota_percent": 100,
+      "baseline_n": 7,
+      "current_n": 7,
+      "baseline_run_ids": [
+        "23c875f5796141308cab3950c6645611",
+        "4d6d41d60f4449e9b9d3d1b4351c74dd",
+        "536170ec68a043f883e30f6e12ef6ec3",
+        "82ce7043c1af4b1da1f32493d6011be6",
+        "939ee480707f4150ac04aa42e07ec403",
+        "c5a69f3bd961423d8e1f2787c8a7c8e5",
+        "cf6c40e870044bfa8a112e999bb3dcf5"
+      ],
+      "current_run_ids": [
+        "194c08f0fd864851980c41d641c35a3a",
+        "20ee9ebd588c4206bfe81a3fff32516a",
+        "612d46bb8fc34b61a07a419a52f57d91",
+        "ac7fd333384143c9b5d2c96659d64ab3",
+        "b6bc866a3d2b45bbbdba1542e2772b01",
+        "bdd584adc2f843c5aa7a441d6951e1a9",
+        "ca8ed2f121b348c6a2b5f16d7c984b09"
+      ],
+      "wall_ratio": 1.1597745476625316,
+      "verdict": "slowdown_needs_review",
+      "reasons": [],
+      "observed_range_ratio_bounds": [
+        1.1594497399847221,
+        1.1598875902429209
+      ],
+      "threshold_sensitive": false
+    },
+    {
+      "scenario": "boundary-15",
+      "threshold": 0.15,
+      "quota_percent": 100,
+      "baseline_n": 7,
+      "current_n": 7,
+      "baseline_run_ids": [
+        "23c875f5796141308cab3950c6645611",
+        "4d6d41d60f4449e9b9d3d1b4351c74dd",
+        "536170ec68a043f883e30f6e12ef6ec3",
+        "82ce7043c1af4b1da1f32493d6011be6",
+        "939ee480707f4150ac04aa42e07ec403",
+        "c5a69f3bd961423d8e1f2787c8a7c8e5",
+        "cf6c40e870044bfa8a112e999bb3dcf5"
+      ],
+      "current_run_ids": [
+        "194c08f0fd864851980c41d641c35a3a",
+        "20ee9ebd588c4206bfe81a3fff32516a",
+        "612d46bb8fc34b61a07a419a52f57d91",
+        "ac7fd333384143c9b5d2c96659d64ab3",
+        "b6bc866a3d2b45bbbdba1542e2772b01",
+        "bdd584adc2f843c5aa7a441d6951e1a9",
+        "ca8ed2f121b348c6a2b5f16d7c984b09"
+      ],
+      "wall_ratio": 1.1597745476625316,
+      "verdict": "slowdown_needs_review",
+      "reasons": [],
+      "observed_range_ratio_bounds": [
+        1.1594497399847221,
+        1.1598875902429209
+      ],
+      "threshold_sensitive": false
+    },
+    {
+      "scenario": "boundary-15",
+      "threshold": 0.25,
+      "quota_percent": 100,
+      "baseline_n": 7,
+      "current_n": 7,
+      "baseline_run_ids": [
+        "23c875f5796141308cab3950c6645611",
+        "4d6d41d60f4449e9b9d3d1b4351c74dd",
+        "536170ec68a043f883e30f6e12ef6ec3",
+        "82ce7043c1af4b1da1f32493d6011be6",
+        "939ee480707f4150ac04aa42e07ec403",
+        "c5a69f3bd961423d8e1f2787c8a7c8e5",
+        "cf6c40e870044bfa8a112e999bb3dcf5"
+      ],
+      "current_run_ids": [
+        "194c08f0fd864851980c41d641c35a3a",
+        "20ee9ebd588c4206bfe81a3fff32516a",
+        "612d46bb8fc34b61a07a419a52f57d91",
+        "ac7fd333384143c9b5d2c96659d64ab3",
+        "b6bc866a3d2b45bbbdba1542e2772b01",
+        "bdd584adc2f843c5aa7a441d6951e1a9",
+        "ca8ed2f121b348c6a2b5f16d7c984b09"
+      ],
+      "wall_ratio": 1.1597745476625316,
+      "verdict": "no_threshold_signal",
+      "reasons": [],
+      "observed_range_ratio_bounds": [
+        1.1594497399847221,
+        1.1598875902429209
+      ],
+      "threshold_sensitive": false
+    },
+    {
+      "scenario": "clear-25",
+      "threshold": 0.1,
+      "quota_percent": 100,
+      "baseline_n": 7,
+      "current_n": 7,
+      "baseline_run_ids": [
+        "23c875f5796141308cab3950c6645611",
+        "4d6d41d60f4449e9b9d3d1b4351c74dd",
+        "536170ec68a043f883e30f6e12ef6ec3",
+        "82ce7043c1af4b1da1f32493d6011be6",
+        "939ee480707f4150ac04aa42e07ec403",
+        "c5a69f3bd961423d8e1f2787c8a7c8e5",
+        "cf6c40e870044bfa8a112e999bb3dcf5"
+      ],
+      "current_run_ids": [
+        "04ff6b637e0a4c86b7e0677af917df47",
+        "24af38dc28ad4b918e4892f2eb2b7808",
+        "37be429df650478a84ab1c3f0d74481c",
+        "3e8058ee431f4365acd5e4d3fba11a88",
+        "60bb13c21f8b423ea93d42d389419782",
+        "b019ce85d0874d10842feee1f3c7f102",
+        "de3c02e9ede34b9ea143adeeb65cc1f6"
+      ],
+      "wall_ratio": 1.2556994786318398,
+      "verdict": "slowdown_needs_review",
+      "reasons": [],
+      "observed_range_ratio_bounds": [
+        1.2552286783106403,
+        1.2559905894294274
+      ],
+      "threshold_sensitive": false
+    },
+    {
+      "scenario": "clear-25",
+      "threshold": 0.15,
+      "quota_percent": 100,
+      "baseline_n": 7,
+      "current_n": 7,
+      "baseline_run_ids": [
+        "23c875f5796141308cab3950c6645611",
+        "4d6d41d60f4449e9b9d3d1b4351c74dd",
+        "536170ec68a043f883e30f6e12ef6ec3",
+        "82ce7043c1af4b1da1f32493d6011be6",
+        "939ee480707f4150ac04aa42e07ec403",
+        "c5a69f3bd961423d8e1f2787c8a7c8e5",
+        "cf6c40e870044bfa8a112e999bb3dcf5"
+      ],
+      "current_run_ids": [
+        "04ff6b637e0a4c86b7e0677af917df47",
+        "24af38dc28ad4b918e4892f2eb2b7808",
+        "37be429df650478a84ab1c3f0d74481c",
+        "3e8058ee431f4365acd5e4d3fba11a88",
+        "60bb13c21f8b423ea93d42d389419782",
+        "b019ce85d0874d10842feee1f3c7f102",
+        "de3c02e9ede34b9ea143adeeb65cc1f6"
+      ],
+      "wall_ratio": 1.2556994786318398,
+      "verdict": "slowdown_needs_review",
+      "reasons": [],
+      "observed_range_ratio_bounds": [
+        1.2552286783106403,
+        1.2559905894294274
+      ],
+      "threshold_sensitive": false
+    },
+    {
+      "scenario": "clear-25",
+      "threshold": 0.25,
+      "quota_percent": 100,
+      "baseline_n": 7,
+      "current_n": 7,
+      "baseline_run_ids": [
+        "23c875f5796141308cab3950c6645611",
+        "4d6d41d60f4449e9b9d3d1b4351c74dd",
+        "536170ec68a043f883e30f6e12ef6ec3",
+        "82ce7043c1af4b1da1f32493d6011be6",
+        "939ee480707f4150ac04aa42e07ec403",
+        "c5a69f3bd961423d8e1f2787c8a7c8e5",
+        "cf6c40e870044bfa8a112e999bb3dcf5"
+      ],
+      "current_run_ids": [
+        "04ff6b637e0a4c86b7e0677af917df47",
+        "24af38dc28ad4b918e4892f2eb2b7808",
+        "37be429df650478a84ab1c3f0d74481c",
+        "3e8058ee431f4365acd5e4d3fba11a88",
+        "60bb13c21f8b423ea93d42d389419782",
+        "b019ce85d0874d10842feee1f3c7f102",
+        "de3c02e9ede34b9ea143adeeb65cc1f6"
+      ],
+      "wall_ratio": 1.2556994786318398,
+      "verdict": "slowdown_needs_review",
+      "reasons": [],
+      "observed_range_ratio_bounds": [
+        1.2552286783106403,
+        1.2559905894294274
+      ],
+      "threshold_sensitive": false
+    }
+  ]
+}
