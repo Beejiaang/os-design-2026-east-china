@@ -116,3 +116,9 @@
 - 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/04-timeline`，基于 `31f6f28`。
 - 产物：docs/history/timeline.md、README.md。人工负责成员未填写。
 - 检查及限制：git log --all 核对日期和提交；本地文档与 evidence 链接检查通过。 不将代理检查改标人工验收。
+
+### 2026-11-17 改进任务 5：教学观察思考题与报告模板
+
+- 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/05-teaching-observations`，基于 `1d54111`。
+- 产物：docs/implementation/teaching-experiments.md。人工负责成员未填写。
+- 检查及限制：原有 bash 命令逐字保留；数值核对集成验证表；本地链接检查通过。 不将代理检查改标人工验收。

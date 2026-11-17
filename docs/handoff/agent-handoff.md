@@ -115,3 +115,11 @@ A 的中断与清理状态有测试，正式性能基线还需要足够实验设
 - 修改范围：docs/history/timeline.md、README.md。run 1.1 / config 1.0 不变，无消费者迁移。
 - 验证：git log --all 核对日期和提交；本地文档与 evidence 链接检查通过。
 - 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。
+
+## 改进任务 5：教学观察思考题与报告模板（2026-11-17）
+
+角色：A 集成，用户授权按 tasklist 跨角色推进。基于 `1d54111cb4b752cdd2fd89045fb3763b9a0557ac`；分支 `improve/05-teaching-observations`，交付提交见该分支 Git HEAD（避免自引用哈希）。
+
+- 修改范围：docs/implementation/teaching-experiments.md。run 1.1 / config 1.0 不变，无消费者迁移。
+- 验证：原有 bash 命令逐字保留；数值核对集成验证表；本地链接检查通过。
+- 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。
