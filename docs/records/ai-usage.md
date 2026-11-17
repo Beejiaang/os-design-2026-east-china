@@ -122,3 +122,9 @@
 - 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/05-teaching-observations`，基于 `1d54111`。
 - 产物：docs/implementation/teaching-experiments.md。人工负责成员未填写。
 - 检查及限制：原有 bash 命令逐字保留；数值核对集成验证表；本地链接检查通过。 不将代理检查改标人工验收。
+
+### 2026-11-17 改进任务 6：最小纯单元与协议 CI
+
+- 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/06-ci`，基于 `4ccef58`。
+- 产物：.github/workflows/ci.yml。人工负责成员未填写。
+- 检查及限制：workflow 已准备；无推送授权，GitHub 未运行。最终本地/目标机等价命令日志统一归档到 P0 验证记录；不把跳过系统项计为通过。tasklist 中任务6所指 ruff 实为任务17，本轮不提前机械修改源码。 不将代理检查改标人工验收。
