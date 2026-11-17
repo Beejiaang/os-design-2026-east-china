@@ -1,7 +1,36 @@
 """Escape all external text; no network assets, scripts or raw-log execution."""
 import html
 import json
+import math
 from pathlib import Path
+
+
+def range_bar(row, threshold):
+    """Observed extrema only; never draw missing/non-finite data as zero."""
+    bounds = row.get("observed_range_ratio_bounds")
+    if (not isinstance(bounds, (list, tuple)) or len(bounds) != 2 or
+            any(type(v) not in (int, float) or not math.isfinite(v) or v < 0 for v in bounds) or
+            bounds[0] > bounds[1] or type(threshold) not in (int, float) or
+            not math.isfinite(threshold) or threshold <= 0):
+        return "<p>观察范围不可用</p>"
+    low, high = bounds
+    reference = 1 + threshold
+    minimum = min(1, low, reference) - 0.05
+    maximum = max(1, high, reference) + 0.05
+
+    def x(value):
+        return 30 + 360 * (value - minimum) / (maximum - minimum)
+
+    color = "#b46a08" if row.get("threshold_sensitive") is True else "#168a86"
+    title = f"已观察比值范围 {low:.4f} 至 {high:.4f}；阈值参考线 {reference:.4f}；不是置信区间"
+    return (f'<svg role="img" aria-label="{title}" viewBox="0 0 430 115" style="min-width:300px;width:100%">'
+            f'<title>{title}</title><line x1="30" y1="45" x2="390" y2="45" stroke="#dae2eb"/>'
+            f'<line x1="{x(1):.2f}" y1="22" x2="{x(1):.2f}" y2="62" stroke="#7d8da0"/>'
+            f'<line x1="{x(reference):.2f}" y1="15" x2="{x(reference):.2f}" y2="65" stroke="#a32a40" stroke-dasharray="4 3"/>'
+            f'<line x1="{x(low):.2f}" y1="45" x2="{x(high):.2f}" y2="45" stroke="{color}" stroke-width="8" stroke-linecap="round"/>'
+            f'<text x="{x(1):.2f}" y="85" text-anchor="middle" font-size="12">1.00</text>'
+            f'<text x="{x(reference):.2f}" y="12" text-anchor="middle" font-size="12">阈值 {reference:.2f}</text>'
+            f'<text x="30" y="108" font-size="12">范围 {low:.4f}–{high:.4f}</text></svg>')
 
 
 def render(summary, output, comparison=None):
@@ -54,5 +83,8 @@ pre{white-space:pre-wrap;word-break:break-word;font-size:13px}.badge{background:
                                (row["quota_percent"], row["baseline_n"], row["current_n"], row["wall_ratio"],
                                 labels[row["verdict"]], row.get("threshold_sensitive"), "; ".join(row["reasons"]))) + "</tr>" for row in comparison["comparisons"])
         document += "<section><h2>历史比较 · 探索性复核规则</h2><p>" + esc(comparison["note"]) + "</p><p>最少样本数：" + esc(comparison["minimum"]) + "；预设变化阈值：" + esc(comparison["threshold"]) + "</p><p>阈值敏感=true 表示两组已观察到的耗时范围可组合出阈值两侧的比值，需留意波动；这不是置信区间。精确范围见追溯数据。</p><table><tr><th>配额 %</th><th>基线 n</th><th>当前 n</th><th>耗时比</th><th>规则输出</th><th>阈值敏感</th><th>原因</th></tr>" + history_rows + "</table></section>"
+        bars = "".join('<div><h3>配额 ' + esc(row["quota_percent"]) + '%</h3>' +
+                       range_bar(row, comparison["threshold"]) + '</div>' for row in comparison["comparisons"])
+        document += '<section><h2>历史比较的观察范围</h2><p>已观察范围敏感性，不是置信区间。虚线为 1+threshold；颜色仅提示是否跨阈值。各图按自身范围缩放，数值以标签为准。</p>' + bars + '</section>'
     document += "<section><h2>排除、问题与追溯证据</h2><pre>" + esc(details) + "</pre></section></html>"
     Path(output).write_text(document, encoding="utf-8")

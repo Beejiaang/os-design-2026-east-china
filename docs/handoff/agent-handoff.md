@@ -217,3 +217,11 @@ A 的中断与清理状态有测试，正式性能基线还需要足够实验设
 - 修改范围：src/collector/host_load.py、src/runner/core.py、tests/test_host_load.py、docs/contracts/data-contract.md。run 1.1 / config 1.0 不变，无消费者迁移。
 - 验证：新增3项采样/异常/写入失败单测；本地32项23通过9跳过，Ruff通过；目标机全量和完整流程按此源码单独复验归档。environment.json附加证据格式linux-load-v1，run/config不变，采样不参与判定。
 - 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。
+
+## 改进任务 13：历史比较观察范围区间条（2026-11-17）
+
+角色：A 集成，用户授权按 tasklist 跨角色推进。基于 `1bde76a`；分支 `improve/13-range-visualization`，交付提交见该分支 Git HEAD（避免自引用哈希）。
+
+- 修改范围：src/report/html.py、tests/test_range_bar.py。run 1.1 / config 1.0 不变，无消费者迁移。
+- 验证：新增2项SVG几何/缺失数据测试；本地34项25通过9跳过，Ruff通过。原compare未改；目标机全量及真实数据重生成截图待本轮验证归档。
+- 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。
