@@ -139,3 +139,11 @@ A 的中断与清理状态有测试，正式性能基线还需要足够实验设
 - 修改范围：docs/project/platform-readiness.md。run 1.1 / config 1.0 不变，无消费者迁移。
 - 验证：git count-objects -vH 与 git ls-files -z + stat 实测；所有表项按字节记；未迁移文件或改写历史。
 - 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。
+
+## 改进任务 8：材料版本与哈希自动清单（2026-11-17）
+
+角色：A 集成，用户授权按 tasklist 跨角色推进。基于 `1e1a83f`；分支 `improve/08-material-manifest`，交付提交见该分支 Git HEAD（避免自引用哈希）。
+
+- 修改范围：scripts/material_manifest.py、docs/validation/material-versions.md、docs/validation/improvement-p0-validation.md、evidence/improvement。run 1.1 / config 1.0 不变，无消费者迁移。
+- 验证：脚本源码a4f4c04；两次生成逐字节一致、冻结材料错误哈希夹具被拒绝；openEuler29项0跳过+完整流程18次+pip check通过。本地3.12纯测试20通过9跳过。见docs/validation/improvement-p0-validation.md。
+- 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。

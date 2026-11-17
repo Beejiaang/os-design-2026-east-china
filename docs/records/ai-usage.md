@@ -134,3 +134,9 @@
 - 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/07-repository-size`，基于 `c65611a`。
 - 产物：docs/project/platform-readiness.md。人工负责成员未填写。
 - 检查及限制：git count-objects -vH 与 git ls-files -z + stat 实测；所有表项按字节记；未迁移文件或改写历史。 不将代理检查改标人工验收。
+
+### 2026-11-17 改进任务 8：材料版本与哈希自动清单
+
+- 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/08-material-manifest`，基于 `1e1a83f`。
+- 产物：scripts/material_manifest.py、docs/validation/material-versions.md、docs/validation/improvement-p0-validation.md、evidence/improvement。人工负责成员未填写。
+- 检查及限制：脚本源码a4f4c04；两次生成逐字节一致、冻结材料错误哈希夹具被拒绝；openEuler29项0跳过+完整流程18次+pip check通过。本地3.12纯测试20通过9跳过。见docs/validation/improvement-p0-validation.md。 不将代理检查改标人工验收。

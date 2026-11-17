@@ -1,0 +1,34 @@
+test_parse_time_preserves_exit_and_rejects_invalid_metrics (test_comparison.ComparisonTests.test_parse_time_preserves_exit_and_rejects_invalid_metrics) ... ok
+test_partial_work_never_changes_functional_output (test_comparison.ComparisonTests.test_partial_work_never_changes_functional_output) ... ok
+test_quota_snapshot_never_treats_missing_as_unlimited (test_comparison.ComparisonTests.test_quota_snapshot_never_treats_missing_as_unlimited) ... ok
+test_unavailable_manager_cannot_claim_cleanup (test_lifecycle.FailureContractTests.test_unavailable_manager_cannot_claim_cleanup) ... ok
+test_unknown_config_and_invalid_cwd_are_rejected (test_lifecycle.FailureContractTests.test_unknown_config_and_invalid_cwd_are_rejected) ... ok
+test_unsupported_environment_is_preserved_without_launch (test_lifecycle.FailureContractTests.test_unsupported_environment_is_preserved_without_launch) ... ok
+test_corrupt_started_snapshot_does_not_prevent_cleanup (test_lifecycle.LifecycleSystemTests.test_corrupt_started_snapshot_does_not_prevent_cleanup) ... skipped 'Set OSDESIGN_INTEGRATION=1 on Linux'
+test_hard_kill_watchdog_and_explicit_recovery (test_lifecycle.LifecycleSystemTests.test_hard_kill_watchdog_and_explicit_recovery) ... skipped 'Set OSDESIGN_INTEGRATION=1 on Linux'
+test_recovery_rejects_other_boot_without_stopping_units (test_lifecycle.LifecycleSystemTests.test_recovery_rejects_other_boot_without_stopping_units) ... skipped 'Set OSDESIGN_INTEGRATION=1 on Linux'
+test_sigint_and_sigterm_preserve_finalized_record (test_lifecycle.LifecycleSystemTests.test_sigint_and_sigterm_preserve_finalized_record) ... skipped 'Set OSDESIGN_INTEGRATION=1 on Linux'
+test_worker_crash_is_error_with_descendant_cleanup (test_lifecycle.LifecycleSystemTests.test_worker_crash_is_error_with_descendant_cleanup) ... skipped 'Set OSDESIGN_INTEGRATION=1 on Linux'
+test_incompatible_data_never_passes (test_member_a.ContractTests.test_incompatible_data_never_passes) ... ok
+test_missing_stat_is_not_zero (test_member_a.ContractTests.test_missing_stat_is_not_zero) ... ok
+test_non_object_records_are_rejected (test_member_a.ContractTests.test_non_object_records_are_rejected) ... ok
+test_rejects_invalid_limits (test_member_a.ContractTests.test_rejects_invalid_limits) ... ok
+test_rejects_shell_string_and_repeat_boolean (test_member_a.ContractTests.test_rejects_shell_string_and_repeat_boolean) ... ok
+test_failure (test_member_a.SystemTests.test_failure) ... skipped 'Set OSDESIGN_INTEGRATION=1 on Linux'
+test_missing_executable (test_member_a.SystemTests.test_missing_executable) ... skipped 'Set OSDESIGN_INTEGRATION=1 on Linux'
+test_three_quotas_and_repeated_output (test_member_a.SystemTests.test_three_quotas_and_repeated_output) ... skipped 'Set OSDESIGN_INTEGRATION=1 on Linux'
+test_timeout_and_descendant_cleanup (test_member_a.SystemTests.test_timeout_and_descendant_cleanup) ... skipped 'Set OSDESIGN_INTEGRATION=1 on Linux'
+test_authoritative_result_and_traceability (test_pipeline.AnalysisTests.test_authoritative_result_and_traceability) ... ok
+test_history_sample_and_compatibility_gates (test_pipeline.AnalysisTests.test_history_sample_and_compatibility_gates) ... ok
+test_html_escapes_untrusted_strings (test_pipeline.AnalysisTests.test_html_escapes_untrusted_strings) ... ok
+test_incomplete_and_missing_correctness (test_pipeline.AnalysisTests.test_incomplete_and_missing_correctness) ... ok
+test_malformed_metadata_is_reported_without_crashing (test_pipeline.AnalysisTests.test_malformed_metadata_is_reported_without_crashing) ... ok
+test_states_and_corruption_cannot_become_eligible (test_pipeline.AnalysisTests.test_states_and_corruption_cannot_become_eligible) ... ok
+test_threshold_tie_and_observed_range_sensitivity (test_pipeline.AnalysisTests.test_threshold_tie_and_observed_range_sensitivity) ... ok
+test_fixed_input_and_independent_reference (test_pipeline.WorkloadTests.test_fixed_input_and_independent_reference) ... ok
+test_hand_computed_negative_values_and_corruption (test_pipeline.WorkloadTests.test_hand_computed_negative_values_and_corruption) ... ok
+
+----------------------------------------------------------------------
+Ran 29 tests in 0.428s
+
+OK (skipped=9)
