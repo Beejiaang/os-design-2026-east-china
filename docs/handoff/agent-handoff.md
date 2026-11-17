@@ -131,3 +131,11 @@ A 的中断与清理状态有测试，正式性能基线还需要足够实验设
 - 修改范围：.github/workflows/ci.yml。run 1.1 / config 1.0 不变，无消费者迁移。
 - 验证：workflow 已准备；无推送授权，GitHub 未运行。最终本地/目标机等价命令日志统一归档到 P0 验证记录；不把跳过系统项计为通过。tasklist 中任务6所指 ruff 实为任务17，本轮不提前机械修改源码。
 - 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。
+
+## 改进任务 7：仓库体积及大文件评估（2026-11-17）
+
+角色：A 集成，用户授权按 tasklist 跨角色推进。基于 `c65611aff4830316bb082c87122e0f3c172973b3`；分支 `improve/07-repository-size`，交付提交见该分支 Git HEAD（避免自引用哈希）。
+
+- 修改范围：docs/project/platform-readiness.md。run 1.1 / config 1.0 不变，无消费者迁移。
+- 验证：git count-objects -vH 与 git ls-files -z + stat 实测；所有表项按字节记；未迁移文件或改写历史。
+- 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。

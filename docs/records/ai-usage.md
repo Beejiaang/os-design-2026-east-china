@@ -128,3 +128,9 @@
 - 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/06-ci`，基于 `4ccef58`。
 - 产物：.github/workflows/ci.yml。人工负责成员未填写。
 - 检查及限制：workflow 已准备；无推送授权，GitHub 未运行。最终本地/目标机等价命令日志统一归档到 P0 验证记录；不把跳过系统项计为通过。tasklist 中任务6所指 ruff 实为任务17，本轮不提前机械修改源码。 不将代理检查改标人工验收。
+
+### 2026-11-17 改进任务 7：仓库体积及大文件评估
+
+- 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/07-repository-size`，基于 `c65611a`。
+- 产物：docs/project/platform-readiness.md。人工负责成员未填写。
+- 检查及限制：git count-objects -vH 与 git ls-files -z + stat 实测；所有表项按字节记；未迁移文件或改写历史。 不将代理检查改标人工验收。
