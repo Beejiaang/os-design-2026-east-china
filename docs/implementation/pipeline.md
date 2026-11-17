@@ -62,3 +62,15 @@ CLI 退出 0 表示实验完整且有可用样本，不表示历史无退化。C
 每档一次预热意在减轻首次读取、代码启动和缓存状态差异；预热作为原始记录保留，明确排除测量样本。一次预热不保证缓存稳定或无宿主机影响。样本/阈值规则在正式验收前固定，不依据事后好看结果重新挑选样本；更多重复及独立机器验证仍待开展。
 
 术语统一入口：[资源、计时与完成状态](../contracts/glossary.md)。
+
+## 开发依赖与静态检查
+
+报告依赖集中在report extra，dev通过本项目report extra复用，并增加固定版本Ruff；执行器不增加运行依赖。仅运行报告仍使用原有 `python3 -m pip install -e '.[report]'`。
+
+```bash
+python3 -m pip install -e '.[dev]'
+python3 -m pip check
+python3 -m ruff check src workloads experiments tests scripts
+```
+
+Ruff采用默认E4/E7/E9/F规则与120列设置，实验/测试中的显式源码路径引导仅豁免E402；不对历史evidence或本地results/work自动修写。当前兼容命令和额外依赖以pyproject.toml为准。

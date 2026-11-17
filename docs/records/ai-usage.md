@@ -181,3 +181,9 @@
 - 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/17-ruff`，基于 `0e30e7f`。
 - 产物：pyproject.toml、.github/workflows/ci.yml、src/report/html.py、tests/test_member_a.py。人工负责成员未填写。
 - 检查及限制：Ruff0.17.5默认E4/E7/E9/F规则通过；只删除一个未用import及将两个lambda机械改成def。本地29项20通过9跳过；因src改动，目标机全量验证在本轮证据记录中补齐，未据此宣称目标机通过。 不将代理检查改标人工验收。
+
+### 2026-11-17 改进任务 18：复用report extra并加入开发检查
+
+- 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/18-extras`，基于 `f96e456`。
+- 产物：pyproject.toml、docs/implementation/pipeline.md。人工负责成员未填写。
+- 检查及限制：Windows3.12 editable安装.[dev]及pip check通过；report extra保留为唯一jsonschema声明。目标机全量验证待本轮归档；不改变执行器依赖。 不将代理检查改标人工验收。

@@ -201,3 +201,11 @@ A 的中断与清理状态有测试，正式性能基线还需要足够实验设
 - 修改范围：pyproject.toml、.github/workflows/ci.yml、src/report/html.py、tests/test_member_a.py。run 1.1 / config 1.0 不变，无消费者迁移。
 - 验证：Ruff0.17.5默认E4/E7/E9/F规则通过；只删除一个未用import及将两个lambda机械改成def。本地29项20通过9跳过；因src改动，目标机全量验证在本轮证据记录中补齐，未据此宣称目标机通过。
 - 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。
+
+## 改进任务 18：复用report extra并加入开发检查（2026-11-17）
+
+角色：A 集成，用户授权按 tasklist 跨角色推进。基于 `f96e456`；分支 `improve/18-extras`，交付提交见该分支 Git HEAD（避免自引用哈希）。
+
+- 修改范围：pyproject.toml、docs/implementation/pipeline.md。run 1.1 / config 1.0 不变，无消费者迁移。
+- 验证：Windows3.12 editable安装.[dev]及pip check通过；report extra保留为唯一jsonschema声明。目标机全量验证待本轮归档；不改变执行器依赖。
+- 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。
