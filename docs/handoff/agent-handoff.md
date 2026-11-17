@@ -99,3 +99,11 @@ A 的中断与清理状态有测试，正式性能基线还需要足够实验设
 - 修改范围：docs/implementation/tool-comparison.md、docs/validation/comparison-validation.md、evidence/comparison/improve01-openeuler-20261117.tar.gz、evidence/comparison/SHA256SUMS。run 1.1 / config 1.0 不变，无消费者迁移。
 - 验证：干净源码 d8a331e：openEuler 29 项0跳过；默认完整流程18次；对照54次逐份SQLite/配额/清理通过；pip check通过。证据 evidence/comparison/improve01-openeuler-20261117.tar.gz。
 - 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。
+
+## 改进任务 3：评审三份材料导读（2026-11-17）
+
+角色：A 集成，用户授权按 tasklist 跨角色推进。基于 `4f8ca84cc54a75d38f45019354e54d871d7082f5`；分支 `improve/03-reviewers-guide`，交付提交见该分支 Git HEAD（避免自引用哈希）。
+
+- 修改范围：docs/reviewers-guide.md、README.md。run 1.1 / config 1.0 不变，无消费者迁移。
+- 验证：本地 Markdown 链接检查通过；导读正文为一张五行索引表。
+- 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。

@@ -104,3 +104,9 @@
 - 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/01-hyperfine`，基于 `6f6fb7d`。
 - 产物：docs/implementation/tool-comparison.md、docs/validation/comparison-validation.md、evidence/comparison/improve01-openeuler-20261117.tar.gz、evidence/comparison/SHA256SUMS。人工负责成员未填写。
 - 检查及限制：干净源码 d8a331e：openEuler 29 项0跳过；默认完整流程18次；对照54次逐份SQLite/配额/清理通过；pip check通过。证据 evidence/comparison/improve01-openeuler-20261117.tar.gz。 不将代理检查改标人工验收。
+
+### 2026-11-17 改进任务 3：评审三份材料导读
+
+- 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/03-reviewers-guide`，基于 `4f8ca84`。
+- 产物：docs/reviewers-guide.md、README.md。人工负责成员未填写。
+- 检查及限制：本地 Markdown 链接检查通过；导读正文为一张五行索引表。 不将代理检查改标人工验收。

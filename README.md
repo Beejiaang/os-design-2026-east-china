@@ -44,6 +44,8 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 
 ## 从这里开始
 
+[评审导读：三份必读材料与分类索引](docs/reviewers-guide.md)
+
 演示与人员复验：[答辩工作稿](demo/presentation/答辩初稿_20261117_v1.pptx)、[讲解与20问](demo/defense-notes.md)、[非实现者复验指南](docs/validation/peer-reproduction.md)、[复验交付包](demo/delivery/README.md)。本轮另在新源码检出和全新 venv 验证可编辑安装、29 项测试及三档小试，记录见 [安装复验](docs/validation/reproduction-validation.md)。这些代理操作仍不能代替人员交叉验收。
 
 目录入口：[文档分区导航](docs/README.md)、[工程文件存放规则](docs/project/directory-layout.md)。代码、负载、实验、协议、证据和演示材料分别放在对应目录；占位说明不代表 B/C 功能已完成。
