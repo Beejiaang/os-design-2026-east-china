@@ -147,3 +147,11 @@ A 的中断与清理状态有测试，正式性能基线还需要足够实验设
 - 修改范围：scripts/material_manifest.py、docs/validation/material-versions.md、docs/validation/improvement-p0-validation.md、evidence/improvement。run 1.1 / config 1.0 不变，无消费者迁移。
 - 验证：脚本源码a4f4c04；两次生成逐字节一致、冻结材料错误哈希夹具被拒绝；openEuler29项0跳过+完整流程18次+pip check通过。本地3.12纯测试20通过9跳过。见docs/validation/improvement-p0-validation.md。
 - 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。
+
+## 改进任务 9：GitLab 命名与描述文案草稿（2026-11-17）
+
+角色：A 集成，用户授权按 tasklist 跨角色推进。基于 `29b660f69748a6beac66ded3ed7ad91a5cabffa4`；分支 `improve/09-gitlab-copy`，交付提交见该分支 Git HEAD（避免自引用哈希）。
+
+- 修改范围：docs/project/platform-readiness.md。run 1.1 / config 1.0 不变，无消费者迁移。
+- 验证：核对用户提供技术方案第四部分本地缓存；必需五项字段齐全，保留人工填空；链接检查通过。
+- 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。

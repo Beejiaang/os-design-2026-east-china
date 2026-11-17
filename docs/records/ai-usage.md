@@ -140,3 +140,9 @@
 - 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/08-material-manifest`，基于 `1e1a83f`。
 - 产物：scripts/material_manifest.py、docs/validation/material-versions.md、docs/validation/improvement-p0-validation.md、evidence/improvement。人工负责成员未填写。
 - 检查及限制：脚本源码a4f4c04；两次生成逐字节一致、冻结材料错误哈希夹具被拒绝；openEuler29项0跳过+完整流程18次+pip check通过。本地3.12纯测试20通过9跳过。见docs/validation/improvement-p0-validation.md。 不将代理检查改标人工验收。
+
+### 2026-11-17 改进任务 9：GitLab 命名与描述文案草稿
+
+- 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/09-gitlab-copy`，基于 `29b660f`。
+- 产物：docs/project/platform-readiness.md。人工负责成员未填写。
+- 检查及限制：核对用户提供技术方案第四部分本地缓存；必需五项字段齐全，保留人工填空；链接检查通过。 不将代理检查改标人工验收。
