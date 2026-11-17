@@ -42,7 +42,7 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 | git_commit / git_dirty / runner_sha256 | 实验目录 Git 版本、未提交状态、执行器与采集器代码哈希 |
 | quota_percent / cpu_max / quota_verified | 请求配额、服务内实际限制、核验结果 |
 | visible_limits / parent_subtree_control | 服务内叶节点与全部可见祖先限制、父节点控制器启用状态 |
-| wall_seconds | 从启动负载到回收直接子进程的单调时钟耗时，秒 |
+| wall_seconds | worker 从初始 cpu.stat 后、服务内快照保存前计时，到负载等待及末次采样后的单调时钟耗时，秒；含区间内采集/等待开销 |
 | cpu_seconds | 已回收子进程的 user+system CPU 时间，秒 |
 | cpu_stat_before / after / delta | cgroup CPU 原始统计与差值；usage_usec、user_usec、system_usec、throttled_usec 单位微秒，nr_periods、nr_throttled 为计数；保留内核实际提供的键 |
 | stdout_sha256 | 标准输出 SHA256；输出含运行时长等非确定内容时不适合直接做历史比较 |
@@ -86,7 +86,7 @@ worker 测量后保持运行，直到被执行器回收或看门狗终止；该�
 
 无配额时 systemd 可能不为叶节点启用 CPU 控制器，此时叶节点 `cpu.max` 不存在；程序同时读取父节点 `cgroup.subtree_control` 来核验“未设置本地配额”，不会把缺失文件伪造为 max，也不把父级约束忽略。
 
-`wall_seconds` 包含启动和回收负载的开销；`cpu_seconds` 不包含 worker 自身，cgroup 差值包含采样间隔内的 worker 开销。超时情况下尚未回收的后代 CPU 可能不计入 wait 统计，以 cgroup 差值和明确的 timeout 状态保留证据。首版以单进程负载为目标，不给多进程 CPU 归属保证。
+`wall_seconds` 包含初始 cpu.stat 之后的服务内快照/started.json 保存、文件打开、进程启动、等待/回收及末次采样开销；`cpu_seconds` 不包含 worker 自身，cgroup 差值包含采样间隔内的 worker 开销。这是对现有计时点的文档细化，未改变原始数据或执行器实现。超时情况下尚未回收的后代 CPU 可能不计入 wait 统计，以 cgroup 差值和明确的 timeout 状态保留证据。首版以单进程负载为目标，不给多进程 CPU 归属保证。
 
 临时服务只继承 systemd 用户管理器环境及显式 PYTHONPATH，不保证继承调用终端的所有环境变量。需要固定的随机种子、语言和线程数应由负载/启动命令明确设置并纳入输入标识。日志写到磁盘，不设容量上限，应使用受控负载。
 

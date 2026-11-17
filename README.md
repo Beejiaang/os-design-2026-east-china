@@ -17,6 +17,12 @@ python3 experiments/run_pipeline.py --output results/group-first
 
 历史比较仅输出探索性阈值信号及无法比较原因；未验收统计准确率，不把 `no_threshold_signal` 解释为“无退化”。已知变慢变体可加 `--passes 2`，结果保持一致，工作量明确增加。
 
+## 实测对照与规则边界
+
+已在 openEuler 完成本队与 GNU time + systemd-run 的 36 次正常任务对照，以及健康复测/额外 5%、15%、25% 工作量的 48 次规则实验。最终 29 项目标机测试全部通过；每份输出均独立校验，预热单列排除。方法、量化表和底层工具贡献见 [同类工具实测说明](docs/implementation/tool-comparison.md)，版本与原始证据见 [扩展验证](docs/validation/comparison-validation.md)。
+
+新增“阈值敏感”展示只描述已观察范围是否跨阈值，不改变原 15% 中位数规则，不是置信区间。本队与原生命令的计时范围/精度不同，不能按耗时表给工具排速度名次。代码仍在本地分支，远端/PR 状态见交接。
+
 ## 运行成员 A 的核心
 
 在支持 cgroup v2 和 systemd 用户服务的 Linux 中，从项目根目录执行：
@@ -36,7 +42,7 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 
 目录入口：[文档分区导航](docs/README.md)、[工程文件存放规则](docs/project/directory-layout.md)。代码、负载、实验、协议、证据和演示材料分别放在对应目录；占位说明不代表 B/C 功能已完成。
 
-使用 Agent 开发的队友先读 **[AGENTS.md](AGENTS.md)**，再看 **[统一口径](docs/project/project-contract.md)**、**[数据协议](docs/contracts/data-contract.md)** 和 **[角色交接/可复制启动任务](docs/handoff/agent-handoff.md)**。A 原集成分支是 `feat/member-a-runner`；新增全链路在本地 `feat/bc-end-to-end`，推送/PR/合并状态见交接，不默认远端已包含它。
+使用 Agent 开发的队友先读 **[AGENTS.md](AGENTS.md)**，再看 **[统一口径](docs/project/project-contract.md)**、**[数据协议](docs/contracts/data-contract.md)** 和 **[角色交接/可复制启动任务](docs/handoff/agent-handoff.md)**。A 原集成分支是 `feat/member-a-runner`，首轮全链路分支为 `feat/bc-end-to-end`，最新对照/诊断在本地 `feat/b-comparison-validation`；推送/PR/合并状态见交接，不默认远端已包含它。
 
 1. 阅读 **[三人分工与阶段验收说明](docs/project/work-allocation.md)**：A 系统与集成、B 负载与实验、C 分析与报告，含课程关联、接口和验收条件。
 2. 使用 **[提交清单](docs/project/submission-checklist.md)** 检查工程、文档、测试、视频、来源许可和官方平台提交；勾选须附证据。
