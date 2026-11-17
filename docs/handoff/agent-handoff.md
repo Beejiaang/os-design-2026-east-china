@@ -269,3 +269,11 @@ A 的中断与清理状态有测试，正式性能基线还需要足够实验设
 ### 任务14目标机验收补记
 
 干净源码`0be73a7`：openEuler 36项测试0跳过、默认18次完整流程、Ruff与pip check均通过，末尾临时单元为零。真实日志、命令及证据见[P1验证](../validation/improvement-p1-validation.md)，原始归档未重写。协议/迁移以数据协议为准；仅本地提交，人员验收待人工。
+
+## 改进任务 20：变更日志与候选标签建议（2026-11-17）
+
+角色：A 集成，用户授权按 tasklist 跨角色推进。基于 `19b223f17f343596f6a2f5b17b6f520d2a96f7ce`；分支 `improve/20-changelog`，交付提交见该分支 Git HEAD（避免自引用哈希）。
+
+- 修改范围：CHANGELOG.md、README.md、docs/project/platform-readiness.md。run 1.1 / config 1.0 不变，无消费者迁移。
+- 验证：读取Git历史、pyproject旧版本及现有注释标签核对；本地Markdown链接检查通过。仅文档变更，不重跑目标机测试，不创建或修改标签。
+- 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。

@@ -93,3 +93,5 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 最近更新：**2026-11-17（Asia/Shanghai）**。赛事动态以官方平台最新公告为准。
 
 术语统一入口：[资源、计时与完成状态](docs/contracts/glossary.md)。
+
+版本变化：[CHANGELOG](CHANGELOG.md)；候选标签与开发快照分别说明，不代表正式发布。
