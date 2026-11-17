@@ -94,3 +94,5 @@ hyperfine 使用 --shell=none 调用本队 Python 适配器，每次建立独立
 | 本项目 d8a331e | 执行采集、原始证据、功能校验、比较门槛、离线报告 | 以上第三方底层能力按来源披露，不认领为原创 |
 
 本队 worker 计时包含快照等额外范围；GNU time 内部计时与 hyperfine 外部计时范围不同，外部差值不能解释为算法加速。命令、全部逐次记录与新一轮完整流程见[任务1验证](../validation/comparison-validation.md#hyperfine-新增目标机验证任务-1)。
+
+术语统一入口：[资源、计时与完成状态](../contracts/glossary.md)。

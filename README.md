@@ -91,3 +91,5 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 本仓库原创文档采用 [CC BY-SA 4.0](LICENSE)，程序代码采用 [MIT](LICENSE-CODE)。第三方资料及引用内容保留原许可。
 
 最近更新：**2026-11-17（Asia/Shanghai）**。赛事动态以官方平台最新公告为准。
+
+术语统一入口：[资源、计时与完成状态](docs/contracts/glossary.md)。

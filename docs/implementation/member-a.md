@@ -99,3 +99,5 @@ worker 测量后保持运行，直到被执行器回收或看门狗终止；该�
 机制参考：[Linux cgroup v2 文档](https://docs.kernel.org/admin-guide/cgroup-v2.html)、[systemd 资源控制文档](https://www.freedesktop.org/software/systemd/man/latest/systemd.resource-control.html)。文档可能描述较新版本，实际验收以目标机测试结果为准。
 
 实测记录见 [docs/validation/member-a-validation.md](../validation/member-a-validation.md)。B/C 模块及非实现者复现、C 报告与真实输出的一致性审核仍需在对应模块交付后完成。
+
+术语统一入口：[资源、计时与完成状态](../contracts/glossary.md)。

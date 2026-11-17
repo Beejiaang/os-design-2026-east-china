@@ -163,3 +163,9 @@
 - 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/15-readme-status`，基于 `0df6e0d`。
 - 产物：README.md。人工负责成员未填写。
 - 检查及限制：文档事实核对与本地链接检查；未更改运行代码。 不将代理检查改标人工验收。
+
+### 2026-11-17 改进任务 16：资源计时和完成状态统一术语
+
+- 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/16-glossary`，基于 `be85834`。
+- 产物：docs/contracts/glossary.md、README.md、docs/implementation/pipeline.md、docs/implementation/member-a.md、docs/implementation/system-design.md、docs/implementation/tool-comparison.md。人工负责成员未填写。
+- 检查及限制：文档事实核对与本地链接检查；未更改运行代码。 不将代理检查改标人工验收。

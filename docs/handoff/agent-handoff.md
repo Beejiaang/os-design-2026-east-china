@@ -177,3 +177,11 @@ A 的中断与清理状态有测试，正式性能基线还需要足够实验设
 - 修改范围：README.md。run 1.1 / config 1.0 不变，无消费者迁移。
 - 验证：文档事实核对与本地链接检查；未更改运行代码。
 - 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。
+
+## 改进任务 16：资源计时和完成状态统一术语（2026-11-17）
+
+角色：A 集成，用户授权按 tasklist 跨角色推进。基于 `be858343a17f176814fba21352201f12a2a267a9`；分支 `improve/16-glossary`，交付提交见该分支 Git HEAD（避免自引用哈希）。
+
+- 修改范围：docs/contracts/glossary.md、README.md、docs/implementation/pipeline.md、docs/implementation/member-a.md、docs/implementation/system-design.md、docs/implementation/tool-comparison.md。run 1.1 / config 1.0 不变，无消费者迁移。
+- 验证：文档事实核对与本地链接检查；未更改运行代码。
+- 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。
