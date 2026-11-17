@@ -8,6 +8,8 @@
 | 数据协议 | [数据协议](contracts/data-contract.md) | 字段、状态、单位、版本和恢复语义；机器格式在 schemas/ |
 | 实现说明 | [成员 A](implementation/member-a.md)、[聚合与报告流程](implementation/pipeline.md)、[系统设计](implementation/system-design.md)、[同类工具对照](implementation/tool-comparison.md) | 执行器、独立校验、分析、离线报告、贡献边界 |
 | 验证记录 | [A 的实测记录](validation/member-a-validation.md)、[完整流程验证](validation/pipeline-validation.md)、[扩展对照与边界验证](validation/comparison-validation.md) | 对应提交、环境、命令与原始证据 |
+| 安装与人员复验 | [新环境安装记录](validation/reproduction-validation.md)、[人员复验指南](validation/peer-reproduction.md)、[空白模板](validation/peer-review-template.md) | 区分代理安装检查与真实非实现者验收 |
+| 演示交付 | [十页答辩稿](../demo/presentation/答辩初稿_20261117_v1.pptx)、[讲解与20问](../demo/defense-notes.md)、[复验包](../demo/delivery/README.md) | 演示、讲解与交接，不代表正式视频或平台提交 |
 | Agent 交接 | [当前状态与角色启动任务](handoff/agent-handoff.md) | A/B/C 输入输出、可复制任务和交接模板 |
 | 过程与来源 | [AI 使用记录](records/ai-usage.md)、[资料来源](records/sources.md) | 过程披露、来源与限制 |
 | 历史资料 | [旧计划](history/project-plan.md)、[选题分析](history/topic-analysis.md)、[讨论模板](history/team-review.md) | 保留决策过程，不覆盖当前计划和协议 |

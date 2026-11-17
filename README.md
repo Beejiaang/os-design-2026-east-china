@@ -40,9 +40,11 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 
 ## 从这里开始
 
+演示与人员复验：[答辩工作稿](demo/presentation/答辩初稿_20261117_v1.pptx)、[讲解与20问](demo/defense-notes.md)、[非实现者复验指南](docs/validation/peer-reproduction.md)、[复验交付包](demo/delivery/README.md)。本轮另在新源码检出和全新 venv 验证可编辑安装、29 项测试及三档小试，记录见 [安装复验](docs/validation/reproduction-validation.md)。这些代理操作仍不能代替人员交叉验收。
+
 目录入口：[文档分区导航](docs/README.md)、[工程文件存放规则](docs/project/directory-layout.md)。代码、负载、实验、协议、证据和演示材料分别放在对应目录；占位说明不代表 B/C 功能已完成。
 
-使用 Agent 开发的队友先读 **[AGENTS.md](AGENTS.md)**，再看 **[统一口径](docs/project/project-contract.md)**、**[数据协议](docs/contracts/data-contract.md)** 和 **[角色交接/可复制启动任务](docs/handoff/agent-handoff.md)**。A 原集成分支是 `feat/member-a-runner`，首轮全链路分支为 `feat/bc-end-to-end`，最新对照/诊断在本地 `feat/b-comparison-validation`；推送/PR/合并状态见交接，不默认远端已包含它。
+使用 Agent 开发的队友先读 **[AGENTS.md](AGENTS.md)**，再看 **[统一口径](docs/project/project-contract.md)**、**[数据协议](docs/contracts/data-contract.md)** 和 **[角色交接/可复制启动任务](docs/handoff/agent-handoff.md)**。A 原集成分支是 `feat/member-a-runner`，首轮全链路为 `feat/bc-end-to-end`，对照/诊断为 `feat/b-comparison-validation`，当前材料/交接在本地 `feat/c-defense-reproduction`；推送/PR/合并状态见交接，不默认远端已包含它。
 
 1. 阅读 **[三人分工与阶段验收说明](docs/project/work-allocation.md)**：A 系统与集成、B 负载与实验、C 分析与报告，含课程关联、接口和验收条件。
 2. 使用 **[提交清单](docs/project/submission-checklist.md)** 检查工程、文档、测试、视频、来源许可和官方平台提交；勾选须附证据。

@@ -2,7 +2,9 @@
 
 日期：2026-11-17。先读根目录 `AGENTS.md`、[统一口径](../project/project-contract.md)、[数据协议](../contracts/data-contract.md)。本页是接续入口；实测细节和 commit 以验证记录与 Git 为准。
 
-**当前接续：`feat/b-comparison-validation`。** 用户要求继续推进同类对照与规则扩展。此分支基于 `d649f7f`，测量源码 `8d76aed`，最终派生诊断/报告源码 `25b7f32`；29 项目标机测试通过，新增 36 次原生对照及 48 次边界实验。见 [对照方法](../implementation/tool-comparison.md)、[扩展验证](../validation/comparison-validation.md)。未推送/建 PR/合并。
+**当前接续：`feat/c-defense-reproduction`。** 基于 `57c865e`，本轮没有改运行实现。新增十页答辩工作稿、讲解与20问、人员复验指南/空白模板和固定源码复验包；新源码检出/全新 venv 完成可编辑安装、29 项测试及三档小试，见 [安装复验](../validation/reproduction-validation.md)。尚未非实现者验收、正式视频/平台提交或推送/PR/共享合并。
+
+上轮对照分支 `feat/b-comparison-validation` 基于 `d649f7f`，测量源码 `8d76aed`，最终派生诊断/报告源码 `25b7f32`；29 项目标机测试通过，新增 36 次原生对照及 48 次边界实验。见 [对照方法](../implementation/tool-comparison.md)、[扩展验证](../validation/comparison-validation.md)。当前复验包故意固定该轮完整快照 57c865e，材料另行标工作稿。
 
 上一轮新增 B/C 与集成代码在本地 `feat/bc-end-to-end`，基于 `a0d6edd`；不要从零重写负载和报告。初轮负载测量源码为 `2ac22b7`；元数据异常处理修正与分析为 `1028dd8`，证据见 [初轮集成验证](../validation/pipeline-validation.md)。原始数据提交不改写。
 
@@ -26,7 +28,7 @@ git switch -c feat/b-group-aggregation origin/feat/member-a-runner
 |---|---|---|---|
 | A | 执行、采集、异常/恢复、run 1.1；已接 B/C，核验最终记录和清理 | 配合非实现者复验；审查新接口变动 | 不代替人员交叉验收或整阶段验收 |
 | B | 固定输入/独立校验；首轮 54 次、本轮 84 次目标机执行；GNU time+systemd-run 正常场景对照；额外 5/15/25% 样本 | 非实现者复验、更多机器/波动样本、其他完整框架对照评估 | 不宣称真实生产退化事故、普遍准确率或已覆盖全部同类工具 |
-| C | 结构/完整性、排除原因、配置对照、历史前提、探索性信号、范围敏感性、离线 HTML 追溯 | 浏览器视觉核验、更广规则验收、最终视频/PPT | 范围敏感性不是置信区间；代理实测不等于人工作业验收 |
+| C | 分析/报告、范围敏感性、十页可编辑答辩稿与备注、讲解20问、人员复验指南/包 | 浏览器视觉核验、更广规则验收、正式视频与最终答辩规格 | PPT 是工作稿且未原生 PowerPoint 验收；代理实测不等于人工作业验收 |
 
 A 的中断与清理状态有测试，正式性能基线还需要足够实验设计、B 的功能验证和 C 的规则。系统异常测试不替代负载测试。
 
