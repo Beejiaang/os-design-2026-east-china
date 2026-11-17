@@ -55,7 +55,7 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 1. 阅读 **[三人分工与阶段验收说明](docs/project/work-allocation.md)**：A 系统与集成、B 负载与实验、C 分析与报告，含课程关联、接口和验收条件。
 2. 使用 **[提交清单](docs/project/submission-checklist.md)** 检查工程、文档、测试、视频、来源许可和官方平台提交；勾选须附证据。
 3. 在 [讨论 Issue](https://github.com/Beejiaang/os-design-2026-east-china/issues/1) 保留问题与依据，按 [协作说明](CONTRIBUTING.md) 提交修改；姓名、实际投入与完成状态由团队补充。
-4. 历史资料：[10 月版学习与计划](docs/history/project-plan.md)、[八类选题分析](docs/history/topic-analysis.md)、[队员评价模板](docs/history/team-review.md)。EulerLens 是历史 B 方向候选。
+4. 历史资料：[开发时间线](docs/history/timeline.md)、[10 月版学习与计划](docs/history/project-plan.md)、[八类选题分析](docs/history/topic-analysis.md)、[队员评价模板](docs/history/team-review.md)。EulerLens 是历史 B 方向候选。
 
 **当前内部节点（2026-11-15 重排）：**11/22 完成环境与手动实验，11/29 完成可演示初稿，12/06 核心功能冻结，12/13 实验与主要材料齐全，12/20 完成正式提交核验。按已发章程的 **12/24 作品截止**倒排，后续以官方通知为准。
 

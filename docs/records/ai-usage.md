@@ -110,3 +110,9 @@
 - 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/03-reviewers-guide`，基于 `4f8ca84`。
 - 产物：docs/reviewers-guide.md、README.md。人工负责成员未填写。
 - 检查及限制：本地 Markdown 链接检查通过；导读正文为一张五行索引表。 不将代理检查改标人工验收。
+
+### 2026-11-17 改进任务 4：可追溯开发时间线
+
+- 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/04-timeline`，基于 `31f6f28`。
+- 产物：docs/history/timeline.md、README.md。人工负责成员未填写。
+- 检查及限制：git log --all 核对日期和提交；本地文档与 evidence 链接检查通过。 不将代理检查改标人工验收。
