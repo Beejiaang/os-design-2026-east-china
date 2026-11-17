@@ -44,6 +44,8 @@ CLI 退出 0 表示实验完整且有可用样本，不表示历史无退化。C
 
 历史比较逐条调用 `runner.compatibility.check_compatibility`，允许 workload_version 改变但要求输出、输入、同档资源、环境与执行器兼容。每边至少五个不同且互不重叠的已校验样本。规则预设为中位数耗时比大于 1.15 时 `slowdown_needs_review`，否则 `no_threshold_signal`；前提或样本不足为 `unable_to_compare`。这是探索性复核信号，15% 和五次均未经过独立误报/漏报验收，不是统计显著性检验，不宣称“无退化”、准确率或根因。
 
+受控变慢样本可运行 `python3 experiments/run_pipeline.py --output results/group-slow --passes 2`。该参数令负载完整处理同一 CSV 两次，仅输出最后一次相同结果；版本标识包含文件哈希和 passes。它是明确设计的变慢校验变体，不能当作真实版本优化/退化事故，也不是故障注入伪造计时。与正常 `--passes 1` 的独立复测分别收集，用于检查既定复核规则的行为。
+
 ## 下一阶段验收
 
 1. 在目标 openEuler 的干净提交运行完整 pipeline，保留所有测量与每次正确性结果。

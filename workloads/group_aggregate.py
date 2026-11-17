@@ -26,5 +26,9 @@ def aggregate(path):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("input")
+    parser.add_argument("--passes", type=int, choices=range(1, 5), default=1,
+                        help="Controlled extra full passes for known-slow validation")
     args = parser.parse_args()
-    print(json.dumps(aggregate(args.input), separators=(",", ":")))
+    for _ in range(args.passes):
+        result = aggregate(args.input)
+    print(json.dumps(result, separators=(",", ":")))

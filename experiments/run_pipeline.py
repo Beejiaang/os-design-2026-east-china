@@ -23,6 +23,8 @@ def main():
     parser.add_argument("--repeats", type=int, default=5)
     parser.add_argument("--warmups", type=int, default=1)
     parser.add_argument("--timeout", type=float, default=60)
+    parser.add_argument("--passes", type=int, choices=range(1, 5), default=1,
+                        help="Controlled slowdown variant; identical functional output")
     args = parser.parse_args()
     validate({"command": ["placeholder"], "workload_version": "preflight", "input_id": "preflight",
               "repeats": args.repeats, "warmups": args.warmups, "timeout_seconds": args.timeout})
@@ -36,8 +38,9 @@ def main():
     (root / "input.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
     (root / "reference.json").write_text(json.dumps(expected, indent=2), encoding="utf-8")
     workload = ROOT / "workloads" / "group_aggregate.py"
-    config = {"command": [sys.executable, str(workload), str(dataset)], "cwd": str(ROOT),
-              "workload_version": "group-aggregate-sha256:" + sha256(workload),
+    workload_hash = sha256(workload)
+    config = {"command": [sys.executable, str(workload), str(dataset), "--passes", str(args.passes)], "cwd": str(ROOT),
+              "workload_version": "group-aggregate-sha256:" + workload_hash + ":passes=" + str(args.passes),
               "input_id": "lcg32-csv-v1:sha256:" + metadata["sha256"],
               "quotas": [None, 100, 50], "repeats": args.repeats,
               "warmups": args.warmups, "order_seed": args.seed, "timeout_seconds": args.timeout}
@@ -46,7 +49,7 @@ def main():
         rows = experiment(config, root / "experiment")
     finally:
         restore_handlers(previous)
-    unchanged = sha256(dataset) == metadata["sha256"] and sha256(workload) == config["workload_version"].split(":")[-1]
+    unchanged = sha256(dataset) == metadata["sha256"] and sha256(workload) == workload_hash
     checks = {}
     for row in rows:
         output = root / "experiment" / row["run_id"] / "stdout.log"
