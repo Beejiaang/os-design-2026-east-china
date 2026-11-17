@@ -32,4 +32,6 @@
 
 正常Git凭据已推送feat/a-release-preparation与正式稿086aff7。原A的[PR2](https://github.com/Beejiaang/os-design-2026-east-china/pull/2)按expected-head约束普通merge成功，main合并提交db557e73b39fe804894e63fefb5338aa6bf66d2c；原始分支与提交历史保留。完整候选集成PR与最终包另续记实际远端状态，不强推。
 
+全链路已建[PR3](https://github.com/Beejiaang/os-design-2026-east-china/pull/3)，以该PR实际状态核验合并。候选ZIP固定30e6a31（运行逻辑与086aff7无差异），所有112个内容文件哈希通过，bundle实际新克隆干净，包SHA256与使用说明见[交付入口](../../demo/delivery/README.md)。本轮8个原始证据归档哈希与3个材料哈希通过，37份Markdown本地链接通过。对当前文件及ZIP/Office/证据归档进行凭据标记与敏感文件名检查，未发现匹配；这是有限模式检查，不声称证明不存在一切秘密。未纳入work、私钥、虚拟机或原始赛事PDF。
+
 [平台准备](../project/platform-readiness.md)保存本赛道实际入口与公开时间依据。队名、真实成员/贡献、指导教师、报名审核与官方GitLab项目未提供；不能替这些事实勾选。人工交叉验收与正式视频按本轮范围排除。GitHub发布与候选包不能代替GitLab和赛事平台接收。

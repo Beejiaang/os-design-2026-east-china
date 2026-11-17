@@ -6,6 +6,10 @@
 
 `scripts/build_release.py --output work/候选包.zip --wheels work/wheels`从干净已提交源码构建新的候选ZIP，附Git历史bundle、源码快照、材料、证据、离线依赖及逐文件MANIFEST。它排除嵌套ZIP和未跟踪工作文件，核验包内所有字节；不代替赛事提交与人工验收。源代码运行逻辑对应2697479，冻结完整复验提交086aff7，此后只有材料与记录补充。
 
+实际[候选交付包](候选交付_20261117_RC1.zip)为20,478,059字节，源码快照30e6a311025600b78f10de98d3e2d5ae35e9173e，112个内容文件加MANIFEST。SHA256为41b626d51a834505a753896e5e699f617bef32476afa5bf55f1ff2de8acbd60b。包内Git bundle已实际克隆到新目录，提交与干净状态核对通过；所有包内文件逐个SHA256通过。源码快照与086aff7在src/workloads/experiments/schemas/tests/pyproject.toml无差异，未把材料更新冒充新一轮运行。
+
+本ZIP固定上述内容，后续仓库提交补充打包与PR记录；不把ZIP自身递归纳入其源快照。完整集成入口为[PR3](https://github.com/Beejiaang/os-design-2026-east-china/pull/3)，是否已合并以PR实际状态为准，GitLab及赛事接收仍待确认。
+
 ## 较早的人员复验快照
 
 `peer-review-kit-20261117.zip` 为当前人工复验准备的本地交付包，不代表已经发送给队友或完成验收。

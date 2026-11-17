@@ -1,5 +1,7 @@
 # 当前候选交付更新
 
+完整集成入口：[PR3](https://github.com/Beejiaang/os-design-2026-east-china/pull/3)；原A的PR2已合并。候选ZIP、七页Word/PDF、十页PPT及原始证据见[交付入口](../../demo/delivery/README.md)，源码快照30e6a31，目标机冻结复验086aff7，29项0跳过与18次完整流程通过。后续从已合并的main或当前集成分支接续，先fetch并核对PR实际状态；不要照下文历史A首轮启动模板重复实现B/C。
+
 2026-11-17：用户要求除人工验收和视频演示外继续完成其余事项。本轮角色为A集成，范围覆盖正式技术稿、PPT原生检查、冻结复验、交付包与仓库整合。当前分支feat/a-release-preparation，基于2697479；运行逻辑未改，旧分支和原始记录保留。正式设计稿与平台缺项见[候选验证](../validation/release-validation.md)、[平台准备](../project/platform-readiness.md)。下文历史“未推送”“PPT未原生检查”以本段及候选验证为准；人员与视频未代办。
 
 # Agent 交接与当前状态
