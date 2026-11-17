@@ -6,7 +6,7 @@
 
 - 本地开发分支：`feat/bc-end-to-end`，基于 A 集成分支 `a0d6edd`；保留原 A 工程与历史。
 - 负载测量源码提交：`2ac22b71b43a9effefeedd550230347873bec38a`。最终分析修正提交：`1028dd8`（修复元数据为数组时的异常处理）；在此提交重算同一批原始记录并重跑测试，没有重标或改写原始测量的 Git 提交。
-- openEuler 24.03 LTS-SP4 / x86_64 / 内核 `6.6.0-159.4.3.154.oe2403sp4.x86_64` / Python 3.11.6 / 4 vCPU；从 Git bundle 独立干净检出到 `/home/holo/projects/osdesign-integration-20261117`，没有覆盖原来的 A 开发目录。
+- openEuler 24.03 LTS-SP4 / x86_64 / 内核 `6.6.0-159.4.3.154.oe2403sp4.x86_64` / Python 3.11.6 / 4 vCPU；从 Git bundle 独立干净检出到 `/home/holo/projects/osdesign-integration-20261117` 复验。交付后另在原开发目录干净检查通过的前提下，切至新分支 feat/bc-end-to-end；原 A 分支和实验记录保留。
 - Ubuntu 26.04.1 WSL / 内核 `6.18.58.1-microsoft-standard-WSL2` / Python 3.14.4：另在 `/home/holo/osdesign-bc-20261117` 干净检出验证。两环境性能数据分别保存、不混作基线。
 - Windows Python 3.13.9：普通测试 24 项中 15 通过、9 项系统测试按预期跳过；不当作目标系统测试通过。
 - 分析使用 jsonschema。openEuler 实装 jsonschema 4.26.0、attrs 26.1.0、jsonschema-specifications 2025.9.1、referencing 0.37.0、rpds-py 2026.9.1、typing_extensions 4.16.0；冻结清单见证据。执行器依然仅使用标准库。

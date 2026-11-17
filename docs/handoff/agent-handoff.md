@@ -4,6 +4,8 @@
 
 **本轮用户授权跨角色推进。** 新增 B/C 与集成代码在本地 `feat/bc-end-to-end`，基于 `a0d6edd`；尚未推送/建 PR/合并。后续 Agent 先检查此分支和 [集成验证](../validation/pipeline-validation.md)，不要照旧模板从零重写负载和报告。负载测量源码为 `2ac22b7`；后续元数据异常处理修正与最终分析为 `1028dd8`，原始数据提交不改写。
 
+Windows 原工程与 openEuler 原开发目录 `/home/holo/projects/os-design-2026-east-china` 均已切至 `feat/bc-end-to-end`；原 A 分支保留。真实实验位于独立复验目录 `/home/holo/projects/osdesign-integration-20261117/results`，共享副本在 evidence/integration；不要将复验检出当作另一份主工程。
+
 ## 先找到正确代码
 
 A 首轮实现和协作规则的集成分支为 `feat/member-a-runner`。未合入 main 时，直接从 main 开始会缺少 runner/collector。先 fetch、查看该分支和 PR，再按角色创建自己的分支：
