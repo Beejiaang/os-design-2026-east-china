@@ -1,6 +1,6 @@
 # 材料、版本与 SHA256 对应表
 
-生成时 Git HEAD：`373209f6ddcc1b37b66a4ab8be525c8c2fb79ace`；分支：`improve/09-gitlab-copy`。
+生成时 Git HEAD：`be348d2e86a7b1cb9445debe01ec1ef4fea01148`；分支：`improve/10-scale-sweep`。
 
 生成时除本表外的改动路径：[]。
 
@@ -18,6 +18,8 @@ RC1 声明实现快照：`2697479`；测量来源：`2ac22b7, 8d76aed`；分析�
 | [evidence/comparison/comparison-openeuler-20261117.tar.gz](../../evidence/comparison/comparison-openeuler-20261117.tar.gz) | `57c865e3f7298b1ac84dd9efe2756abf7dbd443b` | committed | `4cd8a2efc8211a3c8232826f2c9754e5a608e2735442ad3a5f8dbb1b6de25cf5` |
 | [evidence/comparison/improve01-openeuler-20261117.tar.gz](../../evidence/comparison/improve01-openeuler-20261117.tar.gz) | `4f8ca84cc54a75d38f45019354e54d871d7082f5` | committed | `c16fdd557ee061c3be25f19bb72afd64a1d844b986250e4d7142e7862681ce52` |
 | [evidence/improvement/improve-p0-openeuler-20261117.tar.gz](../../evidence/improvement/improve-p0-openeuler-20261117.tar.gz) | `29b660f69748a6beac66ded3ed7ad91a5cabffa4` | committed | `6d6eed19561c7e31cf7374c33a5200701cee1056ceb7587bf65a1d8579327a8f` |
+| [evidence/improvement/p1-final-openeuler-20261117.tar.gz](../../evidence/improvement/p1-final-openeuler-20261117.tar.gz) | `7cc4042bca92bc0d7bebf5e2f7ba47526694dac5` | committed | `607c013dcd73c88ea1a1ad389df2d4761a7023d11c6db04c512a7fa9d0a0a1c1` |
+| [evidence/improvement/p1-staged-openeuler-20261117.tar.gz](../../evidence/improvement/p1-staged-openeuler-20261117.tar.gz) | `7cc4042bca92bc0d7bebf5e2f7ba47526694dac5` | committed | `00a1e3f1f53fb77477da95dfa13a617c220fefd59fabaa498d9458d087046cd6` |
 | [evidence/integration/bc-openeuler-20261117.tar.gz](../../evidence/integration/bc-openeuler-20261117.tar.gz) | `537027ea98c7446f111455a8257beb166524c6c0` | committed | `f92c16f2f72681ca8c560339394d82091885246a270a694e91dd681713e2e6a8` |
 | [evidence/integration/bc-wsl-20261117.tar.gz](../../evidence/integration/bc-wsl-20261117.tar.gz) | `537027ea98c7446f111455a8257beb166524c6c0` | committed | `1c07b283fe1930c3c05b1225035fb7c41bddacc9bff3530f650186ac55dcafec` |
 | [evidence/member-a/openeuler-20261116.tar.gz](../../evidence/member-a/openeuler-20261116.tar.gz) | `de34b8ca107934758ac1655a214b5c0db15eba05` | committed | `5e619dcf3f272250bc133b4b70aacda66a66b4dd2d4c113e7079cb7d17a60405` |
