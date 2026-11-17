@@ -14,10 +14,22 @@
 
 ## 冻结源码复验
 
-在本记录的下一次证据更新中填写实际冻结提交、目标环境、命令、测试和完整流水线结果；尚未执行的检查不写为通过。
+实际冻结提交为086aff71451ffaa4bd15a967a61984e445c5a720。2026-11-17 17:15:46—17:16:22北京时间，在全新检出`/home/holo/projects/osdesign-release-20261117`及全新venv完成离线可编辑安装。系统仍为openEuler24.03 LTS-SP4、原内核与Python3.11，依赖冻结见归档。
+
+实际执行：`pip install -e '.[report]'`（PIP_NO_INDEX=1与既有wheel目录）、`pip check`、`python -m runner doctor`、`PYTHONPATH=src OSDESIGN_INTEGRATION=1 python -m unittest discover -s tests -v`、`python experiments/run_pipeline.py --output results/release`及`python -m report results/release/experiment --output results/release/recomputed.html`。
+
+29项测试全部通过，0跳过；默认200万行完整流程18次均成功，输出独立校验、实际配额和清理通过；15条非预热、3条预热排除。最终schema验证18条通过，完整性issues为空，各档五条可比，重算摘要与原汇总逐档一致。Git开始/结束均干净，所有记录保留冻结提交；结束时osdesign-*临时服务0个。
+
+| 本轮配额 | 非预热数 | wall中位数秒 | CPU中位数秒 |
+|---|---:|---:|---:|
+| null | 5 | 0.815700438 | 0.773123 |
+| 100% | 5 | 0.815819821 | 0.770032 |
+| 50% | 5 | 1.517467352 | 0.775262 |
+
+原始[归档](../../evidence/release/release-openeuler-20261117.tar.gz)SHA256为463450c186a88cb59e3ef3b04dafa40fc87613cc5977e345fa1b4ab36f920b86；[二次核对](../../evidence/release/audit.json)保留schema、输出哈希、计数和摘要证据。大CSV按固定参数/哈希复建，归档不含该文件；其余原始路径未重写。此后追加验证文档/包不修改运行代码，不将这18次重标到后续提交；本轮仍不是人工或第二台机器验收。
 
 ## 发布与外部条件
 
-正常Git凭据已推送feat/a-release-preparation初始快照2697479。完整候选稿后续普通push、PR和合并分别记录实际SHA。旧分支与提交历史保留，不强推。
+正常Git凭据已推送feat/a-release-preparation与正式稿086aff7。原A的[PR2](https://github.com/Beejiaang/os-design-2026-east-china/pull/2)按expected-head约束普通merge成功，main合并提交db557e73b39fe804894e63fefb5338aa6bf66d2c；原始分支与提交历史保留。完整候选集成PR与最终包另续记实际远端状态，不强推。
 
 [平台准备](../project/platform-readiness.md)保存本赛道实际入口与公开时间依据。队名、真实成员/贡献、指导教师、报名审核与官方GitLab项目未提供；不能替这些事实勾选。人工交叉验收与正式视频按本轮范围排除。GitHub发布与候选包不能代替GitLab和赛事平台接收。

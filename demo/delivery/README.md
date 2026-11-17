@@ -1,5 +1,13 @@
 # 同伴复验交付包
 
+## 当前候选交付 RC1
+
+[设计与测试报告Word](设计与测试报告_RC1.docx)、[PDF](设计与测试报告_RC1.pdf)为七页正式技术稿，覆盖实现、功能/性能测试、同类工具和限制；[哈希与来源](release-manifest.json)、[冻结复验](../../docs/validation/release-validation.md)可追溯。PPT已完成代理原生PowerPoint逐页版式检查，人员验收与视频按用户要求排除。
+
+`scripts/build_release.py --output work/候选包.zip --wheels work/wheels`从干净已提交源码构建新的候选ZIP，附Git历史bundle、源码快照、材料、证据、离线依赖及逐文件MANIFEST。它排除嵌套ZIP和未跟踪工作文件，核验包内所有字节；不代替赛事提交与人工验收。源代码运行逻辑对应2697479，冻结完整复验提交086aff7，此后只有材料与记录补充。
+
+## 较早的人员复验快照
+
 `peer-review-kit-20261117.zip` 为当前人工复验准备的本地交付包，不代表已经发送给队友或完成验收。
 
 包中包含：
