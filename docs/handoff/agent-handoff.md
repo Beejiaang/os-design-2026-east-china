@@ -1,6 +1,6 @@
 # 最新接续：RC2材料同步
 
-2026-11-17，基于7ef8f88，当前串联分支improve/22-current-materials。9页报告Word/PDF和12页可编辑PPT已纳入P0/P1/P2；独立RC2 manifest保存哈希，RC1原文件/标签不变。详见[本轮核验](../validation/release-validation-rc2.md)及[交付入口](../../demo/delivery/README.md)。原测量源码bb288cb等分别注明，未重标为材料提交。
+2026-11-17，基于7ef8f88，当前串联分支improve/22-current-materials。9页报告Word/PDF和12页可编辑PPT已纳入P0/P1/P2；独立RC2 manifest保存哈希，RC1原文件/标签不变。最终RC2包固定源码`70580dc968edeba6e24cea14d240fdf45904d9a3`，157份文件哈希、新bundle克隆和双版本材料声明通过；报告9页、PPT12页。详见[本轮核验](../validation/release-validation-rc2.md)及[交付入口](../../demo/delivery/README.md)。原测量源码bb288cb等分别注明，未重标为材料提交。
 
 本轮不改运行代码，仅作者/打包/材料表工具及材料文档；未推送、未建PR、未合并、未创建标签，人员/视频/平台仍待完成。下方“旧RC1未重生成/材料未更新”为历史记录，以本段新增RC2材料为准，旧文件本身仍不覆盖。
 

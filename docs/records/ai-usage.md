@@ -244,3 +244,5 @@
 - 使用documents/pdf/presentations技能：bundled Python生成DOCX，render_docx因缺少LibreOffice失败；保留错误后通过已安装Office兼容接口导出WPS PDF，Poppler逐页检查并修正末页孤段。
 - Artifact Session构建与逐页渲染，修复图片嵌入、标签字号和字体声明；finalizer核对原生表格、图表与新字面数据工作簿、结构/字体并重新导入渲染。未声称原生PowerPoint已检查或保留来源公式。
 - 新manifest与旧RC1独立保存，拓展材料表读取多个声明，打包工具增加显式RC2标记。只改材料工具和文档，不改执行/分析逻辑，不冒充新目标机实测。
+
+- RC2最终候选包固定70580dc968edeba6e24cea14d240fdf45904d9a3，157项哈希、新克隆/材料表重跑通过；检查原生图表9个值与实测一致。修正正文Markdown工作树CRLF与Git LF的哈希差异，保留首次work试包，不将其当最终交付。新包43,825,302字节，无推送/PR/合并/tag或平台提交。

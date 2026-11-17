@@ -6,6 +6,14 @@ RC2是候选材料名称，未打新tag、未人工验收、未含正式视频�
 
 # 同伴复验交付包
 
+## RC2完整候选包
+
+[候选交付ZIP](候选交付_20261117_RC2.zip)，43,825,302字节，固定干净源码`70580dc968edeba6e24cea14d240fdf45904d9a3`，157份内容文件加MANIFEST，含源码Git bundle与Linux x86_64 CPython3.11报告依赖wheels。包内Git bundle已新克隆，精确提交与干净状态通过；每份文件SHA256、RC1/RC2两个声明清单与图表9个实测值均核对通过。
+
+SHA256：`eab420289e88867375f2c371ed9892d0903c4024566df4bbf51c18fb771cbab5`，另见[校验文件](候选交付_20261117_RC2.zip.sha256)。候选包源码的运行逻辑与bb288cb一致；打包后的仓库提交只补交付记录和ZIP，不重标测量提交。新包排除旧ZIP本身，Git bundle仍保留历史对象，不丢失开发过程。
+
+只支持源码/可编辑安装与report extra离线依赖；dev extra的Ruff未放进此wheels集合，离线开发检查需另行准备。不能将该包当成正式视频、人员验收或赛事接收。旧RC1的包及材料继续保留在下文。
+
 ## 当前候选交付 RC1
 
 [设计与测试报告Word](设计与测试报告_RC1.docx)、[PDF](设计与测试报告_RC1.pdf)为七页正式技术稿，覆盖实现、功能/性能测试、同类工具和限制；[哈希与来源](release-manifest.json)、[冻结复验](../../docs/validation/release-validation.md)可追溯。PPT已完成代理原生PowerPoint逐页版式检查，人员验收与视频按用户要求排除。

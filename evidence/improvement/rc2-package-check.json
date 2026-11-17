@@ -1,0 +1,10 @@
+{
+  "source_commit": "70580dc968edeba6e24cea14d240fdf45904d9a3",
+  "package_files": 157,
+  "all_package_hashes_passed": true,
+  "rc1_and_rc2_declarations_passed": true,
+  "bundle_clone_clean": true,
+  "chart_values_match_measured_summary": true,
+  "package_sha256": "eab420289e88867375f2c371ed9892d0903c4024566df4bbf51c18fb771cbab5",
+  "package_bytes": 43825302
+}

@@ -39,3 +39,17 @@ finalizer仅为新字面数据图表补充可编辑工作簿，不声称保留�
 旧RC1三个二进制声明哈希及原ZIP不变，已有evidence条目逐项校验。候选包构建以干净提交为准，源码与材料提交、原测量源码分别记录；新包不递归收集旧ZIP、工作缓存、凭据或虚拟机。
 
 人工复验、正式视频、团队/导师/报名事实、GitHub在线CI和官方GitLab/赛事接收仍未补齐。未推送、未建PR、未合并、未创建/移动标签。
+
+## 候选包实际检查
+
+从干净提交70580dc968edeba6e24cea14d240fdf45904d9a3运行：
+
+```bash
+python scripts/build_release.py --output work/rc2/final-package/候选交付_20261117_RC2.zip --wheels work/peer-kit-20261117/wheels --label RC2
+```
+
+结果43,825,302字节、157份内容文件加MANIFEST；[ZIP](../../demo/delivery/候选交付_20261117_RC2.zip)的SHA256为eab420289e88867375f2c371ed9892d0903c4024566df4bbf51c18fb771cbab5。逐文件核验全部157项，两个材料声明中的7份文件在ZIP内实际字节均匹配；从包内bundle独立克隆并核对提交、干净状态、重新生成材料清单，均通过。原生图表9个缓存数值逐一与实测摘要匹配，嵌入工作簿存在。[机器检查结果](../../evidence/improvement/rc2-package-check.json)供追溯。
+
+特别修正：首次RC2正文Markdown哈希取Windows工作树CRLF字节，不能匹配Git归档的LF字节；已绑定规范Git LF源码后复核工作树/ZIP/新克隆一致。DOCX/PDF正文内容未因此改变，未覆盖RC1。新包包含更新后的两版材料对应表，首次仅在work内试建的候选包不作为交付。
+
+本轮后续提交补ZIP、哈希和交接，不将这些文档提交说成新运行验证。main仍为54ef928，既有v0.1.0-rc.1对象与目标均未改变。
