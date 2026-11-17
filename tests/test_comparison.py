@@ -21,7 +21,7 @@ class ComparisonTests(unittest.TestCase):
             self.assertEqual(value["exit_code"], 7)
             self.assertAlmostEqual(value["cpu_seconds"], 0.85)
             self.assertEqual(value["wall_seconds"], 1.25)
-            for text in ("nan,0,0,0", "1,-1,0,0", "1,2,3", "inf,0,0,0"):
+            for text in ("", "nan,0,0,0", "1,-1,0,0", "1,2,3", "inf,0,0,0"):
                 path.write_text(text)
                 with self.assertRaises(ValueError):
                     parse_time(path)

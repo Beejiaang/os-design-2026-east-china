@@ -31,6 +31,8 @@ def quota_matches(snapshot, quota):
 
 def parse_time(path):
     lines = Path(path).read_text().splitlines()
+    if not lines:
+        raise ValueError("GNU time metrics file is empty")
     parts = lines[-1].split(",")
     if len(parts) != 4:
         raise ValueError("Expected GNU time wall,user,system,exit")

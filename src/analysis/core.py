@@ -176,6 +176,8 @@ def compare(baseline, current, minimum=5, threshold=0.15):
         else:
             problems.append("Missing quota on one side")
         ratio = None
+        range_bounds = None
+        threshold_sensitive = None
         verdict = "unable_to_compare"
         if not problems:
             denominator = statistics.median(r["wall_seconds"] for r in left)
@@ -184,8 +186,14 @@ def compare(baseline, current, minimum=5, threshold=0.15):
             else:
                 ratio = statistics.median(r["wall_seconds"] for r in right) / denominator
                 verdict = "slowdown_needs_review" if ratio > 1 + threshold else "no_threshold_signal"
+                if min(r["wall_seconds"] for r in left) > 0:
+                    range_bounds = [min(r["wall_seconds"] for r in right) / max(r["wall_seconds"] for r in left),
+                                    max(r["wall_seconds"] for r in right) / min(r["wall_seconds"] for r in left)]
+                    threshold_sensitive = range_bounds[0] <= 1 + threshold < range_bounds[1]
         comparisons.append({"quota_percent": quota, "baseline_n": len(left), "current_n": len(right),
                             "baseline_run_ids": [r["run_id"] for r in left], "current_run_ids": [r["run_id"] for r in right],
-                            "wall_ratio": ratio, "verdict": verdict, "reasons": sorted(set(problems))})
+                            "wall_ratio": ratio, "verdict": verdict, "reasons": sorted(set(problems)),
+                            "observed_range_ratio_bounds": range_bounds, "threshold_sensitive": threshold_sensitive})
     return {"rule": "exploratory-median-v1", "minimum": minimum, "threshold": threshold,
-            "comparisons": comparisons, "note": "Exploratory review signal only; no statistical significance, validated accuracy, no-regression or root-cause claim."}
+            "comparisons": comparisons, "sensitivity_version": "observed-range-v1",
+            "note": "Exploratory review signal only; no statistical significance, validated accuracy, no-regression or root-cause claim. Observed range sensitivity is not a confidence interval."}

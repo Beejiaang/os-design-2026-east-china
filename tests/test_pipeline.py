@@ -137,6 +137,24 @@ class AnalysisTests(unittest.TestCase):
         self.assertIn("&lt;script&gt;", text)
         self.assertIn(self.row["run_id"], text)
 
+    def test_threshold_tie_and_observed_range_sensitivity(self):
+        old = analyze(self.root)
+        old["eligible"] = [dict(old["eligible"][0], run_id=f"{i:032x}", wall_seconds=1.0) for i in range(7)]
+        old["groups"][0]["n"] = 7
+        current = copy.deepcopy(old)
+        values = [1.1, 1.12, 1.13, 1.15, 1.17, 1.18, 1.2]
+        for i, row in enumerate(current["eligible"]):
+            row.update(run_id=f"{100+i:032x}", wall_seconds=values[i])
+        row = compare(old, current)["comparisons"][0]
+        self.assertEqual(row["verdict"], "no_threshold_signal")
+        self.assertEqual(row["observed_range_ratio_bounds"], [1.1, 1.2])
+        self.assertIs(row["threshold_sensitive"], True)
+        for row in current["eligible"]:
+            row["wall_seconds"] = 1.3
+        row = compare(old, current)["comparisons"][0]
+        self.assertEqual(row["verdict"], "slowdown_needs_review")
+        self.assertIs(row["threshold_sensitive"], False)
+
 
 if __name__ == "__main__":
     unittest.main()
