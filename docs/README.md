@@ -20,3 +20,5 @@
 本轮改进：[P0任务进度](validation/improvement-progress.md)、[评审导读](reviewers-guide.md)、[开发时间线](history/timeline.md)、[材料版本对应表](validation/material-versions.md)。
 
 P1本轮：[执行进度](validation/improvement-p1-progress.md)、[目标机复验与规模实测](validation/improvement-p1-validation.md)、[统一术语表](contracts/glossary.md)。
+
+P2本轮：[执行进度与总状态](validation/improvement-p2-progress.md)、[CHANGELOG](../CHANGELOG.md)。任务21按迁移前提未成立保持文件名。

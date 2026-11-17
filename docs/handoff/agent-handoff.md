@@ -1,3 +1,9 @@
+# 最新接续：Tasklist P2 已处理
+
+2026-11-17：基于19b223f，当前本地串联分支 **improve/21-delivery-name-policy**，包含全部P0/P1及本轮P2文档；main仍为54ef928。任务20在7360e66补齐CHANGELOG及标签建议；任务21在030ba00复核迁移条件未成立，保持交付文件名。详见[P2进度与限制](../validation/improvement-p2-progress.md)。
+
+本地既有注释标签v0.1.0-rc.1仍指向54ef928；本轮未创建、移动、删除或推送标签，未执行推送/PR/合并/正式提交。运行代码和旧RC1材料/证据未变，仅文档链接、版本事实与哈希检查；最新运行验证仍见下方P1。旧材料未重生成、GitHub在线CI、人员/视频/平台事项仍未完成。下方P0/P1“P2未执行”是当时历史状态，以本段为准。
+
 # 最新接续：Tasklist P1 已执行
 
 2026-11-17：用户授权继续下一轮，当前本地串联分支 **improve/10-scale-sweep**，包含全部P0/P1；起点本轮44dbddd，main未改。P1各任务分支与提交见[进度报告](../validation/improvement-p1-progress.md)。六个代码任务分别完成干净源码目标机复验，最后测量源码bb288cb为37项0跳过、默认完整流程18次与Ruff/pip check通过；另有规模扫描54次全量独立校验通过。证据和边界见[P1验证](../validation/improvement-p1-validation.md)。
