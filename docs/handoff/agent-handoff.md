@@ -1,3 +1,11 @@
+# 最新接续：Tasklist P1 已执行
+
+2026-11-17：用户授权继续下一轮，当前本地串联分支 **improve/10-scale-sweep**，包含全部P0/P1；起点本轮44dbddd，main未改。P1各任务分支与提交见[进度报告](../validation/improvement-p1-progress.md)。六个代码任务分别完成干净源码目标机复验，最后测量源码bb288cb为37项0跳过、默认完整流程18次与Ruff/pip check通过；另有规模扫描54次全量独立校验通过。证据和边界见[P1验证](../validation/improvement-p1-validation.md)。
+
+run1.1/config1.0字段不变，附加linux-load-v1证据和src-py-v2算法在协议中明确；旧指纹数据不重写，新旧摘要不可混比。早期各任务“待目标机验证”以本段和逐提交验证表的实际结果更新；以下P0/RC1条目为历史。
+
+未推送、未建PR、未合并回main、未打tag、未正式提交。P2未执行；人工/视频事项未代办，旧RC1二进制材料未重生成。
+
 # 最新接续：Tasklist P0 已执行
 
 2026-11-17：当前本地串联分支 **improve/09-gitlab-copy**，包含任务1–9；起点main / 54ef928，main未改。各任务分支/提交/路径与检查见[完整进度](../validation/improvement-progress.md)，本轮各任务交接在文末。运行测量源码d8a331e，CI/清单最终代码源码a4f4c04，两者均在openEuler完成29项0跳过、默认18次完整流程及pip check；新增工具对照54次全部通过。材料表脚本独立生成，旧RC1二进制不重生成。
@@ -241,3 +249,23 @@ A 的中断与清理状态有测试，正式性能基线还需要足够实验设
 - 修改范围：experiments/scale_sweep.py、tests/test_scale_sweep.py、docs/validation/improvement-p1-validation.md、evidence/improvement。run 1.1 / config 1.0 不变，无消费者迁移。
 - 验证：bb288cb：openEuler37项0跳过+默认18次完整流程+pip check+Ruff；规模扫描54次逐份SQLite/配额/内存/清理通过。六个代码任务分别复验的日志、源码与限制见docs/validation/improvement-p1-validation.md。
 - 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。
+
+### 任务17目标机验收补记
+
+干净源码`f96e456`：openEuler 29项测试0跳过、默认18次完整流程、Ruff与pip check均通过，末尾临时单元为零。真实日志、命令及证据见[P1验证](../validation/improvement-p1-validation.md)，原始归档未重写。协议/迁移以数据协议为准；仅本地提交，人员验收待人工。
+
+### 任务18目标机验收补记
+
+干净源码`5e0a9d9`：openEuler 29项测试0跳过、默认18次完整流程、Ruff与pip check均通过，末尾临时单元为零。真实日志、命令及证据见[P1验证](../validation/improvement-p1-validation.md)，原始归档未重写。协议/迁移以数据协议为准；仅本地提交，人员验收待人工。
+
+### 任务11目标机验收补记
+
+干净源码`1bde76a`：openEuler 32项测试0跳过、默认18次完整流程、Ruff与pip check均通过，末尾临时单元为零。真实日志、命令及证据见[P1验证](../validation/improvement-p1-validation.md)，原始归档未重写。协议/迁移以数据协议为准；仅本地提交，人员验收待人工。
+
+### 任务13目标机验收补记
+
+干净源码`2d60a88`：openEuler 34项测试0跳过、默认18次完整流程、Ruff与pip check均通过，末尾临时单元为零。真实日志、命令及证据见[P1验证](../validation/improvement-p1-validation.md)，原始归档未重写。协议/迁移以数据协议为准；仅本地提交，人员验收待人工。
+
+### 任务14目标机验收补记
+
+干净源码`0be73a7`：openEuler 36项测试0跳过、默认18次完整流程、Ruff与pip check均通过，末尾临时单元为零。真实日志、命令及证据见[P1验证](../validation/improvement-p1-validation.md)，原始归档未重写。协议/迁移以数据协议为准；仅本地提交，人员验收待人工。

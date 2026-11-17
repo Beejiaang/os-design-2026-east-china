@@ -1,7 +1,7 @@
 # 2026 操作系统设计赛 · 华东区域赛
 
 > 当前冻结：RC1 `086aff7` / `feat/a-release-preparation`；本轮开发在 `improve/*`，尚未重新冻结。
-> 最近目标机验证：2026-11-17，源码 `a4f4c04`，29项测试0跳过，默认完整流程1轮18次；另有d8a331e同类复验。
+> 最近目标机验证：2026-11-17，源码 `bb288cb`，37项测试0跳过，默认完整流程1轮18次，另有54次规模扫描；[验证边界](docs/validation/improvement-p1-validation.md)。
 > 当前硬缺口：[提交清单](docs/project/submission-checklist.md)中的人员交叉验收、视频、团队/导师与官方GitLab/平台接收；[本轮限制](docs/validation/improvement-progress.md)。
 
 2026 年操作系统设计赛华东区域赛参赛项目仓库，涵盖选题分析、技术方案、源代码、测试实验、开发文档与演示材料。
@@ -48,7 +48,7 @@ OSDESIGN_INTEGRATION=1 python3 -m unittest discover -s tests -v
 
 ## 从这里开始
 
-[评审导读：三份必读材料与分类索引](docs/reviewers-guide.md)；[Tasklist P0 改进进度与验证](docs/validation/improvement-progress.md)
+[评审导读：三份必读材料与分类索引](docs/reviewers-guide.md)；[Tasklist P0 改进进度与验证](docs/validation/improvement-progress.md)、[P1 改进进度](docs/validation/improvement-p1-progress.md)
 
 演示与人员复验：[答辩工作稿](demo/presentation/答辩初稿_20261117_v1.pptx)、[讲解与20问](demo/defense-notes.md)、[非实现者复验指南](docs/validation/peer-reproduction.md)、[复验交付包](demo/delivery/README.md)。本轮另在新源码检出和全新 venv 验证可编辑安装、29 项测试及三档小试，记录见 [安装复验](docs/validation/reproduction-validation.md)。这些代理操作仍不能代替人员交叉验收。
 

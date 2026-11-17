@@ -1,5 +1,7 @@
 # Tasklist 改进进度（P0）
 
+本页保留P0完成时的历史状态；后续P1已执行，见[P1进度](improvement-p1-progress.md)。
+
 2026-11-17，按工作区 work/codex-tasklist-20261117.md 执行。起点 main / 54ef928，工作树干净；本轮先完成 P0。每任务独立命名分支与提交，分支按任务依赖串联继承前项，**没有合并回 main**；当前 improve/09-gitlab-copy 包含本轮全部改进。运行实现只扩展任务1的对照编排，未改 runner/collector/正式负载或默认判定规则。
 
 | 任务 | 本地分支 | 交付提交 | 状态与验证 |

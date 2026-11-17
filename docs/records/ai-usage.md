@@ -211,3 +211,10 @@
 - 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/10-scale-sweep`，基于 `0be73a7`。
 - 产物：experiments/scale_sweep.py、tests/test_scale_sweep.py、docs/validation/improvement-p1-validation.md、evidence/improvement。人工负责成员未填写。
 - 检查及限制：bb288cb：openEuler37项0跳过+默认18次完整流程+pip check+Ruff；规模扫描54次逐份SQLite/配额/内存/清理通过。六个代码任务分别复验的日志、源码与限制见docs/validation/improvement-p1-validation.md。 不将代理检查改标人工验收。
+
+### 2026-11-17 P1逐提交目标机验收与统一交接
+
+- 按用户“继续下一轮”授权完成任务10–19，保留各命名分支。具体源码f96e456/5e0a9d9/1bde76a/2d60a88/0be73a7/bb288cb分别全量验证，测试数29/29/32/34/36/37且0跳过；六轮默认流程108次及规模扫描54次，未混作性能基线。
+- 新增源码/采样/区间/内存检查由代理实现；命令、原始结果及来源哈希归档在evidence/improvement。真实区间HTML在Edge无头模式截图并检查，不把夹具当真实跨阈值样本。
+- 算法版本src-py-v2扩大覆盖至全部src，明确旧数据不迁移、新旧摘要不直接可比；旁路loadavg为Linux来宾信息，不进入判定。未声称统计准确率、普遍线性、生产可靠性或教学效果。
+- 文档、术语、冻结规则与材料表更新，旧RC1二进制未重生成。本轮无推送/PR/合并/tag/赛事提交，未替人员认领贡献或代办视频和人工验收。
