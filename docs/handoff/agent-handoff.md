@@ -91,3 +91,11 @@ A 的中断与清理状态有测试，正式性能基线还需要足够实验设
 - 修改范围：docs/validation/comparison-validation.md、evidence/comparison/threshold-matrix-20261117.json、evidence/comparison/SHA256SUMS。run 1.1 / config 1.0 不变，无消费者迁移。
 - 验证：重新分析六场景共 48 条记录；15 格可比，逐格保留 run_id；Markdown 链接检查通过。
 - 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。
+
+## 改进任务 1：hyperfine 三档实测对照（2026-11-17）
+
+角色：A 集成，用户授权按 tasklist 跨角色推进。基于 `6f6fb7d`；分支 `improve/01-hyperfine`，交付提交见该分支 Git HEAD（避免自引用哈希）。
+
+- 修改范围：docs/implementation/tool-comparison.md、docs/validation/comparison-validation.md、evidence/comparison/improve01-openeuler-20261117.tar.gz、evidence/comparison/SHA256SUMS。run 1.1 / config 1.0 不变，无消费者迁移。
+- 验证：干净源码 d8a331e：openEuler 29 项0跳过；默认完整流程18次；对照54次逐份SQLite/配额/清理通过；pip check通过。证据 evidence/comparison/improve01-openeuler-20261117.tar.gz。
+- 状态：仅本地提交；未推送、未建 PR、未合并、未正式提交；非实现者验收仍待人工。

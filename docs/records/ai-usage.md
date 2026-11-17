@@ -98,3 +98,9 @@
 - 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/02-threshold-matrix`，基于 `54ef928`。
 - 产物：docs/validation/comparison-validation.md、evidence/comparison/threshold-matrix-20261117.json、evidence/comparison/SHA256SUMS。人工负责成员未填写。
 - 检查及限制：重新分析六场景共 48 条记录；15 格可比，逐格保留 run_id；Markdown 链接检查通过。 不将代理检查改标人工验收。
+
+### 2026-11-17 改进任务 1：hyperfine 三档实测对照
+
+- 工具：Codex 代理；按用户指定 tasklist 执行，分支 `improve/01-hyperfine`，基于 `6f6fb7d`。
+- 产物：docs/implementation/tool-comparison.md、docs/validation/comparison-validation.md、evidence/comparison/improve01-openeuler-20261117.tar.gz、evidence/comparison/SHA256SUMS。人工负责成员未填写。
+- 检查及限制：干净源码 d8a331e：openEuler 29 项0跳过；默认完整流程18次；对照54次逐份SQLite/配额/清理通过；pip check通过。证据 evidence/comparison/improve01-openeuler-20261117.tar.gz。 不将代理检查改标人工验收。

@@ -88,3 +88,21 @@ GNU time 1.10 在普通用户目录编译，无全局安装；保留构建日志
 补充对照：较早两百万行 --passes 2 的三档中位数比为 1.9213/1.9215/2.0565，原预设 15% 均提示复核，见[初轮原始验证](pipeline-validation.md#历史复核规则检查)，与本表不同输入，不混合样本。
 
 这是固定样本集的观察，不是普遍准确率、统计显著性、误报/漏报率或阈值最优性验收；25% 档超过 25% 阈值源于本批实测比值约 1.2557，不能由工作量参数直接推断。
+
+## hyperfine 新增目标机验证（任务 1）
+
+干净测量源码 d8a331e，普通用户目标目录 /home/holo/projects/osdesign-improve01-20261117；openEuler 24.03 LTS-SP4，Python 3.11.6。复用既有报告 venv，pip check 无冲突，未改变运行资源或安全策略。
+
+```bash
+PYTHONPATH=src OSDESIGN_INTEGRATION=1 python -m unittest discover -s tests -v
+python -m pip check
+python experiments/run_pipeline.py --output results/pipeline
+python experiments/compare_tools.py --output results/tools --time-binary ~/projects/comparison-tools/time-install/bin/time --hyperfine-binary ~/projects/comparison-tools/hyperfine-1.19.0/hyperfine-v1.19.0-x86_64-unknown-linux-musl/hyperfine
+PYTHONPATH=src:. python work/validation/check_improve01.py
+```
+
+python 为 ~/projects/osdesign-release-venv-20261117/bin/python。29 项全量测试通过，0 跳过；默认完整流程 18 次最终化（15 测量、3 预热），全部通过原始输出与正确性证据检查。工具对照 **36+18=54 次全部成功**（45 测量、9 预热），逐份独立 SQLite 校验、配额和清理均通过，可见父级一致，输入/负载前后哈希不变。结束时 osdesign-* 单元为零；工作树干净。工具实际版本和哈希、hyperfine 原始 JSON 与逐次 stdout、原始 run 1.1 均已保留。
+
+[新归档](../../evidence/comparison/improve01-openeuler-20261117.tar.gz)与[哈希](../../evidence/comparison/SHA256SUMS)保留 work/validation 检查源码/日志、results/tools 全部原始记录和 results/pipeline；大 CSV 排除，可按 input.json 参数复建。脚本结束后补跑独立核查并再次归档，原始数据未改写。新增记录使用独立 tool-comparison-v1，并记录 hyperfine 参数；不冒充 runner 协议。
+
+批次顺序限制与计时边界见[同类工具说明](../implementation/tool-comparison.md#hyperfine-补充实测任务-12026-11-17)。本轮是代理目标机实测，不是人员验收、框架通用性或统计准确率验收；旧 RC1 PDF/PPT 未重生成，不声称它们已包含本次新增数字。

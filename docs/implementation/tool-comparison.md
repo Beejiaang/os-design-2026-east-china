@@ -62,3 +62,35 @@ python3 experiments/validate_regression.py --output results/regression-new
 ```
 
 两者要求干净 Git，输出目录必须不存在；使用已准备的目标 Python 环境。原始 GNU 工具安装版本及 hash、完整参数/证据、失败/限制见扩展验证。原生对照仅完成正常任务性能/输出对照，未覆盖其异常、权限、超时或全部功能；不把“尚未测试”写成“不支持”。
+
+## hyperfine 补充实测（任务 1，2026-11-17）
+
+固定 [hyperfine 1.19.0 官方发布](https://github.com/sharkdp/hyperfine/releases/tag/v1.19.0)，Linux x86_64 musl 压缩包在 Windows 下载后转入目标机，以普通用户解压到 ~/projects/comparison-tools/hyperfine-1.19.0，不改全局软件。内容校验不等于上游签名验证；未独立验签，仓库仅保留版本/哈希和原始数据，不包含第三方二进制。
+
+- 下载压缩包 SHA256：`825287143f397774093539ca2458854ab3735c0e8a1aaf075c22edce7d261556`
+- 可执行文件 SHA256：`404d32c40c5a201e47393a80998cf9b67e8662bced8889ea86249cf577273ee2`
+
+新增三种方法同批 54 次（每种三档，各一次预热五次测量），同一 400 万行 CSV、种子 20261117 与固定聚合源码，每份 stdout 用 SQLite 独立参考校验。前 36 次项目/原生命令按既有种子混排；hyperfine 保留自己的 --warmup 1 --runs 5 批次，三档顺序以固定种子打乱为 100/50/null。**hyperfine 在前 36 次之后分批执行，未与另两种逐次交错，存在时间顺序混杂**，不作速度排名。
+
+hyperfine 使用 --shell=none 调用本队 Python 适配器，每次建立独立 systemd 用户服务、运行 GNU time 包裹的负载、保存快照并核验清理。hyperfine 导出的 times 是整个适配命令（Python 导入、服务创建、快照、GNU time、退出及清理）的时间；内部 wall/CPU 列仍来自 GNU time，不是 hyperfine 原生的逐次 CPU 时间。预热输出也独立保存；hyperfine JSON 本身只含五条正式计时。
+
+| 方法/配额 | 内部 wall 中位数 s | 内部 CPU 中位数 s | 外部命令中位数 s |
+|---|---:|---:|---:|
+| project / None | 1.5673 | 1.5346 | 1.6326 |
+| project / 100 | 1.5672 | 1.5347 | 1.6442 |
+| project / 50 | 3.0714 | 1.5380 | 3.1468 |
+| gnu-time-systemd / None | 1.5200 | 1.5200 | 1.5671 |
+| gnu-time-systemd / 100 | 1.5300 | 1.5200 | 1.5777 |
+| gnu-time-systemd / 50 | 3.0400 | 1.5200 | 3.0875 |
+| hyperfine-systemd / None | 1.5400 | 1.5300 | 1.6096 |
+| hyperfine-systemd / 100 | 1.5300 | 1.5200 | 1.6072 |
+| hyperfine-systemd / 50 | 3.0600 | 1.5300 | 3.1288 |
+
+| 对象 | 自带能力 | 本队适配补充 |
+|---|---|---|
+| GNU time 1.10 | 单命令 wall/user/system/退出值 | 配额服务、重复/混排、独立参考、快照及清理 |
+| systemd 255 systemd-run | 用户服务、资源控制、生命周期 | 固定数据、功能校验、可追溯逐次实验 |
+| hyperfine 1.19.0 | 预热、重复、外部命令计时与 JSON 导出 | 三档服务、每次输出保留、SQLite 校验、实际控制/清理核验 |
+| 本项目 d8a331e | 执行采集、原始证据、功能校验、比较门槛、离线报告 | 以上第三方底层能力按来源披露，不认领为原创 |
+
+本队 worker 计时包含快照等额外范围；GNU time 内部计时与 hyperfine 外部计时范围不同，外部差值不能解释为算法加速。命令、全部逐次记录与新一轮完整流程见[任务1验证](../validation/comparison-validation.md#hyperfine-新增目标机验证任务-1)。
