@@ -1,3 +1,7 @@
+# RC3 工程复验版
+
+使用 2026-11-18 工程复验包时，以包根 README.txt 中的分支、提交和离线命令为准。在新目录依次完成克隆、安装、全量测试和三档实验，保留自己的输出。版本化的设计报告与 PPT 见下文 RC2 材料，新增技术实测见[跨会话比较](../../docs/validation/login-session.md)。
+
 # 当前候选材料 RC2
 
 新材料：[9页报告Word](设计与测试报告_RC2.docx)、[PDF](设计与测试报告_RC2.pdf)、[12页可编辑PPT](../presentation/答辩材料_RC2.pptx)、[RC2独立清单](release-manifest-rc2.json)。本版纳入P0/P1/P2，原测量源码与材料版本分别记录，详见[材料核验](../../docs/validation/release-validation-rc2.md)。

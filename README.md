@@ -1,8 +1,7 @@
 # 2026 操作系统设计赛 · 华东区域赛
 
-> 当前冻结：RC1 `086aff7` / `feat/a-release-preparation`；本轮开发在 `improve/*`，尚未重新冻结。
-> 最近目标机验证：2026-11-17，源码 `bb288cb`，37项测试0跳过，默认完整流程1轮18次，另有54次规模扫描；[验证边界](docs/validation/improvement-p1-validation.md)。
-> 当前硬缺口：[提交清单](docs/project/submission-checklist.md)中的人员交叉验收、视频、团队/导师与官方GitLab/平台接收；[本轮限制](docs/validation/improvement-progress.md)。
+> 2026-11-18 工程复验版 RC3 包含逐次节流证据、零样本档位和跨 SSH 登录比较。运行源码 ea91209 已在 openEuler 上通过 40 项测试，含两轮环境一致及一轮亲和性变化实验。[复验记录](docs/validation/login-session.md)
+> 获取工程 ZIP 后先读包根 README.txt，从 Git bundle 检出源码。正式书面报告与幻灯片仍为 RC2；新增演示见[评审导读](docs/reviewers-guide.md)。人员交叉验收、演示视频与平台提交见[提交清单](docs/project/submission-checklist.md)。
 
 2026 年操作系统设计赛华东区域赛参赛项目仓库，涵盖选题分析、技术方案、源代码、测试实验、开发文档与演示材料。
 

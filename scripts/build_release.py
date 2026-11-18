@@ -21,7 +21,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--wheels", type=Path)
-    parser.add_argument("--label", choices=("RC1", "RC2"), default="RC1")
+    parser.add_argument("--label", choices=("RC1", "RC2", "RC3"), default="RC1")
     args = parser.parse_args()
     if git("status", "--porcelain").strip():
         parser.error("commit the reviewed changes before packaging")
@@ -42,14 +42,32 @@ def main():
     if args.wheels:
         for path in sorted(args.wheels.glob("*.whl")):
             files["wheels/" + path.name] = path.read_bytes()
+    install = "python -m pip install -e '.[report]'"
+    if args.wheels:
+        if not any(name.startswith("wheels/") for name in files):
+            parser.error("the requested wheels directory contains no wheel files")
+        install = 'PIP_NO_INDEX=1 PIP_FIND_LINKS="$PWD/../wheels" ' + install
     files["README.txt"] = (
-        "候选交付 " + args.label + "，未人工验收，未含正式视频或赛事接收凭据\n"
-        "源码提交 " + commit + "\n"
-        "运行：先读 project/README.md 与 project/docs/validation/peer-reproduction.md\n"
-        "源码快照可直接检出运行，Git 历史可用 git clone 包内 bundle 文件恢复\n"
-        "wheels 仅对应 Linux x86_64 CPython 3.11，不配置系统权限\n"
-        "离线安装：在 project 目录执行 python3 -m pip install --no-index --find-links ../wheels -e '.[report]'\n"
-        "文件完整性：核对 MANIFEST.json 中各文件 SHA256；哈希不证明正式提交或人工验收\n"
+        f"工程复验包 {args.label} · 源码 {commit}\n"
+        "从解压目录开始，在 openEuler x86_64、CPython 3.11 和可用的 systemd 用户会话中执行。\n"
+        "project/ 供阅读；下面的命令从包内 Git 历史检出源码，以便记录真实提交。\n"
+        "请在新目录解压。完成后打开 review/results/first/report.html。\n"
+        "\n```bash\n"
+        "set -eu\n"
+        f"git clone --branch {branch.removeprefix('refs/heads/')} ./{bundle.name} review\n"
+        "cd review\n"
+        f'test "$(git rev-parse HEAD)" = "{commit}"\n'
+        "python3 -m venv .venv\n"
+        ". .venv/bin/activate\n"
+        f"{install}\n"
+        "python -m pip check\n"
+        "python -m runner doctor\n"
+        "OSDESIGN_INTEGRATION=1 python -m unittest discover -s tests -v\n"
+        "python experiments/run_pipeline.py --output results/first\n"
+        'test -z "$(git status --porcelain)"\n'
+        "```\n\n"
+        "随包报告和幻灯片的版本见 project/demo/delivery/README.md。"
+        "人员验收、正式视频与赛事接收状态见项目提交清单。\n"
     ).encode("utf-8")
     manifest = {"kind": "osdesign-candidate-release-v1", "release_label": args.label, "source_commit": commit,
                 "source_ref": branch, "human_acceptance": "excluded_pending",
