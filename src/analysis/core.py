@@ -120,15 +120,18 @@ def analyze(directory):
             eligible.append(row)
     complete = not issues and all(row["status"] == "success" for row in records) and bool(records)
     groups = []
-    for quota in sorted({row["quota_percent"] for row in eligible}, key=lambda q: -1 if q is None else q):
+    quotas = {row["quota_percent"] for row in records}
+    if config:
+        quotas.update(config.get("quotas", [None, 100, 50]))
+    for quota in sorted(quotas, key=lambda q: -1 if q is None else q):
         sample = [row for row in eligible if row["quota_percent"] == quota]
         # Configuration contrast must still hold input/environment/version fixed.
         # Quota-specific leaf and quota field are intentionally normalized here.
-        reference = eligible[0]
         mismatch = []
         if len(sample) != config.get("repeats", 3) * config.get("quotas", [None, 100, 50]).count(quota):
             mismatch.append("Not all scheduled non-warmup runs passed functional/data checks")
         for row in sample:
+            reference = eligible[0]
             normalized = dict(row, quota_percent=reference["quota_percent"])
             mismatch.extend(check_compatibility(reference, normalized)["reasons"])
             if row["workload_version"] != reference["workload_version"]:
@@ -136,8 +139,8 @@ def analyze(directory):
         wall = [r["wall_seconds"] for r in sample]
         cpu = [r["cpu_seconds"] for r in sample]
         groups.append({"quota_percent": quota, "n": len(sample), "run_ids": [r["run_id"] for r in sample],
-                       "wall_median_seconds": statistics.median(wall), "wall_min_seconds": min(wall),
-                       "wall_max_seconds": max(wall), "cpu_median_seconds": statistics.median(cpu),
+                       "wall_median_seconds": statistics.median(wall) if wall else None, "wall_min_seconds": min(wall, default=None),
+                       "wall_max_seconds": max(wall, default=None), "cpu_median_seconds": statistics.median(cpu) if cpu else None,
                        "comparable": complete and not mismatch, "reasons": sorted(set(mismatch))})
     baseline = next((g["wall_median_seconds"] for g in groups if g["quota_percent"] is None and g["comparable"]), None)
     for group in groups:
@@ -159,7 +162,7 @@ def compare(baseline, current, minimum=5, threshold=0.15):
     old_ids, new_ids = [r["run_id"] for r in old], [r["run_id"] for r in new]
     if len(set(old_ids)) != len(old_ids) or len(set(new_ids)) != len(new_ids) or set(old_ids) & set(new_ids):
         reasons.append("Duplicate/overlapping run_ids cannot be independent historical samples")
-    quotas = sorted({r["quota_percent"] for r in old + new}, key=lambda q: -1 if q is None else q)
+    quotas = sorted({g["quota_percent"] for side in (baseline, current) for g in side["groups"]}, key=lambda q: -1 if q is None else q)
     comparisons = []
     for quota in quotas:
         left = [r for r in old if r["quota_percent"] == quota]

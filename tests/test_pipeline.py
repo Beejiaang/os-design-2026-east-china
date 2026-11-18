@@ -128,6 +128,21 @@ class AnalysisTests(unittest.TestCase):
         new["eligible"][0]["input_id"] = "changed"
         self.assertEqual(compare(old, new)["comparisons"][0]["verdict"], "unable_to_compare")
 
+    def test_planned_quota_survives_absence_of_verified_samples(self):
+        (self.root / self.row["run_id"] / "stdout.log").unlink()
+        summary = analyze(self.root)
+        group, = summary["groups"]
+        self.assertEqual((group["quota_percent"], group["n"], group["comparable"]), (50, 0, False))
+        self.assertIsNone(group["wall_median_seconds"])
+        history, = compare(summary, summary)["comparisons"]
+        self.assertEqual((history["verdict"], history["wall_ratio"]), ("unable_to_compare", None))
+
+    def test_optional_counters_keep_missing_distinct_from_zero(self):
+        summary = analyze(self.root)
+        summary["eligible"][0]["cpu_stat_delta"] = {"usage_usec": 10, "nr_periods": 0, "nr_throttled": False}
+        render(summary, self.root / "report.html")
+        self.assertIn("<td>0</td><td>未提供</td><td>未提供</td>", (self.root / "report.html").read_text(encoding="utf-8"))
+
     def test_html_escapes_untrusted_strings(self):
         summary = analyze(self.root)
         summary["issues"].append("<script>alert(1)</script>")

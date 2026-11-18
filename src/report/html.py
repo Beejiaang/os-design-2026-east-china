@@ -38,13 +38,22 @@ def render(summary, output, comparison=None):
         return html.escape(str(value), quote=True)
 
     def fmt(value):
+        if value is None:
+            return "—"
         return esc(f"{value:.4f}" if type(value) is float else value)
-    groups = "".join("<tr>" + "".join("<td>" + fmt(group.get(key)) + "</td>" for key in
+    groups = "".join("<tr>" + "".join("<td>" + ("null" if key == "quota_percent" and group[key] is None else fmt(group.get(key))) + "</td>" for key in
                      ("quota_percent", "n", "wall_median_seconds", "wall_min_seconds", "wall_max_seconds",
                       "cpu_median_seconds", "wall_ratio_to_unlimited", "comparable")) + "</tr>" for group in summary["groups"])
-    runs = "".join("<tr><td>" + esc(row["run_id"]) + "</td><td>" + esc(row["quota_percent"]) +
-                   "</td><td>" + fmt(row["wall_seconds"]) + "</td><td>" + fmt(row["cpu_seconds"]) +
-                   "</td><td>" + esc(summary["artifacts"][row["run_id"]]["result"]) + "</td></tr>" for row in summary["eligible"])
+    def counter_cells(row):
+        cells = []
+        for field in ("nr_periods", "nr_throttled", "throttled_usec"):
+            value = row["cpu_stat_delta"].get(field)
+            cells.append("<td>" + (str(value) if type(value) is int and value >= 0 else "未提供") + "</td>")
+        return "".join(cells)
+
+    runs = "".join("<tr><td>" + esc(row["run_id"]) + "</td><td>" + esc("null" if row["quota_percent"] is None else row["quota_percent"]) +
+                   "</td><td>" + fmt(row["wall_seconds"]) + "</td><td>" + fmt(row["cpu_seconds"]) + "</td>" + counter_cells(row) +
+                   "<td>" + esc(summary["artifacts"][row["run_id"]]["result"]) + "</td></tr>" for row in summary["eligible"])
     details = json.dumps({"issues": summary["issues"], "excluded": summary["excluded"],
                           "group_reasons": [{"quota": g["quota_percent"], "reasons": g["reasons"]} for g in summary["groups"]],
                           "history": comparison, "artifacts": summary["artifacts"]}, ensure_ascii=False, indent=2)
@@ -75,15 +84,15 @@ pre{white-space:pre-wrap;word-break:break-word;font-size:13px}.badge{background:
                     x = 150 + 680 * row["wall_seconds"] / maximum
                     plot += f'<circle cx="{x}" cy="{y}" r="5" fill="#168a86" fill-opacity="0.55"><title>{esc(row["run_id"])}: {row["wall_seconds"]:.4f} s</title></circle>'
         document += "<section><h2>逐次耗时分布</h2><p>每个点对应一条已校验的非预热记录；重叠点可能不可分辨。原始值见下表。不完整实验中的点仅作记录展示。</p>" + plot + "</svg></section>"
-    document += "<section><h2>已校验的非预热测量</h2><table><tr><th>run_id</th><th>配额 %</th><th>耗时 s</th><th>CPU s</th><th>最终原始记录</th></tr>" + runs + "</table></section>"
+    document += "<section><h2>已校验的非预热测量</h2><p>服务 cgroup 的 cpu.stat 起止差值给出配额周期数、节流次数和累计节流时间。可用 run_id 核对原始记录。累计节流时间与进程 CPU 时间、整项任务耗时的统计范围不同。</p><table><tr><th>run_id</th><th>配额 %</th><th>耗时 s</th><th>CPU s</th><th>配额周期数</th><th>节流次数</th><th>节流时间 μs</th><th>最终原始记录</th></tr>" + runs + "</table></section>"
     if comparison is not None:
         labels = {"unable_to_compare": "无法比较", "slowdown_needs_review": "变慢信号，需复核",
                   "no_threshold_signal": "未触发阈值（不表示无退化）"}
         history_rows = "".join("<tr>" + "".join("<td>" + fmt(value) + "</td>" for value in
-                               (row["quota_percent"], row["baseline_n"], row["current_n"], row["wall_ratio"],
+                               ("null" if row["quota_percent"] is None else row["quota_percent"], row["baseline_n"], row["current_n"], row["wall_ratio"],
                                 labels[row["verdict"]], row.get("threshold_sensitive"), "; ".join(row["reasons"]))) + "</tr>" for row in comparison["comparisons"])
         document += "<section><h2>历史比较 · 探索性复核规则</h2><p>" + esc(comparison["note"]) + "</p><p>最少样本数：" + esc(comparison["minimum"]) + "；预设变化阈值：" + esc(comparison["threshold"]) + "</p><p>阈值敏感=true 表示两组已观察到的耗时范围可组合出阈值两侧的比值，需留意波动；这不是置信区间。精确范围见追溯数据。</p><table><tr><th>配额 %</th><th>基线 n</th><th>当前 n</th><th>耗时比</th><th>规则输出</th><th>阈值敏感</th><th>原因</th></tr>" + history_rows + "</table></section>"
-        bars = "".join('<div><h3>配额 ' + esc(row["quota_percent"]) + '%</h3>' +
+        bars = "".join('<div><h3>配额 ' + esc('null' if row["quota_percent"] is None else str(row["quota_percent"]) + '%') + '</h3>' +
                        range_bar(row, comparison["threshold"]) + '</div>' for row in comparison["comparisons"])
         document += '<section><h2>历史比较的观察范围</h2><p>已观察范围敏感性，不是置信区间。虚线为 1+threshold；颜色仅提示是否跨阈值。各图按自身范围缩放，数值以标签为准。</p>' + bars + '</section>'
     document += "<section><h2>排除、问题与追溯证据</h2><pre>" + esc(details) + "</pre></section></html>"
