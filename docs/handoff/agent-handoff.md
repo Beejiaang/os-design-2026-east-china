@@ -1,3 +1,7 @@
+# 最新接续：目标机节流证据与缺样本复核
+
+2026-11-18，角色 C 分析与报告，基于 f7dca19，在本地 feat/c-quota-coverage 上完成。测量源码 5a5e109，39 项系统环境测试及四轮默认流程通过。原始 run 1.1 沿用；消费配置汇总时需允许零样本档的指标为空。同一登录会话可复验历史对照；跨 SSH 会话的指纹拒绝实例已归档。命令、教学案例、原始数据及缺项见[本轮验证](../validation/quota-evidence.md)。RC2 仍为上一版候选包，人员复验、演示视频与正式提交待团队完成。
+
 # 最新接续：RC2材料同步
 
 2026-11-17，基于7ef8f88，当前串联分支improve/22-current-materials。9页报告Word/PDF和12页可编辑PPT已纳入P0/P1/P2；独立RC2 manifest保存哈希，RC1原文件/标签不变。最终RC2包固定源码`70580dc968edeba6e24cea14d240fdf45904d9a3`，157份文件哈希、新bundle克隆和双版本材料声明通过；报告9页、PPT12页。详见[本轮核验](../validation/release-validation-rc2.md)及[交付入口](../../demo/delivery/README.md)。原测量源码bb288cb等分别注明，未重标为材料提交。

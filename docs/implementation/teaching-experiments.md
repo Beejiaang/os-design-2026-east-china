@@ -58,3 +58,7 @@ PYTHONPATH=src python3 -m report results/lesson-slow/experiment --baseline resul
 - 异常：失败/超时/缺指标/清理及排除原因，保存日志路径；描述后续检查，不修写原始数据
 
 模板用于记录过程，尚未据此评估教学效果或学生实际完成情况。
+
+### 现场核对内核节流
+
+在[实测报告与缺证据练习](../validation/quota-evidence.md)中选一条 50% 样本，读出 run_id、CPU 时间、耗时与节流次数。然后找一条 100% 样本比较。解释为什么“字段缺失”“字段为零”和“本轮实际出现节流”需要三种不同的表述。

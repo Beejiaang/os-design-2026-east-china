@@ -1,0 +1,128 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CPU 配额实验报告</title><style>
+body{font:16px/1.6 system-ui,sans-serif;background:#f3f6fa;color:#192b3d;max-width:1200px;margin:32px auto;padding:0 24px}
+h1{font-size:30px}section{background:white;border:1px solid #dae2eb;border-radius:12px;padding:20px;margin:20px 0;overflow:auto}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}td,th{border-bottom:1px solid #ddd;text-align:left;padding:10px}
+pre{white-space:pre-wrap;word-break:break-word;font-size:13px}.badge{background:#dfe9f4;padding:8px 16px;border-radius:8px}
+</style><h1>数据聚合 · CPU 配额实验报告</h1><p class="badge">实验完整：True · 最终记录：18 / 18</p><p>Descriptive configuration contrast only. No validated regression verdict or root cause. Unlimited means no local quota set.</p><p>目录：/home/holo/projects/osdesign-review-1118/results/review/experiment</p><section><h2>配置对照</h2><p>null 表示本工具未设置本地配额；100% 是一个逻辑 CPU 的上限。倍数仅在可比条件通过时展示。</p><table><tr><th>配额 %</th><th>样本数</th><th>耗时中位数 s</th><th>最小 s</th><th>最大 s</th><th>CPU 中位数 s</th><th>相对 null</th><th>可比</th></tr><tr><td>null</td><td>5</td><td>0.8158</td><td>0.8158</td><td>0.8161</td><td>0.7715</td><td>1.0000</td><td>True</td></tr><tr><td>50</td><td>5</td><td>1.5676</td><td>1.4912</td><td>1.6179</td><td>0.7857</td><td>1.9215</td><td>True</td></tr><tr><td>100</td><td>5</td><td>0.8159</td><td>0.8158</td><td>0.8160</td><td>0.7781</td><td>1.0001</td><td>True</td></tr></table></section><section><h2>逐次耗时分布</h2><p>每个点对应一条已校验的非预热记录；重叠点可能不可分辨。原始值见下表。不完整实验中的点仅作记录展示。</p><svg role="img" aria-label="每次已校验运行的耗时，单位秒" viewBox="0 0 900 235" style="min-width:600px;width:100%"><line x1="150.0" y1="15" x2="150.0" y2="200" stroke="#dde4ed"/><text x="150.0" y="225" text-anchor="middle" fill="#526478">0.00 s</text><line x1="320.0" y1="15" x2="320.0" y2="200" stroke="#dde4ed"/><text x="320.0" y="225" text-anchor="middle" fill="#526478">0.44 s</text><line x1="490.0" y1="15" x2="490.0" y2="200" stroke="#dde4ed"/><text x="490.0" y="225" text-anchor="middle" fill="#526478">0.89 s</text><line x1="660.0" y1="15" x2="660.0" y2="200" stroke="#dde4ed"/><text x="660.0" y="225" text-anchor="middle" fill="#526478">1.33 s</text><line x1="830.0" y1="15" x2="830.0" y2="200" stroke="#dde4ed"/><text x="830.0" y="225" text-anchor="middle" fill="#526478">1.78 s</text><text x="5" y="45" font-size="13">null（未设本地配额）</text><circle cx="461.7145157180199" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>25557e88d7ec4a508d4b04cfd470af9e: 0.8158 s</title></circle><circle cx="461.70422796284856" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>906505ee017841ee9bc4c6bea3bce5ed: 0.8158 s</title></circle><circle cx="461.7415600006037" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>aee70d9d84b04b0d88e59f3cbe20905a: 0.8159 s</title></circle><circle cx="461.83876543610995" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>c5ea949e330c4790ae318c9cf71d0e7c: 0.8161 s</title></circle><circle cx="461.70061721870206" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>d7ef867d06df420c85d68d3ab0d7bff6: 0.8158 s</title></circle><text x="5" y="100" font-size="13">50%</text><circle cx="768.1818181818181" cy="95" r="5" fill="#168a86" fill-opacity="0.55"><title>06fcb932d1774d73aa611145a0590cc6: 1.6179 s</title></circle><circle cx="748.9628346457197" cy="95" r="5" fill="#168a86" fill-opacity="0.55"><title>10b0e6a471b44a7bbea5de0b825fb3e1: 1.5676 s</title></circle><circle cx="719.7563428948001" cy="95" r="5" fill="#168a86" fill-opacity="0.55"><title>12b0c2731c1a4350a1cbabf796d14125: 1.4912 s</title></circle><circle cx="749.0064730678616" cy="95" r="5" fill="#168a86" fill-opacity="0.55"><title>9211f7b4489b4daf9e4cf80e08696d3f: 1.5677 s</title></circle><circle cx="729.7752030672999" cy="95" r="5" fill="#168a86" fill-opacity="0.55"><title>f8300ab2fb80469185b0746861d56c93: 1.5174 s</title></circle><text x="5" y="155" font-size="13">100%</text><circle cx="461.75291187455053" cy="150" r="5" fill="#168a86" fill-opacity="0.55"><title>74ee5d397fe34c1abeeb05f2c0283a5a: 0.8159 s</title></circle><circle cx="461.71455507319547" cy="150" r="5" fill="#168a86" fill-opacity="0.55"><title>b9c947c181154a418fd4316a008e8d93: 0.8158 s</title></circle><circle cx="461.76946895140145" cy="150" r="5" fill="#168a86" fill-opacity="0.55"><title>e3e8ff41f6524db2a846ef02a1483929: 0.8160 s</title></circle><circle cx="461.73878068286024" cy="150" r="5" fill="#168a86" fill-opacity="0.55"><title>e4a34d99461e4a67830aa5eb4803d107: 0.8159 s</title></circle><circle cx="461.78209509320357" cy="150" r="5" fill="#168a86" fill-opacity="0.55"><title>f02eeebcc6f14c43bd7dddf0ef4b1b9c: 0.8160 s</title></circle></svg></section><section><h2>已校验的非预热测量</h2><p>服务 cgroup 的 cpu.stat 起止差值给出配额周期数、节流次数和累计节流时间。可用 run_id 核对原始记录。累计节流时间与进程 CPU 时间、整项任务耗时的统计范围不同。</p><table><tr><th>run_id</th><th>配额 %</th><th>耗时 s</th><th>CPU s</th><th>配额周期数</th><th>节流次数</th><th>节流时间 μs</th><th>最终原始记录</th></tr><tr><td>06fcb932d1774d73aa611145a0590cc6</td><td>50</td><td>1.6179</td><td>0.7932</td><td>16</td><td>16</td><td>771055</td><td>/home/holo/projects/osdesign-review-1118/results/review/experiment/06fcb932d1774d73aa611145a0590cc6/result.json</td></tr><tr><td>10b0e6a471b44a7bbea5de0b825fb3e1</td><td>50</td><td>1.5676</td><td>0.7857</td><td>16</td><td>16</td><td>754188</td><td>/home/holo/projects/osdesign-review-1118/results/review/experiment/10b0e6a471b44a7bbea5de0b825fb3e1/result.json</td></tr><tr><td>12b0c2731c1a4350a1cbabf796d14125</td><td>50</td><td>1.4912</td><td>0.7674</td><td>15</td><td>15</td><td>700837</td><td>/home/holo/projects/osdesign-review-1118/results/review/experiment/12b0c2731c1a4350a1cbabf796d14125/result.json</td></tr><tr><td>25557e88d7ec4a508d4b04cfd470af9e</td><td>null</td><td>0.8158</td><td>0.7701</td><td>未提供</td><td>未提供</td><td>未提供</td><td>/home/holo/projects/osdesign-review-1118/results/review/experiment/25557e88d7ec4a508d4b04cfd470af9e/result.json</td></tr><tr><td>74ee5d397fe34c1abeeb05f2c0283a5a</td><td>100</td><td>0.8159</td><td>0.7672</td><td>8</td><td>0</td><td>0</td><td>/home/holo/projects/osdesign-review-1118/results/review/experiment/74ee5d397fe34c1abeeb05f2c0283a5a/result.json</td></tr><tr><td>906505ee017841ee9bc4c6bea3bce5ed</td><td>null</td><td>0.8158</td><td>0.7715</td><td>未提供</td><td>未提供</td><td>未提供</td><td>/home/holo/projects/osdesign-review-1118/results/review/experiment/906505ee017841ee9bc4c6bea3bce5ed/result.json</td></tr><tr><td>9211f7b4489b4daf9e4cf80e08696d3f</td><td>50</td><td>1.5677</td><td>0.8011</td><td>16</td><td>16</td><td>753685</td><td>/home/holo/projects/osdesign-review-1118/results/review/experiment/9211f7b4489b4daf9e4cf80e08696d3f/result.json</td></tr><tr><td>aee70d9d84b04b0d88e59f3cbe20905a</td><td>null</td><td>0.8159</td><td>0.7764</td><td>未提供</td><td>未提供</td><td>未提供</td><td>/home/holo/projects/osdesign-review-1118/results/review/experiment/aee70d9d84b04b0d88e59f3cbe20905a/result.json</td></tr><tr><td>b9c947c181154a418fd4316a008e8d93</td><td>100</td><td>0.8158</td><td>0.7710</td><td>8</td><td>1</td><td>695</td><td>/home/holo/projects/osdesign-review-1118/results/review/experiment/b9c947c181154a418fd4316a008e8d93/result.json</td></tr><tr><td>c5ea949e330c4790ae318c9cf71d0e7c</td><td>null</td><td>0.8161</td><td>0.7748</td><td>未提供</td><td>未提供</td><td>未提供</td><td>/home/holo/projects/osdesign-review-1118/results/review/experiment/c5ea949e330c4790ae318c9cf71d0e7c/result.json</td></tr><tr><td>d7ef867d06df420c85d68d3ab0d7bff6</td><td>null</td><td>0.8158</td><td>0.7693</td><td>未提供</td><td>未提供</td><td>未提供</td><td>/home/holo/projects/osdesign-review-1118/results/review/experiment/d7ef867d06df420c85d68d3ab0d7bff6/result.json</td></tr><tr><td>e3e8ff41f6524db2a846ef02a1483929</td><td>100</td><td>0.8160</td><td>0.7798</td><td>9</td><td>0</td><td>0</td><td>/home/holo/projects/osdesign-review-1118/results/review/experiment/e3e8ff41f6524db2a846ef02a1483929/result.json</td></tr><tr><td>e4a34d99461e4a67830aa5eb4803d107</td><td>100</td><td>0.8159</td><td>0.8104</td><td>8</td><td>0</td><td>0</td><td>/home/holo/projects/osdesign-review-1118/results/review/experiment/e4a34d99461e4a67830aa5eb4803d107/result.json</td></tr><tr><td>f02eeebcc6f14c43bd7dddf0ef4b1b9c</td><td>100</td><td>0.8160</td><td>0.7781</td><td>8</td><td>0</td><td>0</td><td>/home/holo/projects/osdesign-review-1118/results/review/experiment/f02eeebcc6f14c43bd7dddf0ef4b1b9c/result.json</td></tr><tr><td>f8300ab2fb80469185b0746861d56c93</td><td>50</td><td>1.5174</td><td>0.7723</td><td>15</td><td>15</td><td>718466</td><td>/home/holo/projects/osdesign-review-1118/results/review/experiment/f8300ab2fb80469185b0746861d56c93/result.json</td></tr></table></section><section><h2>排除、问题与追溯证据</h2><pre>{
+  &quot;issues&quot;: [],
+  &quot;excluded&quot;: [
+    {
+      &quot;run_id&quot;: &quot;8809e3dbd2984675ab2f6ec9dc719818&quot;,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;reasons&quot;: [
+        &quot;baseline: explicit non-warmup run required&quot;,
+        &quot;current: explicit non-warmup run required&quot;,
+        &quot;warmup&quot;
+      ]
+    },
+    {
+      &quot;run_id&quot;: &quot;e295ed67187d4095b9a1fa6d6c9967cf&quot;,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;reasons&quot;: [
+        &quot;baseline: explicit non-warmup run required&quot;,
+        &quot;current: explicit non-warmup run required&quot;,
+        &quot;warmup&quot;
+      ]
+    },
+    {
+      &quot;run_id&quot;: &quot;e2a7311d304a412c9fb110d8efe81d5d&quot;,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;reasons&quot;: [
+        &quot;baseline: explicit non-warmup run required&quot;,
+        &quot;current: explicit non-warmup run required&quot;,
+        &quot;warmup&quot;
+      ]
+    }
+  ],
+  &quot;group_reasons&quot;: [
+    {
+      &quot;quota&quot;: null,
+      &quot;reasons&quot;: []
+    },
+    {
+      &quot;quota&quot;: 50,
+      &quot;reasons&quot;: []
+    },
+    {
+      &quot;quota&quot;: 100,
+      &quot;reasons&quot;: []
+    }
+  ],
+  &quot;history&quot;: null,
+  &quot;artifacts&quot;: {
+    &quot;06fcb932d1774d73aa611145a0590cc6&quot;: {
+      &quot;result&quot;: &quot;/home/holo/projects/osdesign-review-1118/results/review/experiment/06fcb932d1774d73aa611145a0590cc6/result.json&quot;,
+      &quot;sha256&quot;: &quot;4d5ccc1681ae211276cd1904be8514212d75440809e15f84a0e82bd7b092c9d2&quot;
+    },
+    &quot;10b0e6a471b44a7bbea5de0b825fb3e1&quot;: {
+      &quot;result&quot;: &quot;/home/holo/projects/osdesign-review-1118/results/review/experiment/10b0e6a471b44a7bbea5de0b825fb3e1/result.json&quot;,
+      &quot;sha256&quot;: &quot;62c4c081bdd8764d1218de84be3e8dc4058264ac39bde9a4cc573fe0adc78879&quot;
+    },
+    &quot;12b0c2731c1a4350a1cbabf796d14125&quot;: {
+      &quot;result&quot;: &quot;/home/holo/projects/osdesign-review-1118/results/review/experiment/12b0c2731c1a4350a1cbabf796d14125/result.json&quot;,
+      &quot;sha256&quot;: &quot;d212ad306e6cacca13ad393e2c1cb0873b4562c2816381de0e50056dc1a4a04c&quot;
+    },
+    &quot;25557e88d7ec4a508d4b04cfd470af9e&quot;: {
+      &quot;result&quot;: &quot;/home/holo/projects/osdesign-review-1118/results/review/experiment/25557e88d7ec4a508d4b04cfd470af9e/result.json&quot;,
+      &quot;sha256&quot;: &quot;f9a523a41bf9d2cfb2b7dba38632f65caecad76d9a35cf32eb53543bf97e7338&quot;
+    },
+    &quot;74ee5d397fe34c1abeeb05f2c0283a5a&quot;: {
+      &quot;result&quot;: &quot;/home/holo/projects/osdesign-review-1118/results/review/experiment/74ee5d397fe34c1abeeb05f2c0283a5a/result.json&quot;,
+      &quot;sha256&quot;: &quot;196afe78048489a95a1834a80f121d2fde8756f74791b168ae12d21c5f213ef6&quot;
+    },
+    &quot;8809e3dbd2984675ab2f6ec9dc719818&quot;: {
+      &quot;result&quot;: &quot;/home/holo/projects/osdesign-review-1118/results/review/experiment/8809e3dbd2984675ab2f6ec9dc719818/result.json&quot;,
+      &quot;sha256&quot;: &quot;49ae66f718d32dee11a43d371419654138440155f1b378dfd1941485fca48a34&quot;
+    },
+    &quot;906505ee017841ee9bc4c6bea3bce5ed&quot;: {
+      &quot;result&quot;: &quot;/home/holo/projects/osdesign-review-1118/results/review/experiment/906505ee017841ee9bc4c6bea3bce5ed/result.json&quot;,
+      &quot;sha256&quot;: &quot;cf809dcdae8fabe3454f866f8c43438876713f824420b4ca034085afdca360d7&quot;
+    },
+    &quot;9211f7b4489b4daf9e4cf80e08696d3f&quot;: {
+      &quot;result&quot;: &quot;/home/holo/projects/osdesign-review-1118/results/review/experiment/9211f7b4489b4daf9e4cf80e08696d3f/result.json&quot;,
+      &quot;sha256&quot;: &quot;9a231f4c490113603265db9fa0896dbe315530504fa1270f4ce8eae6c702a103&quot;
+    },
+    &quot;aee70d9d84b04b0d88e59f3cbe20905a&quot;: {
+      &quot;result&quot;: &quot;/home/holo/projects/osdesign-review-1118/results/review/experiment/aee70d9d84b04b0d88e59f3cbe20905a/result.json&quot;,
+      &quot;sha256&quot;: &quot;98cb3e3c15a719373ffcb2d47d0a4425063a2ff6c7de86cd3b2c54ead5465dc4&quot;
+    },
+    &quot;b9c947c181154a418fd4316a008e8d93&quot;: {
+      &quot;result&quot;: &quot;/home/holo/projects/osdesign-review-1118/results/review/experiment/b9c947c181154a418fd4316a008e8d93/result.json&quot;,
+      &quot;sha256&quot;: &quot;386b21cf0e108608501a4a615fb691e369b41a4f6ee860c61ff8cdc20254cd25&quot;
+    },
+    &quot;c5ea949e330c4790ae318c9cf71d0e7c&quot;: {
+      &quot;result&quot;: &quot;/home/holo/projects/osdesign-review-1118/results/review/experiment/c5ea949e330c4790ae318c9cf71d0e7c/result.json&quot;,
+      &quot;sha256&quot;: &quot;4030e31eaac63eb5ff4f0f566b5de3f54adb6c07ea15a0c294ee2fb48deee221&quot;
+    },
+    &quot;d7ef867d06df420c85d68d3ab0d7bff6&quot;: {
+      &quot;result&quot;: &quot;/home/holo/projects/osdesign-review-1118/results/review/experiment/d7ef867d06df420c85d68d3ab0d7bff6/result.json&quot;,
+      &quot;sha256&quot;: &quot;e21382fcd63f1a3aea59b3c498c12592ffcb587af1d7f90a3e26d50e1010b115&quot;
+    },
+    &quot;e295ed67187d4095b9a1fa6d6c9967cf&quot;: {
+      &quot;result&quot;: &quot;/home/holo/projects/osdesign-review-1118/results/review/experiment/e295ed67187d4095b9a1fa6d6c9967cf/result.json&quot;,
+      &quot;sha256&quot;: &quot;d18881612e9d4d71a1a7b2a2e73d38ea011e5ebb457356eb0d335ae790bf2895&quot;
+    },
+    &quot;e2a7311d304a412c9fb110d8efe81d5d&quot;: {
+      &quot;result&quot;: &quot;/home/holo/projects/osdesign-review-1118/results/review/experiment/e2a7311d304a412c9fb110d8efe81d5d/result.json&quot;,
+      &quot;sha256&quot;: &quot;c4230e6802bcd56acc94f423b2bc2818f94bbb029daaf62fb29ced3f0eebfa6f&quot;
+    },
+    &quot;e3e8ff41f6524db2a846ef02a1483929&quot;: {
+      &quot;result&quot;: &quot;/home/holo/projects/osdesign-review-1118/results/review/experiment/e3e8ff41f6524db2a846ef02a1483929/result.json&quot;,
+      &quot;sha256&quot;: &quot;fa962b78b09b50adbb831baa9fa61006de9347847017872fdf7e36ca5dcd92b2&quot;
+    },
+    &quot;e4a34d99461e4a67830aa5eb4803d107&quot;: {
+      &quot;result&quot;: &quot;/home/holo/projects/osdesign-review-1118/results/review/experiment/e4a34d99461e4a67830aa5eb4803d107/result.json&quot;,
+      &quot;sha256&quot;: &quot;3b18b98d8d39a5e65e9ed293160bf7fa54e714dfa212bb60b5b7374e617ed2a8&quot;
+    },
+    &quot;f02eeebcc6f14c43bd7dddf0ef4b1b9c&quot;: {
+      &quot;result&quot;: &quot;/home/holo/projects/osdesign-review-1118/results/review/experiment/f02eeebcc6f14c43bd7dddf0ef4b1b9c/result.json&quot;,
+      &quot;sha256&quot;: &quot;59e080368848b1808611ee3603fae830de762622a332fc9eb852b1fab1a2745c&quot;
+    },
+    &quot;f8300ab2fb80469185b0746861d56c93&quot;: {
+      &quot;result&quot;: &quot;/home/holo/projects/osdesign-review-1118/results/review/experiment/f8300ab2fb80469185b0746861d56c93/result.json&quot;,
+      &quot;sha256&quot;: &quot;9c3b0cb0fb6755c021cc2b1e4fba573d9876ef444410bdaa6c3af3ca7fccbe01&quot;
+    }
+  }
+}</pre></section></html>

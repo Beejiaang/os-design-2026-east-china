@@ -1,0 +1,243 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CPU 配额实验报告</title><style>
+body{font:16px/1.6 system-ui,sans-serif;background:#f3f6fa;color:#192b3d;max-width:1200px;margin:32px auto;padding:0 24px}
+h1{font-size:30px}section{background:white;border:1px solid #dae2eb;border-radius:12px;padding:20px;margin:20px 0;overflow:auto}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}td,th{border-bottom:1px solid #ddd;text-align:left;padding:10px}
+pre{white-space:pre-wrap;word-break:break-word;font-size:13px}.badge{background:#dfe9f4;padding:8px 16px;border-radius:8px}
+</style><h1>数据聚合 · CPU 配额实验报告</h1><p class="badge">实验完整：True · 最终记录：18 / 18</p><p>Descriptive configuration contrast only. No validated regression verdict or root cause. Unlimited means no local quota set.</p><p>目录：/tmp/tmpxad2mhts/current</p><section><h2>配置对照</h2><p>null 表示本工具未设置本地配额；100% 是一个逻辑 CPU 的上限。倍数仅在可比条件通过时展示。</p><table><tr><th>配额 %</th><th>样本数</th><th>耗时中位数 s</th><th>最小 s</th><th>最大 s</th><th>CPU 中位数 s</th><th>相对 null</th><th>可比</th></tr><tr><td>null</td><td>5</td><td>0.8157</td><td>0.8156</td><td>0.8159</td><td>0.7695</td><td>1.0000</td><td>True</td></tr><tr><td>50</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>False</td></tr><tr><td>100</td><td>5</td><td>0.8156</td><td>0.8155</td><td>0.8159</td><td>0.7696</td><td>0.9999</td><td>True</td></tr></table></section><section><h2>逐次耗时分布</h2><p>每个点对应一条已校验的非预热记录；重叠点可能不可分辨。原始值见下表。不完整实验中的点仅作记录展示。</p><svg role="img" aria-label="每次已校验运行的耗时，单位秒" viewBox="0 0 900 235" style="min-width:600px;width:100%"><line x1="150.0" y1="15" x2="150.0" y2="200" stroke="#dde4ed"/><text x="150.0" y="225" text-anchor="middle" fill="#526478">0.00 s</text><line x1="320.0" y1="15" x2="320.0" y2="200" stroke="#dde4ed"/><text x="320.0" y="225" text-anchor="middle" fill="#526478">0.22 s</text><line x1="490.0" y1="15" x2="490.0" y2="200" stroke="#dde4ed"/><text x="490.0" y="225" text-anchor="middle" fill="#526478">0.45 s</text><line x1="660.0" y1="15" x2="660.0" y2="200" stroke="#dde4ed"/><text x="660.0" y="225" text-anchor="middle" fill="#526478">0.67 s</text><line x1="830.0" y1="15" x2="830.0" y2="200" stroke="#dde4ed"/><text x="830.0" y="225" text-anchor="middle" fill="#526478">0.90 s</text><text x="5" y="45" font-size="13">null（未设本地配额）</text><circle cx="767.9998312012341" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>088c8c16e27a46fa864342e4edebabf7: 0.8156 s</title></circle><circle cx="768.164905882258" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>4114a4e403a04ae1b6736f256ab22353: 0.8159 s</title></circle><circle cx="768.0422373469322" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>5a71c3d8ddb0418b9ae2a228b672d629: 0.8157 s</title></circle><circle cx="768.0434443400219" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>865cc059a85d4c978d61061b30b5d7b2: 0.8157 s</title></circle><circle cx="768.1358721291243" cy="40" r="5" fill="#168a86" fill-opacity="0.55"><title>987cfe27c5914586b503a6c5a82e3374: 0.8158 s</title></circle><text x="5" y="100" font-size="13">50%</text><text x="5" y="155" font-size="13">100%</text><circle cx="767.9737834868616" cy="150" r="5" fill="#168a86" fill-opacity="0.55"><title>83e7004aa9f84446adc352c19c52ac88: 0.8156 s</title></circle><circle cx="767.9336079674803" cy="150" r="5" fill="#168a86" fill-opacity="0.55"><title>a70d8c9413824b05ba55c25e08a41a5b: 0.8156 s</title></circle><circle cx="768.0596012271374" cy="150" r="5" fill="#168a86" fill-opacity="0.55"><title>c37ba3d4cbdf47f5bd83fa252cbc9078: 0.8157 s</title></circle><circle cx="767.8873368676709" cy="150" r="5" fill="#168a86" fill-opacity="0.55"><title>c969ca6ffdb6470cb563f2d141613067: 0.8155 s</title></circle><circle cx="768.1818181818181" cy="150" r="5" fill="#168a86" fill-opacity="0.55"><title>f9539c2f95f74bdc94f34b5fc7c33dae: 0.8159 s</title></circle></svg></section><section><h2>已校验的非预热测量</h2><p>服务 cgroup 的 cpu.stat 起止差值给出配额周期数、节流次数和累计节流时间。可用 run_id 核对原始记录。累计节流时间与进程 CPU 时间、整项任务耗时的统计范围不同。</p><table><tr><th>run_id</th><th>配额 %</th><th>耗时 s</th><th>CPU s</th><th>配额周期数</th><th>节流次数</th><th>节流时间 μs</th><th>最终原始记录</th></tr><tr><td>088c8c16e27a46fa864342e4edebabf7</td><td>null</td><td>0.8156</td><td>0.7680</td><td>未提供</td><td>未提供</td><td>未提供</td><td>/tmp/tmpxad2mhts/current/088c8c16e27a46fa864342e4edebabf7/result.json</td></tr><tr><td>4114a4e403a04ae1b6736f256ab22353</td><td>null</td><td>0.8159</td><td>0.7738</td><td>未提供</td><td>未提供</td><td>未提供</td><td>/tmp/tmpxad2mhts/current/4114a4e403a04ae1b6736f256ab22353/result.json</td></tr><tr><td>5a71c3d8ddb0418b9ae2a228b672d629</td><td>null</td><td>0.8157</td><td>0.7736</td><td>未提供</td><td>未提供</td><td>未提供</td><td>/tmp/tmpxad2mhts/current/5a71c3d8ddb0418b9ae2a228b672d629/result.json</td></tr><tr><td>83e7004aa9f84446adc352c19c52ac88</td><td>100</td><td>0.8156</td><td>0.7694</td><td>8</td><td>0</td><td>0</td><td>/tmp/tmpxad2mhts/current/83e7004aa9f84446adc352c19c52ac88/result.json</td></tr><tr><td>865cc059a85d4c978d61061b30b5d7b2</td><td>null</td><td>0.8157</td><td>0.7695</td><td>未提供</td><td>未提供</td><td>未提供</td><td>/tmp/tmpxad2mhts/current/865cc059a85d4c978d61061b30b5d7b2/result.json</td></tr><tr><td>987cfe27c5914586b503a6c5a82e3374</td><td>null</td><td>0.8158</td><td>0.7662</td><td>未提供</td><td>未提供</td><td>未提供</td><td>/tmp/tmpxad2mhts/current/987cfe27c5914586b503a6c5a82e3374/result.json</td></tr><tr><td>a70d8c9413824b05ba55c25e08a41a5b</td><td>100</td><td>0.8156</td><td>0.7726</td><td>8</td><td>0</td><td>0</td><td>/tmp/tmpxad2mhts/current/a70d8c9413824b05ba55c25e08a41a5b/result.json</td></tr><tr><td>c37ba3d4cbdf47f5bd83fa252cbc9078</td><td>100</td><td>0.8157</td><td>0.7696</td><td>8</td><td>0</td><td>0</td><td>/tmp/tmpxad2mhts/current/c37ba3d4cbdf47f5bd83fa252cbc9078/result.json</td></tr><tr><td>c969ca6ffdb6470cb563f2d141613067</td><td>100</td><td>0.8155</td><td>0.7624</td><td>8</td><td>0</td><td>0</td><td>/tmp/tmpxad2mhts/current/c969ca6ffdb6470cb563f2d141613067/result.json</td></tr><tr><td>f9539c2f95f74bdc94f34b5fc7c33dae</td><td>100</td><td>0.8159</td><td>0.7756</td><td>8</td><td>0</td><td>0</td><td>/tmp/tmpxad2mhts/current/f9539c2f95f74bdc94f34b5fc7c33dae/result.json</td></tr></table></section><section><h2>历史比较 · 探索性复核规则</h2><p>Exploratory review signal only; no statistical significance, validated accuracy, no-regression or root-cause claim. Observed range sensitivity is not a confidence interval.</p><p>最少样本数：5；预设变化阈值：0.15</p><p>阈值敏感=true 表示两组已观察到的耗时范围可组合出阈值两侧的比值，需留意波动；这不是置信区间。精确范围见追溯数据。</p><table><tr><th>配额 %</th><th>基线 n</th><th>当前 n</th><th>耗时比</th><th>规则输出</th><th>阈值敏感</th><th>原因</th></tr><tr><td>null</td><td>5</td><td>5</td><td>1.0001</td><td>未触发阈值（不表示无退化）</td><td>False</td><td></td></tr><tr><td>50</td><td>0</td><td>0</td><td>—</td><td>无法比较</td><td>—</td><td>Insufficient independently verified samples; Missing quota on one side; Quota group has incomplete or incompatible evidence</td></tr><tr><td>100</td><td>5</td><td>5</td><td>0.9998</td><td>未触发阈值（不表示无退化）</td><td>False</td><td></td></tr></table></section><section><h2>历史比较的观察范围</h2><p>已观察范围敏感性，不是置信区间。虚线为 1+threshold；颜色仅提示是否跨阈值。各图按自身范围缩放，数值以标签为准。</p><div><h3>配额 null</h3><svg role="img" aria-label="已观察比值范围 0.9998 至 1.0005；阈值参考线 1.1500；不是置信区间" viewBox="0 0 430 115" style="min-width:300px;width:100%"><title>已观察比值范围 0.9998 至 1.0005；阈值参考线 1.1500；不是置信区间</title><line x1="30" y1="45" x2="390" y2="45" stroke="#dae2eb"/><line x1="102.28" y1="22" x2="102.28" y2="62" stroke="#7d8da0"/><line x1="318.07" y1="15" x2="318.07" y2="65" stroke="#a32a40" stroke-dasharray="4 3"/><line x1="101.93" y1="45" x2="103.05" y2="45" stroke="#168a86" stroke-width="8" stroke-linecap="round"/><text x="102.28" y="85" text-anchor="middle" font-size="12">1.00</text><text x="318.07" y="12" text-anchor="middle" font-size="12">阈值 1.15</text><text x="30" y="108" font-size="12">范围 0.9998–1.0005</text></svg></div><div><h3>配额 50%</h3><p>观察范围不可用</p></div><div><h3>配额 100%</h3><svg role="img" aria-label="已观察比值范围 0.9994 至 1.0004；阈值参考线 1.1500；不是置信区间" viewBox="0 0 430 115" style="min-width:300px;width:100%"><title>已观察比值范围 0.9994 至 1.0004；阈值参考线 1.1500；不是置信区间</title><line x1="30" y1="45" x2="390" y2="45" stroke="#dae2eb"/><line x1="102.68" y1="22" x2="102.68" y2="62" stroke="#7d8da0"/><line x1="318.17" y1="15" x2="318.17" y2="65" stroke="#a32a40" stroke-dasharray="4 3"/><line x1="101.83" y1="45" x2="103.32" y2="45" stroke="#168a86" stroke-width="8" stroke-linecap="round"/><text x="102.68" y="85" text-anchor="middle" font-size="12">1.00</text><text x="318.17" y="12" text-anchor="middle" font-size="12">阈值 1.15</text><text x="30" y="108" font-size="12">范围 0.9994–1.0004</text></svg></div></section><section><h2>排除、问题与追溯证据</h2><pre>{
+  &quot;issues&quot;: [],
+  &quot;excluded&quot;: [
+    {
+      &quot;run_id&quot;: &quot;05e210eb2c8e4407a782497fdec6d6aa&quot;,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;reasons&quot;: [
+        &quot;stdout artifact missing or hash mismatch&quot;
+      ]
+    },
+    {
+      &quot;run_id&quot;: &quot;11bcde74d6df46639c75f59fce5585a0&quot;,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;reasons&quot;: [
+        &quot;stdout artifact missing or hash mismatch&quot;
+      ]
+    },
+    {
+      &quot;run_id&quot;: &quot;2f882efd2a944ef68e381d713aab7db1&quot;,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;reasons&quot;: [
+        &quot;baseline: explicit non-warmup run required&quot;,
+        &quot;current: explicit non-warmup run required&quot;,
+        &quot;warmup&quot;
+      ]
+    },
+    {
+      &quot;run_id&quot;: &quot;9768587864614135b39f484a29e963a6&quot;,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;reasons&quot;: [
+        &quot;stdout artifact missing or hash mismatch&quot;
+      ]
+    },
+    {
+      &quot;run_id&quot;: &quot;a95b158abdf445bd980d2358d6fee89a&quot;,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;reasons&quot;: [
+        &quot;baseline: explicit non-warmup run required&quot;,
+        &quot;current: explicit non-warmup run required&quot;,
+        &quot;warmup&quot;
+      ]
+    },
+    {
+      &quot;run_id&quot;: &quot;c5d2b5365dcd417aadd35f5093a2767b&quot;,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;reasons&quot;: [
+        &quot;stdout artifact missing or hash mismatch&quot;
+      ]
+    },
+    {
+      &quot;run_id&quot;: &quot;d793b31d16f54c3fbda0f1a95bdab13b&quot;,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;reasons&quot;: [
+        &quot;stdout artifact missing or hash mismatch&quot;
+      ]
+    },
+    {
+      &quot;run_id&quot;: &quot;fd00e607e9734f2cbd48367cfaa8a3a9&quot;,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;reasons&quot;: [
+        &quot;baseline: explicit non-warmup run required&quot;,
+        &quot;current: explicit non-warmup run required&quot;,
+        &quot;warmup&quot;
+      ]
+    }
+  ],
+  &quot;group_reasons&quot;: [
+    {
+      &quot;quota&quot;: null,
+      &quot;reasons&quot;: []
+    },
+    {
+      &quot;quota&quot;: 50,
+      &quot;reasons&quot;: [
+        &quot;Not all scheduled non-warmup runs passed functional/data checks&quot;
+      ]
+    },
+    {
+      &quot;quota&quot;: 100,
+      &quot;reasons&quot;: []
+    }
+  ],
+  &quot;history&quot;: {
+    &quot;rule&quot;: &quot;exploratory-median-v1&quot;,
+    &quot;minimum&quot;: 5,
+    &quot;threshold&quot;: 0.15,
+    &quot;comparisons&quot;: [
+      {
+        &quot;quota_percent&quot;: null,
+        &quot;baseline_n&quot;: 5,
+        &quot;current_n&quot;: 5,
+        &quot;baseline_run_ids&quot;: [
+          &quot;3b76bb1a0a6640d498cabd0610ef877e&quot;,
+          &quot;57bb13db71db43ac9bbc0322f92863d7&quot;,
+          &quot;caf6a8ac5ac94072966eb62dc6054e00&quot;,
+          &quot;df7ca087c390437ba0ceecec72e7cc46&quot;,
+          &quot;f4b2f6a6df884425aa59ca61b92bd2db&quot;
+        ],
+        &quot;current_run_ids&quot;: [
+          &quot;088c8c16e27a46fa864342e4edebabf7&quot;,
+          &quot;4114a4e403a04ae1b6736f256ab22353&quot;,
+          &quot;5a71c3d8ddb0418b9ae2a228b672d629&quot;,
+          &quot;865cc059a85d4c978d61061b30b5d7b2&quot;,
+          &quot;987cfe27c5914586b503a6c5a82e3374&quot;
+        ],
+        &quot;wall_ratio&quot;: 1.0000926260631453,
+        &quot;verdict&quot;: &quot;no_threshold_signal&quot;,
+        &quot;reasons&quot;: [],
+        &quot;observed_range_ratio_bounds&quot;: [
+          0.9997569045043239,
+          1.0005385370065
+        ],
+        &quot;threshold_sensitive&quot;: false
+      },
+      {
+        &quot;quota_percent&quot;: 50,
+        &quot;baseline_n&quot;: 0,
+        &quot;current_n&quot;: 0,
+        &quot;baseline_run_ids&quot;: [],
+        &quot;current_run_ids&quot;: [],
+        &quot;wall_ratio&quot;: null,
+        &quot;verdict&quot;: &quot;unable_to_compare&quot;,
+        &quot;reasons&quot;: [
+          &quot;Insufficient independently verified samples&quot;,
+          &quot;Missing quota on one side&quot;,
+          &quot;Quota group has incomplete or incompatible evidence&quot;
+        ],
+        &quot;observed_range_ratio_bounds&quot;: null,
+        &quot;threshold_sensitive&quot;: null
+      },
+      {
+        &quot;quota_percent&quot;: 100,
+        &quot;baseline_n&quot;: 5,
+        &quot;current_n&quot;: 5,
+        &quot;baseline_run_ids&quot;: [
+          &quot;2ca4ac6942cf452f8e06ea793f7f196b&quot;,
+          &quot;6c0c2061497f4ad6a00f86b26902f408&quot;,
+          &quot;93e79a7e31044c5bae2a279119ed411e&quot;,
+          &quot;d6b3ca9e4f204031bcfb3d1b9747c450&quot;,
+          &quot;fccac19285fb43d9b730827fb4ebe34d&quot;
+        ],
+        &quot;current_run_ids&quot;: [
+          &quot;83e7004aa9f84446adc352c19c52ac88&quot;,
+          &quot;a70d8c9413824b05ba55c25e08a41a5b&quot;,
+          &quot;c37ba3d4cbdf47f5bd83fa252cbc9078&quot;,
+          &quot;c969ca6ffdb6470cb563f2d141613067&quot;,
+          &quot;f9539c2f95f74bdc94f34b5fc7c33dae&quot;
+        ],
+        &quot;wall_ratio&quot;: 0.9997680083016769,
+        &quot;verdict&quot;: &quot;no_threshold_signal&quot;,
+        &quot;reasons&quot;: [],
+        &quot;observed_range_ratio_bounds&quot;: [
+          0.9994072110757543,
+          1.0004431747312952
+        ],
+        &quot;threshold_sensitive&quot;: false
+      }
+    ],
+    &quot;sensitivity_version&quot;: &quot;observed-range-v1&quot;,
+    &quot;note&quot;: &quot;Exploratory review signal only; no statistical significance, validated accuracy, no-regression or root-cause claim. Observed range sensitivity is not a confidence interval.&quot;
+  },
+  &quot;artifacts&quot;: {
+    &quot;05e210eb2c8e4407a782497fdec6d6aa&quot;: {
+      &quot;result&quot;: &quot;/tmp/tmpxad2mhts/current/05e210eb2c8e4407a782497fdec6d6aa/result.json&quot;,
+      &quot;sha256&quot;: &quot;8cce1f9be58fd7aaae8b5787c45a4791f0b2418ab67e89fbea208e1141f971b0&quot;
+    },
+    &quot;088c8c16e27a46fa864342e4edebabf7&quot;: {
+      &quot;result&quot;: &quot;/tmp/tmpxad2mhts/current/088c8c16e27a46fa864342e4edebabf7/result.json&quot;,
+      &quot;sha256&quot;: &quot;2fe7c8cde6d0422213621042db4dd09c29aefe01307e33f281d66167a25fb771&quot;
+    },
+    &quot;11bcde74d6df46639c75f59fce5585a0&quot;: {
+      &quot;result&quot;: &quot;/tmp/tmpxad2mhts/current/11bcde74d6df46639c75f59fce5585a0/result.json&quot;,
+      &quot;sha256&quot;: &quot;100935322eecfdaddc2b17b53eb27c037bbd6188917ce87ecaf408eb723c0146&quot;
+    },
+    &quot;2f882efd2a944ef68e381d713aab7db1&quot;: {
+      &quot;result&quot;: &quot;/tmp/tmpxad2mhts/current/2f882efd2a944ef68e381d713aab7db1/result.json&quot;,
+      &quot;sha256&quot;: &quot;eff358a5e460e2bb6246aac1380a2eedc2e6faa798a77685601f3d36ec17d544&quot;
+    },
+    &quot;4114a4e403a04ae1b6736f256ab22353&quot;: {
+      &quot;result&quot;: &quot;/tmp/tmpxad2mhts/current/4114a4e403a04ae1b6736f256ab22353/result.json&quot;,
+      &quot;sha256&quot;: &quot;3403578fccf804dbc7f267d5d86a3faa9338f9520f31b3b8e221bee4388d8f13&quot;
+    },
+    &quot;5a71c3d8ddb0418b9ae2a228b672d629&quot;: {
+      &quot;result&quot;: &quot;/tmp/tmpxad2mhts/current/5a71c3d8ddb0418b9ae2a228b672d629/result.json&quot;,
+      &quot;sha256&quot;: &quot;b909608ce4b5daccb11df0e59b03fd63f5c3441cc83f07af78ab4b96577c337f&quot;
+    },
+    &quot;83e7004aa9f84446adc352c19c52ac88&quot;: {
+      &quot;result&quot;: &quot;/tmp/tmpxad2mhts/current/83e7004aa9f84446adc352c19c52ac88/result.json&quot;,
+      &quot;sha256&quot;: &quot;1deea0b301746287eb6121a524c153da55f09b2a5f9f7a6f29e691deb8e3f28f&quot;
+    },
+    &quot;865cc059a85d4c978d61061b30b5d7b2&quot;: {
+      &quot;result&quot;: &quot;/tmp/tmpxad2mhts/current/865cc059a85d4c978d61061b30b5d7b2/result.json&quot;,
+      &quot;sha256&quot;: &quot;bb20510de7d29c89eb1f717edddacf7107f809917e7a4a9d9687f1abcff44b1a&quot;
+    },
+    &quot;9768587864614135b39f484a29e963a6&quot;: {
+      &quot;result&quot;: &quot;/tmp/tmpxad2mhts/current/9768587864614135b39f484a29e963a6/result.json&quot;,
+      &quot;sha256&quot;: &quot;3df9ff9c6b4fbc54c3e8eb41f3e66fdfb17307eb9df9baa7dbda7ffcb73f1c11&quot;
+    },
+    &quot;987cfe27c5914586b503a6c5a82e3374&quot;: {
+      &quot;result&quot;: &quot;/tmp/tmpxad2mhts/current/987cfe27c5914586b503a6c5a82e3374/result.json&quot;,
+      &quot;sha256&quot;: &quot;2bede2e7e18df3bb76df14985c05ab393504193e69549171f2de2af05a693035&quot;
+    },
+    &quot;a70d8c9413824b05ba55c25e08a41a5b&quot;: {
+      &quot;result&quot;: &quot;/tmp/tmpxad2mhts/current/a70d8c9413824b05ba55c25e08a41a5b/result.json&quot;,
+      &quot;sha256&quot;: &quot;fba65c353980b5ca9d753ee575b067c90f341efb7ef4071fddaebba1fec7685f&quot;
+    },
+    &quot;a95b158abdf445bd980d2358d6fee89a&quot;: {
+      &quot;result&quot;: &quot;/tmp/tmpxad2mhts/current/a95b158abdf445bd980d2358d6fee89a/result.json&quot;,
+      &quot;sha256&quot;: &quot;07704de059a0fd66d5970272d757d11684a8026d0f4c3f8cbd7f086436b1be49&quot;
+    },
+    &quot;c37ba3d4cbdf47f5bd83fa252cbc9078&quot;: {
+      &quot;result&quot;: &quot;/tmp/tmpxad2mhts/current/c37ba3d4cbdf47f5bd83fa252cbc9078/result.json&quot;,
+      &quot;sha256&quot;: &quot;a8fc7f2cecf98a5f68300d859878186a8b71f55cb62c743806d4768a3f51e231&quot;
+    },
+    &quot;c5d2b5365dcd417aadd35f5093a2767b&quot;: {
+      &quot;result&quot;: &quot;/tmp/tmpxad2mhts/current/c5d2b5365dcd417aadd35f5093a2767b/result.json&quot;,
+      &quot;sha256&quot;: &quot;94dc04d27ebf2eb5b89ac6b37f89c6f624eb6e61c2ecf35f0407700a95158011&quot;
+    },
+    &quot;c969ca6ffdb6470cb563f2d141613067&quot;: {
+      &quot;result&quot;: &quot;/tmp/tmpxad2mhts/current/c969ca6ffdb6470cb563f2d141613067/result.json&quot;,
+      &quot;sha256&quot;: &quot;2100e28ddab8bfc34d63e1788255712f0fd08da26b695e4c66bc24c18c4a62c7&quot;
+    },
+    &quot;d793b31d16f54c3fbda0f1a95bdab13b&quot;: {
+      &quot;result&quot;: &quot;/tmp/tmpxad2mhts/current/d793b31d16f54c3fbda0f1a95bdab13b/result.json&quot;,
+      &quot;sha256&quot;: &quot;059a42ed74ce0af2b6b3dda1ea21fce42e57691efd68e0a1dbbd8e48e5c23944&quot;
+    },
+    &quot;f9539c2f95f74bdc94f34b5fc7c33dae&quot;: {
+      &quot;result&quot;: &quot;/tmp/tmpxad2mhts/current/f9539c2f95f74bdc94f34b5fc7c33dae/result.json&quot;,
+      &quot;sha256&quot;: &quot;9ef9de23c36fc40ec1271af42a7b6b9238957d197d6a0eda938d1eeec3808d67&quot;
+    },
+    &quot;fd00e607e9734f2cbd48367cfaa8a3a9&quot;: {
+      &quot;result&quot;: &quot;/tmp/tmpxad2mhts/current/fd00e607e9734f2cbd48367cfaa8a3a9/result.json&quot;,
+      &quot;sha256&quot;: &quot;bc5727f0c7d0d6739e288b78fedf4ce870598e19b1a557baab8c174963f600ed&quot;
+    }
+  }
+}</pre></section></html>

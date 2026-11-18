@@ -11,3 +11,5 @@
 | 协作过程 | [当前交接](handoff/agent-handoff.md)、[AI 使用](records/ai-usage.md)、[文档总索引](README.md)区分代理实测、人员贡献与阶段状态 |
 
 代理实测通过不能替代非实现者验收、统计显著性或官方接收；提交清单中的人工事项继续保留待办。
+
+RC2 后续实测可从[评分项与现场演示](validation/quota-evidence.md)进入，包含可直接打开的节流证据报告。
