@@ -45,6 +45,10 @@ def ancestors(path):
     return result
 
 
+def environment_fingerprint(fields):
+    return hashlib.sha256(json.dumps(fields, sort_keys=True).encode()).hexdigest()
+
+
 def environment():
     cpuinfo = read("/proc/cpuinfo") or ""
     model = next((line.split(":", 1)[1].strip() for line in cpuinfo.splitlines()
@@ -57,7 +61,7 @@ def environment():
     # Machine identity is hashed; hostnames and raw machine IDs are not exported.
     machine = read("/etc/machine-id")
     fields["machine_id_sha256"] = hashlib.sha256(machine.encode()).hexdigest() if machine else None
-    fields["fingerprint"] = hashlib.sha256(json.dumps(fields, sort_keys=True).encode()).hexdigest()
+    fields["fingerprint"] = environment_fingerprint(fields)
     return fields
 
 

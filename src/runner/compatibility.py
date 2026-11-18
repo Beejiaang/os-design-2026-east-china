@@ -3,6 +3,31 @@ import math
 import re
 
 
+from collector.system import environment_fingerprint
+
+
+def login_environment(env):
+    """Compare verified login snapshots while retaining every measured limit."""
+    if not isinstance(env, dict):
+        return None
+    fields = dict(env)
+    fingerprint = fields.pop("fingerprint", None)
+    limits = fields.get("visible_limits")
+    if (not isinstance(limits, list) or len(limits) < 2 or
+            not all(isinstance(entry, dict) for entry in limits) or
+            not re.fullmatch(r"[0-9a-f]{64}", str(fields.get("machine_id_sha256"))) or
+            fingerprint != environment_fingerprint(fields)):
+        return None
+    leaf = limits[0]
+    match = re.fullmatch(r"(/sys/fs/cgroup/user[.]slice/user-[0-9]+[.]slice)/session-[0-9]+[.]scope",
+                         str(leaf.get("path")))
+    if (not match or limits[1].get("path") != match[1] or
+            not isinstance(leaf.get("cpu_max"), str) or "cpuset_effective" not in leaf):
+        return None
+    fields["visible_limits"] = [dict(leaf, path=match[1] + "/session-*.scope"), *limits[1:]]
+    return fields
+
+
 def check_compatibility(baseline, current):
     reasons = []
     if not isinstance(baseline, dict) or not isinstance(current, dict):
@@ -45,7 +70,9 @@ def check_compatibility(baseline, current):
         if baseline.get(key) != current.get(key):
             reasons.append(key + " differs")
     if baseline.get("environment") != current.get("environment"):
-        reasons.append("environment metadata differs")
+        old_login = login_environment(baseline.get("environment"))
+        if old_login is None or old_login != login_environment(current.get("environment")):
+            reasons.append("environment metadata differs")
     # Drop each run's unique leaf directory while retaining actual service ancestors.
     for name, row in (("baseline", baseline), ("current", current)):
         hierarchy = row.get("visible_limits")

@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from collector.system import doctor, stat_delta
+from collector.system import doctor, environment_fingerprint, stat_delta
 from runner.compatibility import check_compatibility
 from runner.core import experiment, validate
 
@@ -62,6 +62,31 @@ class ContractTests(unittest.TestCase):
                 self.assertFalse(check_compatibility(row, incomplete)["compatible"])
         # Workload versions may change; the rest of the evidence must match.
         self.assertTrue(check_compatibility(row, dict(row, workload_version="v2"))["compatible"])
+
+    def test_only_numbered_login_leaf_can_vary(self):
+        path = Path(__file__).resolve().parents[1] / "examples/measured-run-1.1.json"
+        row = json.loads(path.read_text(encoding="utf-8"))
+        row.update(warmup=False, git_dirty="")
+        parent = "/sys/fs/cgroup/user.slice/user-1000.slice"
+        def with_login(number, **changes):
+            env = dict(row["environment"])
+            env.pop("fingerprint")
+            env["visible_limits"] = [dict(path=f"{parent}/session-{number}.scope", cpu_max="max 100000",
+                                          cpuset_effective=None), dict(path=parent)]
+            env.update(changes)
+            env["fingerprint"] = environment_fingerprint(env)
+            return dict(row, environment=env)
+        first, second = with_login(1), with_login(2)
+        self.assertTrue(check_compatibility(first, second)["compatible"])
+        for other in (with_login(2, affinity=[999]), with_login(2, machine_id_sha256="a" * 64)):
+            self.assertFalse(check_compatibility(first, other)["compatible"])
+        for key, value in (("path", parent + "/custom.scope"), ("cpu_max", "50000 100000"),
+                           ("cpuset_effective", "0-1")):
+            limits = copy.deepcopy(second["environment"]["visible_limits"])
+            limits[0][key] = value
+            self.assertFalse(check_compatibility(first, with_login(2, visible_limits=limits))["compatible"])
+        second["environment"]["fingerprint"] = "invalid"
+        self.assertFalse(check_compatibility(first, second)["compatible"])
 
     def test_non_object_records_are_rejected(self):
         for value in (None, [], "", 5):
