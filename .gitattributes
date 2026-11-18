@@ -5,3 +5,5 @@
 *.sh text eol=lf
 *.png binary
 *.pdf binary
+evidence/improvement/quota-report.html text eol=lf
+evidence/improvement/derived-missing-50.html text eol=lf
