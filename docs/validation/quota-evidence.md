@@ -45,3 +45,5 @@ python -m report results/paired-b/experiment --baseline results/paired-a/experim
 在仓库根目录解开归档到新的空目录后，使用归档内脚本或[同一复验脚本](../../evidence/improvement/replay-missing-quota.py)，传入 paired-a/experiment、paired-b/experiment 的实际路径与新的 HTML 输出路径。脚本先复制两个实验到临时目录，仅从副本移除 50% 档正式运行的 stdout.log，检查该档保留为 0 对 0、无法比较、耗时比为空，另外两档仍有比值。归档中 work/review/derived.json 与 derived-missing.html 记录这次派生检查，临时路径仅供审计。
 
 39 项目标机测试全部通过，跳过 0 项。四轮共 72 次，其中 60 次正式测量通过独立正确性校验，12 次预热单列。Ruff、pip check 通过，结束时工具服务列表为空。[打开缺少 50% 档输出的派生报告](../../evidence/improvement/derived-missing-50.html)。保留的 null、100% 档耗时比分别为 1.00009、0.99977。
+
+后续版本已针对这里观察到的跨登录拒绝完成[规则修正和新目标机验证](login-session.md)。上面的结果对应原测量提交。
